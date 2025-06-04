@@ -20,7 +20,7 @@ body::before {
   position: fixed;
   width: 200%;
   height: 200%;
-  background: transparent url('https://raw.githubusercontent.com/klsyxo/starry-sky-background/main/images/stars.png') repeat;
+  background: transparent url('https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?fm=jpg') repeat;
   animation: stars 200s linear infinite;
   opacity: 0.6;
   z-index: -1;
@@ -97,7 +97,6 @@ h1 {
   transform: scale(1.05);
 }
 
-/* NOVO: Animação de tremor para a caixa */
 @keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
   10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -112,7 +111,6 @@ h1 {
   100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-/* Adiciona a animação de tremor quando a caixa é "chutada" */
 #gift-box.shake-animation {
   animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
   transform-origin: center center;
@@ -156,31 +154,27 @@ h1 {
   left: -150px;
   z-index: 30;
   opacity: 0;
-  /* Removendo a transição 'left' para usar a keyframe completa */
   transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: left, opacity, transform;
 }
 
 #allstar.animate {
-  /* Não precisamos mais de 'left' ou 'transform' aqui, a keyframe fará isso */
   opacity: 1;
-  /* A animação 'kick-allstar' será aplicada via JS */
 }
 
-/* NOVA: Animação específica para o All Star "chutar" */
 @keyframes kick-allstar {
   0% {
-    left: -150px; /* Posição inicial fora da tela */
+    left: -150px;
     transform: rotate(0deg);
   }
   70% {
-    left: calc(50% + 120px); /* Move um pouco além do limite direito da caixa */
-    transform: rotate(25deg) scale(1.1); /* Rotação e leve aumento para o impacto */
+    left: calc(50% + 120px);
+    transform: rotate(25deg) scale(1.1);
   }
   100% {
-    left: calc(50% + 90px); /* Posição final no limite da caixa (50% da tela + metade da largura da caixa + metade da largura do tênis) */
-    transform: rotate(20deg) scale(1); /* Posição final e rotação */
+    left: calc(50% + 90px);
+    transform: rotate(20deg) scale(1);
   }
 }
 
@@ -264,21 +258,6 @@ h1 {
   will-change: transform, opacity;
 }
 
-/* Remover a animação 'kick' antiga se ela for exclusiva do All Star */
-/* @keyframes kick {
-  0% { transform: translateX(0) scale(1); }
-  20% { transform: translateX(-25px) scale(1.1); }
-  50% { transform: translateX(15px) scale(0.95); }
-  80% { transform: translateX(-10px) scale(1.03); }
-  100% { transform: translateX(0) scale(1); }
-} */
-
-/* Remover kick-animation se não for mais usada na gift-box */
-/* .kick-animation {
-  animation: kick 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-} */
-
-
 #play-pause-btn {
   position: fixed;
   bottom: 20px;
@@ -301,6 +280,28 @@ h1 {
 
 #play-pause-btn:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+.gift-bow {
+position: absolute;
+top: -15px;
+left: 0;
+width: 100%;
+height: auto;
+z-index: 26;
+object-fit: contain;
+pointer-events: none;
+}
+
+.sunflower-frame {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: contain;
+z-index: 25;
+pointer-events: none;
 }
 
 @keyframes twinkle {
