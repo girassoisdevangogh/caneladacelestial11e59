@@ -5,7 +5,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const explosion = document.getElementById("explosion");
   const tooltip = document.getElementById("tooltip");
 
+  const messages = {
+    sol: "Sol: Eu sou aquela luz que ilumina do jeitinho diferente, meio doido, meio sonhador, tipo um abraço inesperado que te faz sorrir sem saber por quê.",
+    lua: "Lua: E eu observo tudo de longe, como quem não se apega, mas sente. Sou seu aconchego nas noites de silêncio, o sussurro doce que chega de mansinho e te lembra que até nas sombras tem beleza.",
+    venus: "Vênus: Amor, pra mim, é liberdade de existir ao lado, sem cobrar presença. É toque que acontece até no silêncio entre dois olhares.",
+    marte: "Marte: Sou o fogo que arde no peito, aquele chute que te empurra pra frente, mas também o abraço quente que não te solta.",
+    mercurio: "Mercúrio: Falo baixinho, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir consegue entender.",
+    jupiter: "Júpiter: Crescer não é pressa, é raiz. A fé é uma semente que escolhe o seu tempo pra brotar.",
+    saturno: "Saturno: O tempo me ensinou que o que é verdadeiro não se apressa. A maturidade é um gesto calmo de quem já esperou muito.",
+    urano: "Urano: Toda mudança começa com um incômodo. Sou o estalo que tira o véu dos olhos e mostra o que sempre esteve ali.",
+    netuno: "Netuno: Sou a névoa dos sonhos e das saudades que a gente não sabe de onde vêm. Navego onde a razão não alcança.",
+    plutao: "Plutão: Dentro da dor mora a semente da transformação. Eu sou o fim que prepara terreno pro recomeço."
+
+  };
+
+  let animationStarted = false;
+
   giftBox.addEventListener("click", () => {
+    if (animationStarted) return;
+    animationStarted = true;
+
     giftBox.classList.add("kick-animation");
     allStar.classList.add("animate");
 
@@ -16,44 +35,25 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       giftBox.style.display = "none";
       skyContainer.style.display = "block";
-      allStar.style.opacity = "0"; // some com o tênis depois do chute
+      allStar.style.opacity = "0";
       startMessageLoop();
     }, 2000);
   });
 
-  const messages = {
-    sol: "Sol: Eu sou aquela luz que ilumina do jeitinho diferente, meio doido, meio sonhador, tipo um abraço inesperado que te faz sorrir sem saber por quê.",
-    lua: "Lua: E eu observo tudo de longe, como quem não se apega, mas sente. Sou seu aconchego nas noites de silêncio, o sussurro doce que chega de mansinho e te lembra que até nas sombras tem beleza.",
-    venus: "Vênus: Prefiro o toque que vem do olhar.",
-    marte: "Marte: Sou o fogo que arde no peito, aquele chute que te empurra pra frente, mas também o abraço quente que não te solta.",
-    mercurio: "Mercúrio: Falo baixinho, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir consegue entender.",
-    jupiter: "Júpiter: Crescendo devagar e firme, a vida é terra e semente.",
-    saturno: "Saturno: Tempo é a lição que ninguém quer aprender fácil.",
-    urano: "Urano: A faísca da mudança e da revolução.",
-    netuno: "Netuno: Sonhos líquidos que nos carregam pra longe.",
-    plutao: "Plutão: O segredo escondido no escuro, mas que transforma tudo."
-  };
-
-  let messageTimeout;
-
   function positionTooltip(planet, message) {
     tooltip.textContent = message;
-    tooltip.style.opacity = "0";
     tooltip.classList.add("visible");
+    tooltip.style.opacity = "0";
     tooltip.style.top = "0px";
     tooltip.style.left = "0px";
 
-    // Força reflow para pegar o tamanho correto do tooltip
     const tooltipRect = tooltip.getBoundingClientRect();
     const rect = planet.getBoundingClientRect();
 
     let top = window.scrollY + rect.top - tooltipRect.height - 8;
     let left = window.scrollX + rect.left + rect.width / 2 - tooltipRect.width / 2;
 
-    // Ajuste para não sair da tela na horizontal
     left = Math.min(Math.max(left, 8), window.innerWidth - tooltipRect.width - 8);
-
-    // Se ultrapassar o topo da tela, mostra abaixo do planeta
     if (top < window.scrollY + 8) {
       top = window.scrollY + rect.bottom + 8;
     }
@@ -68,22 +68,29 @@ document.addEventListener("DOMContentLoaded", () => {
     let current = 0;
 
     function showNextTooltip() {
-      if (current >= planets.length) {
-        tooltip.classList.remove("visible");
-        return;
-      }
-
       const planet = planets[current];
-      // Busca a classe que está no messages
       const key = Array.from(planet.classList).find(c => messages[c]) || "";
       const message = messages[key] || "";
 
       positionTooltip(planet, message);
 
-      current++;
-      messageTimeout = setTimeout(showNextTooltip, 3500);
+      current = (current + 1) % planets.length;
+      setTimeout(showNextTooltip, 3500);
     }
 
     showNextTooltip();
   }
+
+  document.addEventListener("mousemove", (e) => {
+    const star = document.createElement("div");
+    star.className = "star-dust";
+    star.style.left = `${e.pageX}px`;
+    star.style.top = `${e.pageY}px`;
+
+    document.body.appendChild(star);
+
+    setTimeout(() => {
+      star.remove();
+    }, 1000);
+  });
 });
