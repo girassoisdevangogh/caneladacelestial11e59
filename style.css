@@ -1,7 +1,9 @@
+/* Esconde o ::before do gift-box */
 #gift-box::before {
   display: none;
 }
 
+/* Estilo do girassol dentro do gift-box */
 .girassol {
   width: 80px;
   height: 80px;
@@ -11,6 +13,7 @@
   margin-bottom: 15px;
 }
 
+/* All Star escondido inicialmente */
 #allstar {
   display: none;
   position: absolute;
@@ -20,11 +23,13 @@
   z-index: 5;
 }
 
+/* All Star animado */
 #allstar.animate {
   display: block;
   animation: kickMove 1s forwards ease-out;
 }
 
+/* Animação do chute */
 @keyframes kickMove {
   0% {
     left: -120px;
@@ -40,6 +45,7 @@
   }
 }
 
+/* Estilo e animação da explosão */
 #explosion {
   display: none;
   position: absolute;
@@ -70,6 +76,7 @@
   }
 }
 
+/* Tooltip */
 #tooltip {
   position: absolute;
   padding: 10px;
@@ -87,4 +94,69 @@
 
 #tooltip.visible {
   opacity: 1;
+}
+
+/* Container do céu com planetas */
+#sky-container {
+  display: none;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #001d3d, #003566, #0f4c75);
+  overflow: hidden;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+/* Planetas */
+.planet {
+  position: absolute;
+  color: white;
+  font-size: 16px;
+  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.planet:hover {
+  transform: scale(1.1);
+}
+
+/* Estilo da estrela cadente */
+.shooting-star {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  color: white;
+  animation: twinkle 2s infinite ease-in-out;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+/* Efeito cintilante */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Mensagem sequencial após abertura */
+#message {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fffacd;
+  font-size: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  font-family: 'Comic Sans MS', cursive;
 }
