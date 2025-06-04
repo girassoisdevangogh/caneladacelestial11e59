@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0a0a23;
+  color: white;
+  overflow: hidden;
+}
+
+#gift-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background-color: #ffd700;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 223, 0, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 2;
+}
+
+#gift-box::before {
+  content: '';
+  width: 60px;
+  height: 60px;
+  background-image: url('https://i.imgur.com/KZsmUi2.png'); /* Laço */
+  background-size: cover;
+  position: absolute;
+  top: -30px;
+}
+
+.girassol {
+  width: 30px;
+  height: 30px;
+  background-image: url('https://i.imgur.com/tKQwAGz.png'); /* Girassol */
+  background-size: cover;
+  margin-top: 10px;
+}
+
+.kick-animation {
+  animation: shake 0.5s;
+  animation-iteration-count: 4;
+}
+
+@keyframes shake {
+  0% { transform: translate(-50%, -50%) translate(0, 0); }
+  25% { transform: translate(-50%, -50%) translate(-5px, 0); }
+  50% { transform: translate(-50%, -50%) translate(5px, 0); }
+  75% { transform: translate(-50%, -50%) translate(-5px, 0); }
+  100% { transform: translate(-50%, -50%) translate(0, 0); }
+}
+
+#sky-container {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.planet {
+  position: absolute;
+  font-size: 14px;
+  color: #ffe;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #fff2;
+  border-radius: 8px;
+}
+
+.planet::before {
+  content: '★ ';
+  color: gold;
+}
