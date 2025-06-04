@@ -1,132 +1,71 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0a0a23;
-  color: white;
-  overflow: hidden;
-  height: 100vh;
-}
-
-#gift-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, #fff8dc, #fcd253);
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  z-index: 2;
-  transition: transform 0.3s ease;
-}
-
-#gift-box:hover {
-  transform: translate(-50%, -50%) scale(1.05);
-}
-
-
 #gift-box::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 80px;
-  background-image: url('https://img.cdndsgni.com/preview/10623021.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  z-index: 3;
+  display: none;
 }
-
-
 
 .girassol {
-  width: 40px;
-  height: 40px;
-  background-image: url('https://png.pngtree.com/png-vector/20210526/ourmid/pngtree-sunflower-flour-plant-petals-png-image_3347632.jpg'); /* Girassol */
+  width: 80px;
+  height: 80px;
+  background-image: url('https://png.pngtree.com/png-vector/20210526/ourmid/pngtree-sunflower-flour-plant-petals-png-image_3347632.jpg');
   background-size: cover;
-  margin-top: 10px;
+  background-position: center;
+  margin-bottom: 15px;
 }
 
-.kick-animation {
-  animation: shake 0.5s;
-  animation-iteration-count: 4;
-}
-
-@keyframes shake {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(-5px, 0); }
-  50% { transform: translate(5px, 0); }
-  75% { transform: translate(-5px, 0); }
-  100% { transform: translate(0, 0); }
-}
-
-#sky-container {
+#allstar {
   display: none;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.planet {
   position: absolute;
-  font-size: 14px;
-  color: #ffe;
-  padding: 6px 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid #fff2;
-  border-radius: 8px;
+  width: 100px;
+  top: 30%;
+  left: -120px;
+  z-index: 5;
 }
 
-.planet::before {
-  content: '★ ';
-  color: gold;
+#allstar.animate {
+  display: block;
+  animation: kickMove 1s forwards ease-out;
 }
 
-.shooting-star {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  color: #ffffff;
-  font-size: 18px;
-  animation: shooting 5s linear infinite;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-@keyframes shooting {
+@keyframes kickMove {
   0% {
-    transform: translate(0, 0) rotate(0deg);
+    left: -120px;
+    transform: rotate(0deg);
+  }
+  50% {
+    left: 45%;
+    transform: rotate(20deg);
+  }
+  100% {
+    left: 50%;
+    transform: rotate(0deg);
+  }
+}
+
+#explosion {
+  display: none;
+  position: absolute;
+  font-size: 64px;
+  top: 45%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  animation: explode 0.5s ease-out forwards;
+}
+
+#explosion.animate {
+  display: block;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(0.5);
     opacity: 0;
   }
-  10% {
+  50% {
+    transform: scale(1.5);
     opacity: 1;
   }
   100% {
-    transform: translate(100vw, 100vh) rotate(45deg);
+    transform: scale(1);
     opacity: 0;
   }
-}
-
-#message {
-  position: absolute;
-  bottom: 10%;
-  width: 100%;
-  text-align: center;
-  font-size: 16px;
-  opacity: 0;
-  transition: opacity 1s ease;
-  color: #ffffffbb;
 }
