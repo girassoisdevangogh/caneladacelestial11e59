@@ -15,7 +15,6 @@ html, body {
   font-family: 'Quicksand', sans-serif;
 }
 
-/* Fundo com estrelas animadas */
 body::before {
   content: "";
   position: fixed;
@@ -27,14 +26,12 @@ body::before {
   z-index: -1;
 }
 
-/* Centraliza container vertical e horizontal */
 body, html {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Container com max-width, fundo transparente e blur */
 .container {
   text-align: center;
   max-width: 600px;
@@ -48,7 +45,6 @@ body, html {
   color: white;
 }
 
-/* Título */
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 2.4rem;
@@ -57,7 +53,6 @@ h1 {
   text-shadow: 0 0 10px #f1c40faa;
 }
 
-/* Poema estiloso com sombra, font maior e quebra natural */
 .poem {
   font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
@@ -75,7 +70,6 @@ h1 {
   padding: 0 1rem;
 }
 
-/* Gift box centralizado */
 #gift-box {
   background: #fffbe6;
   border: 2px solid #e6c200;
@@ -102,7 +96,6 @@ h1 {
   transform: scale(1.05);
 }
 
-/* Girassol no gift box */
 .girassol {
   width: 40px;
   height: 40px;
@@ -115,19 +108,19 @@ h1 {
   width: 120px;
   position: absolute;
   bottom: 50%;
-  right: -150px;
+  left: -150px; 
   z-index: 30;
   opacity: 0;
-  transition: right 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+  transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
               opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: right, opacity, transform;
+  will-change: left, opacity, transform;
 }
 
 #allstar.animate {
-  right: calc(50% - 60px);
+  left: calc(50% - 60px); 
   opacity: 1;
-  transform: rotate(-20deg);
+  transform: rotate(20deg); 
 }
 
 #explosion {
@@ -210,8 +203,6 @@ h1 {
   will-change: transform, opacity;
 }
 
-/* Animações */
-
 @keyframes kick {
   0% {
     transform: translateX(0) scale(1);
@@ -251,6 +242,7 @@ h1 {
   z-index: 150;
   transition: background-color 0.3s ease;
   user-select: none;
+  display: none;
 }
 
 #play-pause-btn:hover {
