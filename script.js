@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(() => {
     document.title = titleText.slice(titleIndex) + titleText.slice(0, titleIndex);
     titleIndex = (titleIndex + 1) % titleText.length;
-  }, 200);
+  }, 400);
 
   const messages = {
     sol: "☀️ Sol: Eu sou aquela luz que ilumina do jeitinho diferente, meio doido, meio sonhador, tipo um abraço inesperado que te faz sorrir sem saber por quê.",
