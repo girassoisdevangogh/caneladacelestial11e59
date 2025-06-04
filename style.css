@@ -206,3 +206,25 @@ h1 {
   }
 }
 
+.star {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 8px #fff, 0 0 12px #9cf;
+  pointer-events: none;
+  z-index: 999;
+  animation: twinkle 1s ease-out forwards;
+}
+
+@keyframes twinkle {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-10px, -30px) scale(0.3);
+    opacity: 0;
+  }
+}
