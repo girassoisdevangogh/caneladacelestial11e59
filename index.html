@@ -6,11 +6,11 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<audio id="bg-music" autoplay muted loop>
-  <source src="https://girassoisdevangogh.github.io/caneladaceleste11e59/RUELLE-I-get-to-love-you.mp3" type="audio/mpeg">
-</audio>
-  
 <body>
+
+  <audio id="bg-music" loop>
+    <source src="https://girassoisdevangogh.github.io/caneladaceleste11e59/RUELLE-I-get-to-love-you.mp3" type="audio/mpeg" />
+  </audio>
 
   <div class="container">
     <h1>08 de Março de 2024</h1>
@@ -19,15 +19,20 @@
     
     <p class="shooting-star">Na hora do chute, eu só pensei: não posso errar com essa garota. Curiosidade e cautela.</p>
     
-    <div id="gift-box">
+    <div id="gift-box" style="cursor:pointer;">
       <div class="girassol"></div>
       <span style="font-size: 24px; font-weight: bold; color: #6b4c00; font-family: 'Comic Sans MS', cursive;">
-        Clique para abrir
+        Clique para abrir e tocar música
       </span>
+      <br />
       <span style="font-size: 18px; color: #8b5e00; margin-top: 10px; font-family: 'Comic Sans MS', cursive;">
         🎁 Tem algo especial aqui dentro
       </span>
     </div>
+
+    <button id="music-toggle" style="display:none; margin-top: 20px; font-family: 'Comic Sans MS', cursive;">
+      Pausar música
+    </button>
   </div>
 
   <img
@@ -38,7 +43,7 @@
 
   <div id="explosion">💥</div>
 
-  <div id="sky-container">
+  <div id="sky-container" style="display:none;">
     <div class="planet lua" style="top: 10%; left: 20%;">🌙 Lua em Aquário</div>
     <div class="planet sol" style="top: 20%; left: 60%;">☀️ Sol em Peixes</div>
     <div class="planet mercurio" style="top: 30%; left: 40%;">🧠 Mercúrio em Peixes</div>
