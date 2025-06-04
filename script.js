@@ -4,6 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const allStar = document.getElementById("allstar");
   const explosion = document.getElementById("explosion");
   const tooltip = document.getElementById("tooltip");
+  const titleText = "🌌 Assim estava o céu naquela noite em que o rumo das nossas vidas se encontraram... ";
+  let titleIndex = 0;
+
+  setInterval(() => {
+    document.title = titleText.slice(titleIndex) + titleText.slice(0, titleIndex);
+    titleIndex = (titleIndex + 1) % titleText.length;
+  }, 200);
 
   const messages = {
     sol: "☀️ Sol: Eu sou aquela luz que ilumina do jeitinho diferente, meio doido, meio sonhador, tipo um abraço inesperado que te faz sorrir sem saber por quê.",
