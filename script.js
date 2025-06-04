@@ -3,14 +3,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const skyContainer = document.getElementById("sky-container");
 
   giftBox.addEventListener("click", () => {
-    giftBox.classList.add("kick-animation");
+  const kickImg = document.getElementById("kick-img");
+  const boom = document.getElementById("boom");
 
-    setTimeout(() => {
-      giftBox.style.display = "none";
-      skyContainer.style.display = "block";
-      startMessageLoop();
-    }, 2000);
-  });
+  giftBox.classList.add("kick-animation");
+
+  kickImg.style.display = "block";
+  boom.style.display = "block";
+
+  setTimeout(() => {
+    kickImg.style.display = "none";
+    boom.style.display = "none";
+    giftBox.style.display = "none";
+    skyContainer.style.display = "block";
+    startMessageLoop();
+  }, 2000);
+});
 
   const messages = [
     "Sol: Eu brilho no meio da névoa pisciana.",
