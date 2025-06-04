@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function startMessageLoop() {
     const planets = Array.from(document.querySelectorAll(".planet"));
-    let current = 0;
+    let current = planets.findIndex(p => p.classList.contains("sol"));
 
     function showNextTooltip() {
     const planet = planets[current];
@@ -95,4 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
       star.remove();
     }, 1000);
   });
+  
+  document.addEventListener("mousemove", (e) => {
+  const star = document.createElement("div");
+  star.classList.add("star");
+  star.style.left = `${e.clientX}px`;
+  star.style.top = `${e.clientY}px`;
+
+  document.body.appendChild(star);
+
+  setTimeout(() => {
+    star.remove();
+  }, 1000);
 });
