@@ -9,12 +9,13 @@
 html, body {
   height: 100%;
   overflow-x: hidden;
-  overflow-y: auto; /* libera scroll vertical */
+  overflow-y: auto;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   color: white;
   font-family: 'Quicksand', sans-serif;
 }
 
+/* Fundo com estrelas animadas */
 body::before {
   content: "";
   position: fixed;
@@ -26,6 +27,14 @@ body::before {
   z-index: -1;
 }
 
+/* Centraliza container vertical e horizontal */
+body, html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container com max-width, fundo transparente e blur */
 .container {
   text-align: center;
   max-width: 600px;
@@ -36,8 +45,10 @@ body::before {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   z-index: 10;
+  color: white;
 }
 
+/* Título */
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 2.4rem;
@@ -46,14 +57,46 @@ h1 {
   text-shadow: 0 0 10px #f1c40faa;
 }
 
+/* Poema estiloso com sombra, font maior e quebra natural */
 .poem {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
   line-height: 1.8;
-  color: #e0e0e0;
-  text-shadow: 0 0 8px #fff1a8cc;
+  color: #fef4c1;
+  text-shadow:
+    0 0 4px #fff8c2cc,
+    0 0 8px #f1c40faa,
+    0 0 16px #f39c12bb;
+  margin-bottom: 2rem;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+  padding: 0 1rem;
 }
 
+/* Marquee simples e estiloso (loop horizontal infinito) */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border-top: 1px solid #f1c40f55;
+  border-bottom: 1px solid #f1c40f55;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 1.1rem;
+  color: #f1c40fcc;
+  text-shadow: 0 0 6px #f1c40fbb;
+  animation: marqueeAnim 15s linear infinite;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+}
+
+/* Gift box centralizado */
 #gift-box {
   background: #fffbe6;
   border: 2px solid #e6c200;
@@ -70,12 +113,15 @@ h1 {
   transition: transform 0.3s;
   position: relative;
   z-index: 20;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #gift-box:hover {
   transform: scale(1.05);
 }
 
+/* Girassol no gift box */
 .girassol {
   width: 40px;
   height: 40px;
@@ -177,6 +223,8 @@ h1 {
   animation: twinkle 1s ease-out forwards;
 }
 
+/* Animações */
+
 @keyframes twinkle {
   0% {
     transform: translate(0, 0) scale(1);
@@ -186,6 +234,10 @@ h1 {
     transform: translate(-10px, -30px) scale(0.3);
     opacity: 0;
   }
+}
+@keyframes marqueeAnim {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 @keyframes stars {
