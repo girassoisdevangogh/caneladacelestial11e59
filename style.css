@@ -139,16 +139,23 @@ h1 {
 
 #tooltip {
   position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fffbea;
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-family: 'Playfair Display', serif;
+  max-width: 240px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 150;
+  transition: opacity 0.5s ease;
+  z-index: 100;
+  pointer-events: none;
 }
+
 
 #tooltip.visible {
   opacity: 1;
