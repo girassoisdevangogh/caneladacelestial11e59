@@ -8,18 +8,22 @@
 
 html, body {
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto; /* libera scroll vertical */
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  color: white;
+  font-family: 'Quicksand', sans-serif;
 }
 
-body {
-  background: radial-gradient(ellipse at top, #0d1b2a, #000);
-  color: #f5f5f5;
-  font-family: 'Quicksand', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  position: relative;
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: transparent url('https://raw.githubusercontent.com/klsyxo/starry-sky-background/main/images/stars.png') repeat;
+  animation: stars 200s linear infinite;
+  opacity: 0.6;
+  z-index: -1;
 }
 
 .container {
@@ -130,6 +134,7 @@ h1 {
   position: absolute;
   font-size: 1.2rem;
   transition: transform 0.3s;
+  cursor: pointer;
 }
 
 .planet:hover {
@@ -156,54 +161,8 @@ h1 {
   pointer-events: none;
 }
 
-
 #tooltip.visible {
   opacity: 1;
-}
-
-#message {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255 255 255 / 0.1);
-  backdrop-filter: blur(6px);
-  color: #f1c40f;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
-  padding: 1rem 1.8rem;
-  border-radius: 14px;
-  box-shadow: 0 0 15px #f1c40faa;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  max-width: 80vw;
-  text-align: center;
-  z-index: 50;
-}
-
-.star-dust {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.8;
-  box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
-  animation: fadeOutStar 1s ease-out forwards;
-  z-index: 9999;
-}
-
-@keyframes fadeOutStar {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(0.3);
-    opacity: 0;
-  }
 }
 
 .star {
@@ -227,4 +186,9 @@ h1 {
     transform: translate(-10px, -30px) scale(0.3);
     opacity: 0;
   }
+}
+
+@keyframes stars {
+  0% { background-position: 0 0; }
+  100% { background-position: -10000px 5000px; }
 }
