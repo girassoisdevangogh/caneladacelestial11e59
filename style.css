@@ -1,163 +1,195 @@
-/* Esconde o ::before do gift-box */
-#gift-box::before {
-  display: none;
+/* Reset e base */
+body {
+  margin: 0;
+  background: linear-gradient(to bottom, #0b1d51 0%, #1a3a7a 100%);
+  color: white;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  height: 100vh;
 }
 
-/* Estilo do girassol dentro do gift-box */
+/* Caixa de presente */
+#gift-box {
+  cursor: pointer;
+  width: 250px;
+  height: 250px;
+  background: #ffc107;
+  border: 3px solid #6b4c00;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 60px auto 20px;
+  box-shadow: 0 5px 10px rgba(107, 76, 0, 0.5);
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+#gift-box:hover {
+  transform: scale(1.05);
+}
+
+/* Girassol estilizado simples */
 .girassol {
   width: 80px;
   height: 80px;
-  background-image: url('https://png.pngtree.com/png-vector/20210526/ourmid/pngtree-sunflower-flour-plant-petals-png-image_3347632.jpg');
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 15px;
+  background: radial-gradient(circle at center, #ffda44 40%, #b68600 90%);
+  border-radius: 50%;
+  margin-bottom: 12px;
+  position: relative;
 }
 
-/* All Star escondido inicialmente */
-#allstar {
-  display: none;
+.girassol::before,
+.girassol::after {
+  content: "";
   position: absolute;
-  width: 100px;
-  top: 30%;
-  left: -120px;
-  z-index: 5;
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle at center, #ffda44 40%, #b68600 90%);
+  border-radius: 50%;
+  top: 18px;
+  left: -12px;
+  transform: rotate(30deg);
 }
 
-/* All Star animado */
-#allstar.animate {
+.girassol::after {
+  left: auto;
+  right: -12px;
+  top: 18px;
+  transform: rotate(-30deg);
+}
+
+/* Estrela cadente texto */
+.shooting-star {
   display: block;
-  animation: kickMove 1s forwards ease-out;
+  text-align: center;
+  font-style: italic;
+  margin: 20px 0;
+  color: #f9f0a6;
 }
 
-/* Animação do chute */
+/* Tênis (All Star) */
+#allstar {
+  position: fixed;
+  bottom: 50px;
+  right: -150px; /* Começa fora da tela na direita */
+  width: 100px;
+  height: auto;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#allstar.animate {
+  animation: kickMove 1.5s forwards;
+  opacity: 1;
+}
+
+/* Explosão 💥 */
+#explosion {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  font-size: 3rem;
+  opacity: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 200;
+}
+
+#explosion.animate {
+  opacity: 1;
+  animation: explosionFade 1s forwards;
+}
+
+/* Animação tênis da direita pra esquerda */
 @keyframes kickMove {
   0% {
-    right: -120px;
+    right: -150px;
     transform: rotate(0deg);
+    opacity: 1;
   }
   50% {
     right: 45%;
     transform: rotate(-20deg);
+    opacity: 1;
   }
   100% {
     right: 50%;
     transform: rotate(0deg);
-  }
-}
-
-
-/* Estilo e animação da explosão */
-#explosion {
-  display: none;
-  position: absolute;
-  font-size: 64px;
-  top: 45%;
-  left: 48%;
-  transform: translate(-50%, -50%);
-  z-index: 6;
-  animation: explode 0.5s ease-out forwards;
-}
-
-#explosion.animate {
-  display: block;
-}
-
-@keyframes explode {
-  0% {
-    transform: scale(0.5);
     opacity: 0;
   }
-  50% {
-    transform: scale(1.5);
+}
+
+/* Animação explosão */
+@keyframes explosionFade {
+  0% {
     opacity: 1;
+    transform: translateX(-50%) scale(1);
   }
   100% {
-    transform: scale(1);
     opacity: 0;
+    transform: translateX(-50%) scale(1.5);
   }
 }
 
-/* Tooltip */
-#tooltip {
-  position: absolute;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
-  border-radius: 8px;
-  font-size: 14px;
-  max-width: 220px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 999;
-  font-family: 'Comic Sans MS', cursive;
-}
-
-#tooltip.visible {
-  opacity: 1;
-}
-
-/* Container do céu com planetas */
+/* Céu container */
 #sky-container {
-  display: none;
   position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(to bottom, #001d3d, #003566, #0f4c75);
+  width: 100%;
+  height: 70vh;
+  margin: 0 auto;
+  background: radial-gradient(circle at center, #1a2a6c, #0b1d51);
+  border-radius: 10px;
+  box-shadow: 0 0 30px #1a2a6c;
   overflow: hidden;
-  font-family: 'Comic Sans MS', cursive;
+  padding: 10px;
+  color: #eee;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 /* Planetas */
 .planet {
   position: absolute;
-  color: white;
-  font-size: 16px;
-  padding: 6px 12px;
-  background-color: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+  background: rgba(255 255 255 / 0.15);
+  border-radius: 50%;
+  padding: 8px 12px;
+  color: #fff;
+  cursor: default;
+  font-size: 14px;
+  max-width: 160px;
+  text-align: center;
+  user-select: none;
+  transition: background-color 0.3s ease;
 }
 
 .planet:hover {
-  transform: scale(1.1);
+  background: rgba(255 255 255 / 0.4);
+  color: #ffdd57;
+  font-weight: bolder;
 }
 
-/* Estilo da estrela cadente */
-.shooting-star {
+/* Tooltip */
+#tooltip {
   position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 18px;
-  color: white;
-  animation: twinkle 2s infinite ease-in-out;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffd;
+  padding: 6px 10px;
+  border-radius: 5px;
+  pointer-events: none;
+  font-size: 13px;
   font-family: 'Comic Sans MS', cursive;
-}
-
-/* Efeito cintilante */
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* Mensagem sequencial após abertura */
-#message {
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #fffacd;
-  font-size: 20px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 10px 20px;
-  border-radius: 10px;
   opacity: 0;
-  transition: opacity 0.8s ease;
-  font-family: 'Comic Sans MS', cursive;
+  transition: opacity 0.2s ease;
+  max-width: 220px;
+  z-index: 5000;
+}
+
+#tooltip.visible {
+  opacity: 1;
 }
