@@ -38,27 +38,31 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function positionTooltip(planet, message) {
+    tooltip.style.opacity = "0"; // fade out rápido antes de reposicionar
     tooltip.textContent = message;
-    tooltip.classList.add("visible");
-    tooltip.style.opacity = "0";
 
-    const tooltipRect = tooltip.getBoundingClientRect();
-    const rect = planet.getBoundingClientRect();
+    // Espera um pouco para pegar o tamanho atualizado do tooltip
+    requestAnimationFrame(() => {
+      const tooltipRect = tooltip.getBoundingClientRect();
+      const rect = planet.getBoundingClientRect();
 
-    let top = window.scrollY + rect.top - tooltipRect.height - 12;
-    let left = window.scrollX + rect.left + rect.width / 2 - tooltipRect.width / 2;
+      let top = window.scrollY + rect.top - tooltipRect.height - 12;
+      let left = window.scrollX + rect.left + rect.width / 2 - tooltipRect.width / 2;
 
-    left = Math.min(Math.max(left, 8), window.innerWidth - tooltipRect.width - 8);
-    if (top < window.scrollY + 8) top = window.scrollY + rect.bottom + 12;
+      left = Math.min(Math.max(left, 8), window.innerWidth - tooltipRect.width - 8);
+      if (top < window.scrollY + 8) top = window.scrollY + rect.bottom + 12;
 
-    tooltip.style.top = `${top}px`;
-    tooltip.style.left = `${left}px`;
-    tooltip.style.opacity = "1";
+      tooltip.style.top = `${top}px`;
+      tooltip.style.left = `${left}px`;
+      tooltip.style.opacity = "1";
+      tooltip.classList.add("visible");
+    });
   }
 
   function startMessageLoop() {
     const planets = [...document.querySelectorAll(".planet")];
     let current = planets.findIndex(p => p.classList.contains("sol"));
+    if (current === -1) current = 0;
 
     function showNextTooltip() {
       const planet = planets[current];
@@ -75,11 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousemove", (e) => {
     const star = document.createElement("div");
     star.className = "star";
+    star.style.position = "fixed";
     star.style.left = `${e.clientX}px`;
     star.style.top = `${e.clientY}px`;
-
+    star.style.pointerEvents = "none";
     document.body.appendChild(star);
 
-    setTimeout(() => star.remove(), 1000);
+    setTimeout(() => {
+      if (star.parentNode) star.parentNode.removeChild(star);
+    }, 1000);
   });
 });
