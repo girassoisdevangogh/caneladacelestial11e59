@@ -1,34 +1,59 @@
 document.addEventListener("DOMContentLoaded", () => {
   const giftBox = document.getElementById("gift-box");
   const skyContainer = document.getElementById("sky-container");
+  const allStar = document.getElementById("allstar");
+  const explosion = document.getElementById("explosion");
 
   giftBox.addEventListener("click", () => {
-  const kickImg = document.getElementById("kick-img");
-  const boom = document.getElementById("boom");
+    giftBox.classList.add("kick-animation");
+    allStar.classList.add("animate");
 
-  giftBox.classList.add("kick-animation");
+    setTimeout(() => {
+      explosion.classList.add("animate");
+    }, 500);
 
-  kickImg.style.display = "block";
-  boom.style.display = "block";
+    setTimeout(() => {
+      giftBox.style.display = "none";
+      skyContainer.style.display = "block";
+      startMessageLoop();
+    }, 2000);
+  });
 
-  setTimeout(() => {
-    kickImg.style.display = "none";
-    boom.style.display = "none";
-    giftBox.style.display = "none";
-    skyContainer.style.display = "block";
-    startMessageLoop();
-  }, 2000);
+  const tooltip = document.getElementById("tooltip");
+
+const messages = {
+  sol: "Sol: Eu brilho no meio da névoa pisciana.",
+  lua: "Lua: E eu observo tudo de longe, como quem não se apega, mas sente.",
+  venus: "Vênus: Prefiro o toque que vem do olhar.",
+  marte: "Marte: Mas às vezes o amor vem numa canelada.",
+  saturno: "Saturno: As estruturas também sabem chorar.",
+  netuno: "Netuno: Tudo isso talvez tenha sido só um sonho.",
+  plutao: "Plutão: Mas sonhos mexem com o que há de mais real.",
+  mercurio: "Mercúrio: Silêncio também comunica.",
+  jupiter: "Júpiter: Crescer é sair da zona de conforto.",
+  urano: "Urano: A mudança é inevitável."
+};
+
+document.querySelectorAll(".planet").forEach(planet => {
+  planet.addEventListener("mouseover", (e) => {
+    for (const key in messages) {
+      if (planet.classList.contains(key)) {
+        tooltip.textContent = messages[key];
+        tooltip.classList.add("visible");
+        break;
+      }
+    }
+  });
+
+  planet.addEventListener("mousemove", (e) => {
+    tooltip.style.top = (e.pageY + 15) + "px";
+    tooltip.style.left = (e.pageX + 15) + "px";
+  });
+
+  planet.addEventListener("mouseout", () => {
+    tooltip.classList.remove("visible");
+  });
 });
-
-  const messages = [
-    "Sol: Eu brilho no meio da névoa pisciana.",
-    "Lua: E eu observo tudo de longe, como quem não se apega, mas sente.",
-    "Vênus: Prefiro o toque que vem do olhar.",
-    "Marte: Mas às vezes o amor vem numa canelada.",
-    "Saturno: As estruturas também sabem chorar.",
-    "Netuno: Tudo isso talvez tenha sido só um sonho.",
-    "Plutão: Mas sonhos mexem com o que há de mais real.",
-  ];
 
   let currentMessage = 0;
 
