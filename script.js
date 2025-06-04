@@ -27,9 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     giftBox.classList.add("kick-animation");
     allStar.classList.add("animate");
 
-    setTimeout(() => {
-      explosion.classList.add("animate");
-    }, 500);
+    setTimeout(() => explosion.classList.add("animate"), 500);
 
     setTimeout(() => {
       giftBox.style.display = "none";
@@ -51,9 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let left = window.scrollX + rect.left + rect.width / 2 - tooltipRect.width / 2;
 
     left = Math.min(Math.max(left, 8), window.innerWidth - tooltipRect.width - 8);
-    if (top < window.scrollY + 8) {
-      top = window.scrollY + rect.bottom + 12;
-    }
+    if (top < window.scrollY + 8) top = window.scrollY + rect.bottom + 12;
 
     tooltip.style.top = `${top}px`;
     tooltip.style.left = `${left}px`;
@@ -61,15 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startMessageLoop() {
-    const planets = Array.from(document.querySelectorAll(".planet"));
+    const planets = [...document.querySelectorAll(".planet")];
     let current = planets.findIndex(p => p.classList.contains("sol"));
 
     function showNextTooltip() {
       const planet = planets[current];
-      const key = Array.from(planet.classList).find(c => messages[c]) || "";
-      const message = messages[key] || "";
-
-      positionTooltip(planet, message);
+      const key = [...planet.classList].find(c => messages[c]) || "";
+      positionTooltip(planet, messages[key] || "");
 
       current = (current + 1) % planets.length;
       setTimeout(showNextTooltip, 7000);
@@ -80,14 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("mousemove", (e) => {
     const star = document.createElement("div");
-    star.classList.add("star");
+    star.className = "star";
     star.style.left = `${e.clientX}px`;
     star.style.top = `${e.clientY}px`;
 
     document.body.appendChild(star);
 
-    setTimeout(() => {
-      star.remove();
-    }, 1000);
+    setTimeout(() => star.remove(), 1000);
   });
 });
