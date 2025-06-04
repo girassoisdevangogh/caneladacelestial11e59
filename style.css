@@ -73,7 +73,7 @@ h1 {
 #gift-box {
   background: #fffbe6;
   border: 2px solid #e6c200;
-  border-radius: 20px;
+  border-radius: 30px;
   width: 300px;
   height: 180px;
   display: flex;
@@ -90,37 +90,98 @@ h1 {
   text-align: center;
   user-select: none;
   will-change: transform;
+  overflow: hidden;
 }
 
 #gift-box:hover {
   transform: scale(1.05);
 }
 
-.girassol {
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle, #f5e342 50%, #c48b00 51%);
-  border-radius: 50%;
-  margin-bottom: 10px;
+/* NOVO: Animação de tremor para a caixa */
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Adiciona a animação de tremor quando a caixa é "chutada" */
+#gift-box.shake-animation {
+  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+  transform-origin: center center;
+}
+
+.sunflower-frame {
+  position: absolute;
+  top: -15%;
+  left: -15%;
+  width: 130%;
+  height: 130%;
+  object-fit: contain;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.gift-text-main {
+  font-size: 24px;
+  font-weight: bold;
+  color: #6b4c00;
+  font-family: 'Quicksand', sans-serif;
+  z-index: 30;
+  position: relative;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.gift-text-secondary {
+  font-size: 18px;
+  color: #8b5e00;
+  margin-top: 10px;
+  font-family: 'Quicksand', sans-serif;
+  z-index: 30;
+  position: relative;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 #allstar {
   width: 120px;
   position: absolute;
   bottom: 50%;
-  left: -150px; 
+  left: -150px;
   z-index: 30;
   opacity: 0;
-  transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-              opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  /* Removendo a transição 'left' para usar a keyframe completa */
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: left, opacity, transform;
 }
 
 #allstar.animate {
-  left: calc(50% - 60px); 
+  /* Não precisamos mais de 'left' ou 'transform' aqui, a keyframe fará isso */
   opacity: 1;
-  transform: rotate(20deg); 
+  /* A animação 'kick-allstar' será aplicada via JS */
+}
+
+/* NOVA: Animação específica para o All Star "chutar" */
+@keyframes kick-allstar {
+  0% {
+    left: -150px; /* Posição inicial fora da tela */
+    transform: rotate(0deg);
+  }
+  70% {
+    left: calc(50% + 120px); /* Move um pouco além do limite direito da caixa */
+    transform: rotate(25deg) scale(1.1); /* Rotação e leve aumento para o impacto */
+  }
+  100% {
+    left: calc(50% + 90px); /* Posição final no limite da caixa (50% da tela + metade da largura da caixa + metade da largura do tênis) */
+    transform: rotate(20deg) scale(1); /* Posição final e rotação */
+  }
 }
 
 #explosion {
@@ -131,7 +192,7 @@ h1 {
   font-size: 4rem;
   opacity: 0;
   z-index: 40;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, opacity;
 }
@@ -203,27 +264,20 @@ h1 {
   will-change: transform, opacity;
 }
 
-@keyframes kick {
-  0% {
-    transform: translateX(0) scale(1);
-  }
-  20% {
-    transform: translateX(-25px) scale(1.1);
-  }
-  50% {
-    transform: translateX(15px) scale(0.95);
-  }
-  80% {
-    transform: translateX(-10px) scale(1.03);
-  }
-  100% {
-    transform: translateX(0) scale(1);
-  }
-}
+/* Remover a animação 'kick' antiga se ela for exclusiva do All Star */
+/* @keyframes kick {
+  0% { transform: translateX(0) scale(1); }
+  20% { transform: translateX(-25px) scale(1.1); }
+  50% { transform: translateX(15px) scale(0.95); }
+  80% { transform: translateX(-10px) scale(1.03); }
+  100% { transform: translateX(0) scale(1); }
+} */
 
-.kick-animation {
+/* Remover kick-animation se não for mais usada na gift-box */
+/* .kick-animation {
   animation: kick 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
+} */
+
 
 #play-pause-btn {
   position: fixed;
