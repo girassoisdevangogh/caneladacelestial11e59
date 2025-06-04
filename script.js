@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const explosion = document.getElementById("explosion");
   const tooltip = document.getElementById("tooltip");
   const bgMusic = document.getElementById("bg-music");
-  const musicToggle = document.getElementById("music-toggle");
+  const playPauseBtn = document.getElementById("play-pause-btn");
 
   const titleText = "🌌 Assim estava o céu naquela noite em que o rumo das nossas vidas se encontraram... ";
   let titleIndex = 0;
@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let animationStarted = false;
 
-  function updateMusicToggleText() {
-    musicToggle.textContent = bgMusic.paused ? "Tocar música" : "Pausar música";
+  function updateMusicButtonState() {
+    playPauseBtn.textContent = bgMusic.paused ? "▶️" : "⏸️";
   }
 
   giftBox.addEventListener("click", async () => {
@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       await bgMusic.play();
-      updateMusicToggleText();
+      updateMusicButtonState();
     } catch (e) {
-      console.log("Erro ao tentar tocar a música:", e);
+      console.log("Erro ao tentar tocar a música automaticamente:", e);
     }
 
     giftBox.classList.add("kick-animation");
@@ -54,26 +54,23 @@ document.addEventListener("DOMContentLoaded", () => {
       giftBox.style.display = "none";
       skyContainer.style.display = "block";
       allStar.style.opacity = "0";
-      musicToggle.style.display = "inline-block";
+      playPauseBtn.style.display = "inline-block";
       startMessageLoop();
     }, 2000);
   });
 
-  musicToggle.addEventListener("click", () => {
+  playPauseBtn.addEventListener("click", () => {
     if (bgMusic.paused) {
       bgMusic.play();
     } else {
       bgMusic.pause();
     }
-    updateMusicToggleText();
+    updateMusicButtonState();
   });
 
-  bgMusic.addEventListener('play', updateMusicToggleText);
-  bgMusic.addEventListener('pause', updateMusicToggleText);
-
-  bgMusic.addEventListener('ended', () => {
-    updateMusicToggleText();
-  });
+  bgMusic.addEventListener('play', updateMusicButtonState);
+  bgMusic.addEventListener('pause', updateMusicButtonState);
+  bgMusic.addEventListener('ended', updateMusicButtonState);
 
   function positionTooltip(planet, message) {
     tooltip.style.opacity = "0";
@@ -102,12 +99,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (current === -1) current = 0;
 
     function showNextTooltip() {
-      const planet = planets[current];
-      const key = [...planet.classList].find(c => messages[c]) || "";
-      positionTooltip(planet, messages[key] || "");
+      tooltip.classList.remove("visible");
+      tooltip.style.opacity = "0"; 
 
-      current = (current + 1) % planets.length;
-      setTimeout(showNextTooltip, 7000);
+      setTimeout(() => {
+        const planet = planets[current];
+        const key = [...planet.classList].find(c => messages[c]) || "";
+        positionTooltip(planet, messages[key] || "");
+
+        current = (current + 1) % planets.length;
+        setTimeout(showNextTooltip, 7000);
+      }, 500);
     }
 
     showNextTooltip();
@@ -127,5 +129,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   });
 
-  updateMusicToggleText();
+  updateMusicButtonState();
 });
