@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     giftBox.classList.add("kick-animation");
     allStar.classList.add("animate");
 
+  allStar.addEventListener("animationend", () => {
+    allStar.classList.remove("animate");
+  }, { once: true });
     setTimeout(() => {
       explosion.classList.add("animate");
     }, 500);
