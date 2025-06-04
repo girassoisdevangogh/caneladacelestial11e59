@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   giftBox.addEventListener("click", async () => {
-    if (animationStarted) return;
+    if (animationStarted) return; 
     animationStarted = true;
 
     try {
@@ -55,8 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       skyContainer.style.display = "block";
       allStar.style.opacity = "0";
       playPauseBtn.style.display = "inline-block";
-      
-      startMessageLoop(); 
+      startMessageLoop();
     }, 2000);
   });
 
@@ -74,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bgMusic.addEventListener('ended', updateMusicButtonState);
 
   function positionTooltip(planet, message) {
-    tooltip.style.opacity = "0"; 
+    tooltip.style.opacity = "0";
     tooltip.textContent = message;
 
     requestAnimationFrame(() => {
@@ -103,20 +102,17 @@ document.addEventListener("DOMContentLoaded", () => {
       tooltip.classList.remove("visible");
       tooltip.style.opacity = "0"; 
 
-      setTimeout(() => { 
+      setTimeout(() => {
         const planet = planets[current];
         const key = [...planet.classList].find(c => messages[c]) || "";
-        
-        if (messages[key]) {
-          positionTooltip(planet, messages[key]);
-        }
-        
+        positionTooltip(planet, messages[key] || "");
+
         current = (current + 1) % planets.length;
         setTimeout(showNextTooltip, 7000); 
       }, 500);
     }
 
-    showNextTooltip(); 
+    showNextTooltip();
   }
 
   document.addEventListener("mousemove", (e) => {
