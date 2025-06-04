@@ -32,18 +32,19 @@
 /* Animação do chute */
 @keyframes kickMove {
   0% {
-    left: -120px;
+    right: -120px;
     transform: rotate(0deg);
   }
   50% {
-    left: 45%;
-    transform: rotate(20deg);
+    right: 45%;
+    transform: rotate(-20deg);
   }
   100% {
-    left: 50%;
+    right: 50%;
     transform: rotate(0deg);
   }
 }
+
 
 /* Estilo e animação da explosão */
 #explosion {
