@@ -68,15 +68,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let current = 0;
 
     function showNextTooltip() {
-      const planet = planets[current];
-      const key = Array.from(planet.classList).find(c => messages[c]) || "";
-      const message = messages[key] || "";
+    const planet = planets[current];
+    const key = Array.from(planet.classList).find(c => messages[c]) || "";
+    const message = messages[key] || "";
 
-      positionTooltip(planet, message);
+    positionTooltip(planet, message);
 
-      current = (current + 1) % planets.length;
-      setTimeout(showNextTooltip, 3500);
-    }
+    current++;
+    if (current >= planets.length) current = 0;
+
+  messageTimeout = setTimeout(showNextTooltip, 6000);
+}
 
     showNextTooltip();
   }
