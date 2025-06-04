@@ -118,11 +118,13 @@ h1 {
 
 .sunflower-frame {
   position: absolute;
-  top: -15%;
-  left: -15%;
-  width: 130%;
-  height: 130%;
-  object-fit: contain;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: cover;
   z-index: 25;
   pointer-events: none;
 }
