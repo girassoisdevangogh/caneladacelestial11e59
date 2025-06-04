@@ -30,12 +30,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let animationStarted = false;
 
+  function updateMusicToggleText() {
+    musicToggle.textContent = bgMusic.paused ? "Tocar música" : "Pausar música";
+  }
+
   giftBox.addEventListener("click", async () => {
     if (animationStarted) return;
     animationStarted = true;
 
     try {
       await bgMusic.play();
+      updateMusicToggleText();
     } catch (e) {
       console.log("Erro ao tentar tocar a música:", e);
     }
@@ -57,11 +62,17 @@ document.addEventListener("DOMContentLoaded", () => {
   musicToggle.addEventListener("click", () => {
     if (bgMusic.paused) {
       bgMusic.play();
-      musicToggle.textContent = "Pausar música";
     } else {
       bgMusic.pause();
-      musicToggle.textContent = "Tocar música";
     }
+    updateMusicToggleText();
+  });
+
+  bgMusic.addEventListener('play', updateMusicToggleText);
+  bgMusic.addEventListener('pause', updateMusicToggleText);
+
+  bgMusic.addEventListener('ended', () => {
+    updateMusicToggleText();
   });
 
   function positionTooltip(planet, message) {
@@ -115,4 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (star.parentNode) star.parentNode.removeChild(star);
     }, 1000);
   });
+
+  updateMusicToggleText();
 });
