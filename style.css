@@ -10,34 +10,42 @@ body {
 
 #gift-box {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #ffd700;
-  box-shadow: inset 0 0 50px rgba(255, 223, 0, 0.5);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #fff8dc, #fcd253);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.5);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   z-index: 2;
+  transition: transform 0.3s ease;
 }
+
+#gift-box:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
 
 #gift-box::before {
   content: '';
-  width: 100px;
-  height: 100px;
   position: absolute;
-  top: 40px;
-  left: calc(50% - 50px);
-  background-size: 16px 16px;
-  background-position: 0 0, 8px 8px;
-  background-image:
-    linear-gradient(45deg, #efefef 25%, rgba(239, 239, 239, 0) 25%, rgba(239, 239, 239, 0) 75%, #efefef 75%, #efefef),
-    linear-gradient(45deg, #efefef 25%, rgba(239, 239, 239, 0) 25%, rgba(239, 239, 239, 0) 75%, #efefef 75%, #efefef);
-  clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 0px 100%);
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 80px;
+  background-image: url('https://img.cdndsgni.com/preview/10623021.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 3;
 }
+
 
 
 .girassol {
