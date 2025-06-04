@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const allStar = document.getElementById("allstar");
   const explosion = document.getElementById("explosion");
   const tooltip = document.getElementById("tooltip");
+  const bgMusic = document.getElementById("bg-music");
+  const musicToggle = document.getElementById("music-toggle");
+
   const titleText = "🌌 Assim estava o céu naquela noite em que o rumo das nossas vidas se encontraram... ";
   let titleIndex = 0;
 
@@ -27,9 +30,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let animationStarted = false;
 
-  giftBox.addEventListener("click", () => {
+  giftBox.addEventListener("click", async () => {
     if (animationStarted) return;
     animationStarted = true;
+
+    try {
+      await bgMusic.play();
+    } catch (e) {
+      console.log("Erro ao tentar tocar a música:", e);
+    }
 
     giftBox.classList.add("kick-animation");
     allStar.classList.add("animate");
@@ -40,15 +49,25 @@ document.addEventListener("DOMContentLoaded", () => {
       giftBox.style.display = "none";
       skyContainer.style.display = "block";
       allStar.style.opacity = "0";
+      musicToggle.style.display = "inline-block";
       startMessageLoop();
     }, 2000);
   });
 
+  musicToggle.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.play();
+      musicToggle.textContent = "Pausar música";
+    } else {
+      bgMusic.pause();
+      musicToggle.textContent = "Tocar música";
+    }
+  });
+
   function positionTooltip(planet, message) {
-    tooltip.style.opacity = "0"; // fade out rápido antes de reposicionar
+    tooltip.style.opacity = "0";
     tooltip.textContent = message;
 
-    // Espera um pouco para pegar o tamanho atualizado do tooltip
     requestAnimationFrame(() => {
       const tooltipRect = tooltip.getBoundingClientRect();
       const rect = planet.getBoundingClientRect();
