@@ -9,12 +9,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainContainer = document.querySelector(".container");
 
   const planets = [...document.querySelectorAll(".planet")];
+  let currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
+  if (currentPlanetIndex === -1) {
+      currentPlanetIndex = 0;
+  }
 
   const titleText = "🌌 Assim estava o céu naquela noite em que o rumo das nossas vidas se encontraram... ";
   let titleIndex = 0;
 
   let messageLoopTimeoutId;
-  let currentPlanetIndex = 0;
   let isHovering = false;
 
   setInterval(() => {
@@ -26,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sol: "☀️ Eu sou aquela luz que te ilumina de um jeitinho diferente, meio louco, meio sonhador e inesperado, que te faz sorrir sem saber por quê ☀️",
     lua: "🌙 E eu observo tudo de longe, como quem não se apega, mas sente. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho 🌙",
     venus: "💖 Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca. É toque que acontece até no silêncio entre dois olhares 💖",
-    marte: "🔥 Sou o fogo que arde no peito, o chute que te empurra suavemente à frente, e o abraço quente de quem não tem intenção de te soltar �",
+    marte: "🔥 Sou o fogo que arde no peito, o chute que te empurra suavemente à frente, e o abraço quente de quem não tem intenção de te soltar 🔥",
     mercurio: "🧠 Falo baixinho, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir entende 🧠",
     jupiter: "🌱 Crescer não é pressa, é raiz. A fé é uma semente que escolhe seu tempo pra brotar 🌱",
     saturno: "⏳ O tempo me ensinou que o que é verdadeiro não se apressa. A maturidade é um gesto calmo de quem já esperou muito ⏳",
@@ -58,9 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => explosion.classList.add("animate"), 500);
 
     setTimeout(() => {
-      giftBox.style.display = "none";
-      allStar.style.opacity = "0";
-      explosion.classList.remove("animate");
+      giftBox.style.display = "none"; 
+      allStar.style.opacity = "0"; 
+      explosion.classList.remove("animate"); 
 
       mainContainer.classList.add("hidden");
 
@@ -71,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
       startMessageLoop();
       addPlanetHoverListeners();
     }, 2000);
-
   });
 
   playPauseBtn.addEventListener("click", () => {
@@ -111,32 +113,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function startMessageLoop() {
     clearTimeout(messageLoopTimeoutId);
-
-    if (!isHovering) {
-      function showNextTooltip() {
-        tooltip.classList.remove("visible");
-        tooltip.style.opacity = "0";
-
-        setTimeout(() => {
-          if (!isHovering) {
-            const planet = planets[currentPlanetIndex];
-            const key = [...planet.classList].find(c => messages[c]) || "";
-
-            if (messages[key]) {
-              positionTooltip(planet, messages[key]);
-            } else {
-              currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
-              messageLoopTimeoutId = setTimeout(showNextTooltip, 100);
-              return;
-            }
-
-            currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
-            messageLoopTimeoutId = setTimeout(showNextTooltip, 8500);
-          }
-        }, 500);
-      }
-      showNextTooltip();
+    if (isHovering) {
+      return;
     }
+
+    function showNextTooltip() {
+      tooltip.classList.remove("visible");
+      tooltip.style.opacity = "0";
+
+      messageLoopTimeoutId = setTimeout(() => {
+        if (!isHovering) {
+          const planet = planets[currentPlanetIndex];
+          const key = [...planet.classList].find(c => messages[c]) || "";
+
+          if (messages[key]) {
+            positionTooltip(planet, messages[key]);
+          } else {
+            currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
+            showNextTooltip(); 
+            return;
+          }
+
+          currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
+          messageLoopTimeoutId = setTimeout(showNextTooltip, 8500);
+        } else {
+          clearTimeout(messageLoopTimeoutId);
+        }
+      }, 500);
+    }
+
+    showNextTooltip();
   }
 
   function addPlanetHoverListeners() {
