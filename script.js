@@ -60,11 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     giftBox.classList.add("kick-animation");
-    
+
     kickElementsWrapper.style.opacity = "1";
-    
+
     allStar.style.animation = "allstarAnimation 1.8s forwards";
-    
+
     setTimeout(() => {
       explosion.style.animation = "explosionAnimation 0.5s forwards";
     }, 900);
@@ -84,7 +84,11 @@ document.addEventListener("DOMContentLoaded", () => {
       skyContainer.style.visibility = "visible";
       skyContainer.style.opacity = "1";
       playPauseBtn.style.display = "inline-block";
-
+      
+      currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
+      if (currentPlanetIndex === -1) {
+          currentPlanetIndex = 0;
+      }
       startMessageLoop();
       addPlanetHoverListeners();
     }, 2500);
