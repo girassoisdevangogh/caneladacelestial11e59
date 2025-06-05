@@ -311,74 +311,52 @@ h1 {
   0% {
     opacity: 1;
     transform: translate(-50%, -50%);
-    #allstar {
-      transform: translateX(-300px) translateY(0) rotate(0deg) scale(0.6);
-      opacity: 0;
-    }
-    #explosion {
-      transform: scale(0);
-      opacity: 0;
-    }
-  }
-  20% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-    #allstar {
-      transform: translateX(-150px) translateY(-10px) rotate(-10deg) scale(0.8);
-      opacity: 1;
-    }
-    #explosion {
-      transform: scale(0);
-      opacity: 0;
-    }
-  }
-  40% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-    #allstar {
-      transform: translateX(-50px) translateY(-5px) rotate(15deg) scale(1);
-      opacity: 1;
-    }
-    #explosion {
-      transform: scale(0);
-      opacity: 0;
-    }
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-    #allstar {
-      transform: translateX(0px) translateY(0px) rotate(20deg) scale(1.05);
-      opacity: 1;
-    }
-    #explosion {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  70% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-    #allstar {
-      transform: translateX(80px) translateY(-10px) rotate(30deg) scale(0.9);
-      opacity: 0.8;
-    }
-    #explosion {
-      transform: scale(1.2);
-      opacity: 1;
-    }
   }
   100% {
     opacity: 0;
     transform: translate(-50%, -50%);
-    #allstar {
-      transform: translateX(300px) translateY(-20px) rotate(40deg) scale(0.5);
-      opacity: 0;
-    }
-    #explosion {
-      transform: scale(0);
-      opacity: 0;
-    }
+  }
+}
+
+@keyframes allstarAnimation {
+  0% {
+    transform: translateX(-300px) translateY(0) rotate(0deg) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    transform: translateX(-150px) translateY(-10px) rotate(-10deg) scale(0.8);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(-50px) translateY(-5px) rotate(15deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(0px) translateY(0px) rotate(20deg) scale(1.05);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(80px) translateY(-10px) rotate(30deg) scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(300px) translateY(-20px) rotate(40deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes explosionAnimation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
 }
 
