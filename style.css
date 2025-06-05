@@ -16,11 +16,12 @@ html, body {
 }
 
 body::before {
-  content: fill;
+  content: "";
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 200%;
+  height: 200%;
   background: transparent url('https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?fm=jpg') repeat;
+  background-size: 1280px 1024px;
   animation: stars 200s linear infinite;
   opacity: 0.6;
   z-index: -1;
@@ -123,7 +124,7 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 200%;
+  width: 100%;
   height: 100%;
   object-fit: fill;
   pointer-events: none;
