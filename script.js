@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentPlanetIndex = 0;
   }
 
-  const titleText = "🌌 Assim estava o céu quando o rumo das nossas vidas se cruzaram";
+  const titleText = "Assim estava o céu quando o rumo das nossas vidas se encontraram 💜";
   let titleIndex = 0;
 
   let messageLoopTimeoutId;
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(() => {
     document.title = titleText.slice(titleIndex) + titleText.slice(0, titleIndex);
     titleIndex = (titleIndex + 1) % titleText.length;
-  }, 800);
+  }, 200);
 
   const messages = {
     sol: "☀️ Sou aquele raio de luz meio torto que invade o aquário, faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença ☀️",
