@@ -377,5 +377,5 @@ h1 {
 
 @keyframes moveBackground {
   0% { background-position: center center; }
-  100% { background-position: calc(center + 50px) calc(center + 50px); }
+  100% { background-position: calc(50% + 50px) calc(50% + 50px); }
 }
