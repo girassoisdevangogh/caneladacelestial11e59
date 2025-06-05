@@ -21,11 +21,12 @@ html, body {
 body::before {
   content: "";
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%),
-              url('https://media.istockphoto.com/id/536507269/pt/foto/c%C3%A9u-de-noite-com-estrelas-e-a-nebulosa-azul-brilhante.jpg?s=612x612&w=0&k=20&c=iqML1p7Izo3B9PJZY0VPQ16ONj8l9mCW54MgrEgP9aE=');
-  background-size: cover;
+              url('https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg');
+  background-size: contain, cover;
+  background-repeat: repeat;
   background-blend-mode: screen;
   animation: stars 200s linear infinite;
   opacity: 1;
@@ -81,7 +82,7 @@ h1 {
 #gift-box {
   background: #fffbe6;
   border: 2px solid #e6c200;
-  border-radius: 30px;  
+  border-radius: 30px;
   width: 80%;
   max-width: 600px;
   height: 180px;
@@ -338,7 +339,7 @@ h1 {
 
 @keyframes stars {
   0% { background-position: 0 0; }
-  100% { background-position: -10000px 5000px; }
+  100% { background-position: -5000px 2500px; }
 }
 
 @keyframes fadeInOutExplosion {
