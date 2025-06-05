@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 900);
         
         setTimeout(() => {
-            giftBox.style.display = "none";
+            giftBox.classList.add("hidden"); 
             mainContainer.classList.add("hidden");
 
             kickElementsWrapper.style.animation = "none";
