@@ -26,7 +26,7 @@ body::before {
   top: -10vh;
   left: -10vw;
   background: url('https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/main/fundo-espectral.png');
-  background-size: cover;
+  background-size: 150% auto
   background-repeat: no-repeat;
   background-position: center center;
   animation: moveBackground 125s linear infinite;
@@ -400,4 +400,10 @@ h1 {
   50% { background-position: 100% 50%; }
   75% { background-position: 50% 100%; }
   100% { background-position: 50% 50%; }
+}
+
+@media (max-width: 768px) {
+  body::before {
+  background-size: auto 180%;
+  }
 }
