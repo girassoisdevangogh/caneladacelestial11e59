@@ -97,9 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             explosion.style.animation = "explosionAnimation 0.5s forwards";
         }, 900);
-
+        
         setTimeout(() => {
             giftBox.style.display = "none";
+            mainContainer.classList.add("hidden");
 
             kickElementsWrapper.style.animation = "none";
             kickElementsWrapper.style.opacity = "0";
@@ -107,8 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
             allStar.style.opacity = "0";
             explosion.style.animation = "none";
             explosion.style.opacity = "0";
-
-            mainContainer.classList.add("hidden"); 
 
             skyContainer.style.visibility = "visible";
             skyContainer.style.opacity = "1";
