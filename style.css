@@ -21,10 +21,10 @@ html, body {
 body::before {
   content: "";
   position: fixed;
-  width: 180vw;
-  height: 180vh;
-  top: -40vh;
-  left: -40vw;
+  width: 225vw;
+  height: 225vh;
+  top: -55vh;
+  left: -55vw;
   background: url('https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/main/fundo-espectral.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -396,8 +396,10 @@ h1 {
 
 @keyframes moveBackground {
   0% { background-position: 50% 50%; }
-  25% { background-position: 0% 0%; }
-  50% { background-position: 100% 50%; }
-  75% { background-position: 50% 100%; }
+  16% { background-position: 0% 25%; }
+  33% { background-position: 100% 75%; }
+  50% { background-position: 25% 0%; }
+  66% { background-position: 75% 100%; }
+  83% { background-position: 50% 25%; }
   100% { background-position: 50% 50%; }
 }
