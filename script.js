@@ -27,15 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const STAR_CREATE_INTERVAL = 30;
     let lastStarCreationTime = 0;
 
-    const customCursor = document.createElement("img");
-    customCursor.src = 'https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/refs/heads/main/mouse.gif';
-    customCursor.alt = 'cursor estrela';
+    const customCursor = document.createElement("div");
+    customCursor.className = "custom-star-cursor";
     customCursor.style.position = "fixed";
     customCursor.style.pointerEvents = "none";
     customCursor.style.zIndex = "9999";
-    customCursor.style.width = "24px";
-    customCursor.style.height = "24px";
-    customCursor.style.transform = "translate(-12px, -12px)";
     document.body.appendChild(customCursor);
     document.body.style.cursor = 'none';
 
