@@ -32,14 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const messages = {
     sol: "☀️ Sou aquele raio de luz meio torto que invade o aquário, faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença ☀️",
     lua: "🌙 E eu observo tudo de longe, como quem não se apega, mas sente. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho 🌙",
-    venus: "💖 Sou o toque que acontece até no silêncio entre dois olhares. Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca  💖",
+    venus: "💖 Sou o toque que acontece até no silêncio entre dois olhares. Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca  💖",
     marte: "🔥 Sou o fogo que arde no peito, o chute na canela que empurra suavemente ao progresso e o abraço quente de quem não tem intenção de te soltar 🔥",
     mercurio: "🧠 Falo baixinho, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir entende 🧠",
     jupiter: "🌱 Sou a fé, a semente que escolhe seu tempo pra brotar. Crescer não é pressa, é raiz 🌱",
     saturno: "⏳ Sou o tempo que ensina que o que é verdadeiro não se apressa. A maturidade é um gesto calmo de quem já esperou muito ⏳",
     urano: "⚡ Sou o estalo que tira o véu dos olhos, com leveza para não assustar e firmeza para permanecer ⚡",
     netuno: "🌊 Trago a névoa dos sonhos e das saudades que a gente não sabe de onde vêm mas sempre atende 🌊",
-    plutao: "🏹 Mostro o fim que prepara terreno pro recomeço. Dentro da desconstrução mora a semente da transformação  🏹"
+    plutao: "🏹 Mostro o fim que prepara terreno pro recomeço. Dentro da desconstrução mora a semente da transformação  🏹"
   };
 
   let animationStarted = false;
@@ -63,12 +63,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     kickElementsWrapper.style.opacity = "1";
     kickElementsWrapper.style.animation = "kickAndExplode 1.8s forwards";
+    allStar.style.animation = "allstarAnimation 1.8s forwards";
+    explosion.style.animation = "explosionAnimation 1.8s forwards";
+
 
     setTimeout(() => {
       giftBox.style.display = "none";
 
       kickElementsWrapper.style.animation = "none";
       kickElementsWrapper.style.opacity = "0";
+      allStar.style.animation = "none";
+      explosion.style.animation = "none";
+
 
       mainContainer.classList.add("hidden");
 
