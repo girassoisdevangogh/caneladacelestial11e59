@@ -326,6 +326,17 @@ h1 {
     pointer-events: none;
 }
 
+.custom-star-cursor {
+    width: 32px;
+    height: 32px;
+    background-image: url('https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/refs/heads/main/mouse.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+}
+
 @keyframes kickAndExplode {
     0% {
         opacity: 1;
