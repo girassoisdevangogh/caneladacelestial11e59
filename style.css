@@ -33,6 +33,7 @@ body::before {
     animation: moveBackground 300s linear infinite alternate;
     opacity: 1;
     z-index: -1;
+    will-change: background-position;
 }
 
 .container {
@@ -420,9 +421,15 @@ h1 {
 }
 
 @keyframes moveBackground {
-    0% { background-position: 0% 0%; }
-    25% { background-position: 100% 0%; }
-    50% { background-position: 100% 100%; }
-    75% { background-position: 0% 100%; }
-    100% { background-position: 0% 0%; }
+  0%   { background-position: 50% 50%; }
+  10%  { background-position: 52% 48%; }
+  20%  { background-position: 54% 53%; }
+  30%  { background-position: 49% 55%; }
+  40%  { background-position: 53% 52%; }
+  50%  { background-position: 51% 49%; }
+  60%  { background-position: 48% 54%; }
+  70%  { background-position: 56% 51%; }
+  80%  { background-position: 50% 53%; }
+  90%  { background-position: 52% 47%; }
+  100% { background-position: 50% 50%; }
 }
