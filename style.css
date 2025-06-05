@@ -21,12 +21,13 @@ html, body {
 body::before {
   content: "";
   position: fixed;
-  width: 50%;
-  height: 50%;
+  width: 100vw;
+  height: 100vh;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%),
               url('https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg');
-  background-size: contain, cover;
-  background-repeat: repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-blend-mode: screen;
   animation: stars 200s linear infinite;
   opacity: 1;
