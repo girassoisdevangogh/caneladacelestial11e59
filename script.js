@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentPlanetIndex = 0;
   }
 
-  const titleText = "🌌 Assim estava o céu naquela noite em que o rumo das nossas vidas se encontraram... ";
+  const titleText = "🌌 Assim estava o céu quando o rumo das nossas vidas se cruzaram";
   let titleIndex = 0;
 
   let messageLoopTimeoutId;
@@ -26,15 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 400);
 
   const messages = {
-    sol: "☀️ Sou aquele raio de luz meio torto que invade teu aquário, faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença ☀️",
+    sol: "☀️ Sou aquele raio de luz meio torto que invade o aquário, faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença ☀️",
     lua: "🌙 E eu observo tudo de longe, como quem não se apega, mas sente. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho 🌙",
-    venus: "💖 Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca. É toque que acontece até no silêncio entre dois olhares 💖",
-    marte: "🔥 Sou o fogo que arde no peito, o chute na canela empurra suavemente ao progresso e o abraço quente de quem não tem intenção de te soltar 🔥", // Emoji corrigido
+    venus: "💖 Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca. Sou o toque que acontece até no silêncio entre dois olhares 💖",
+    marte: "🔥 Sou o fogo que arde no peito, o chute na canela empurra suavemente ao progresso e o abraço quente de quem não tem intenção de te soltar 🔥",
     mercurio: "🧠 Falo baixinho, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir entende 🧠",
-    jupiter: "🌱 Crescer não é pressa, é raiz. A fé é uma semente que escolhe seu tempo pra brotar 🌱",
+    jupiter: "🌱 Crescer não é pressa, é raiz. Sou a fé, a semente que escolhe seu tempo pra brotar 🌱",
     saturno: "⏳ O tempo me ensinou que o que é verdadeiro não se apressa. A maturidade é um gesto calmo de quem já esperou muito ⏳",
     urano: "⚡ Sou o estalo que tira o véu dos olhos, com leveza para não assustar e firmeza para permanecer ⚡",
-    netuno: "🌊 Sou a névoa dos sonhos e das saudades que a gente não sabe de onde vêm, e sempre atende 🌊",
+    netuno: "🌊 Sou a névoa dos sonhos e das saudades que a gente não sabe de onde vêm mas sempre atende 🌊",
     plutao: "🏹 Dentro da desconstrução mora a semente da transformação. Eu sou o fim que prepara terreno pro recomeço 🏹"
   };
 
