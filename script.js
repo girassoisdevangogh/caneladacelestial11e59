@@ -35,14 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   giftBox.addEventListener("click", async () => {
-    if (animationStarted) return; 
+    if (animationStarted) return;
     animationStarted = true;
 
     try {
       await bgMusic.play();
       updateMusicButtonState();
     } catch (e) {
-      console.log("Erro ao tentar tocar a música automaticamente:", e);
     }
 
     giftBox.classList.add("kick-animation");
@@ -52,8 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       giftBox.style.display = "none";
-      skyContainer.style.display = "block";
       allStar.style.opacity = "0";
+
+      skyContainer.style.visibility = "visible";
+      skyContainer.style.opacity = "1";
       playPauseBtn.style.display = "inline-block";
       startMessageLoop();
     }, 2000);
@@ -100,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showNextTooltip() {
       tooltip.classList.remove("visible");
-      tooltip.style.opacity = "0"; 
+      tooltip.style.opacity = "0";
 
       setTimeout(() => {
         const planet = planets[current];
@@ -108,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         positionTooltip(planet, messages[key] || "");
 
         current = (current + 1) % planets.length;
-        setTimeout(showNextTooltip, 7000); 
+        setTimeout(showNextTooltip, 7000);
       }, 500);
     }
 
