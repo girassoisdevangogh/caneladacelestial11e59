@@ -20,7 +20,8 @@ body::before {
   position: fixed;
   width: 200%;
   height: 200%;
-  background: transparent url('https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?fm=jpg') repeat;
+  /*background: transparent url('https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?fm=jpg') repeat;*/
+  background: transparent url('https://res.cloudinary.com/gimmersta-wallpaper/image/upload/c_fill,f_auto,fl_progressive,q_auto,h_500/v1716294750/articles/SG0064BU03W_product.jpg') repeat;
   background-size: 1280px 1024px;
   animation: stars 200s linear infinite;
   opacity: 0.6;
