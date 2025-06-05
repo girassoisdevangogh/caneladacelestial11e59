@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentPlanetIndex = 0;
   }
 
-  const titleText = "Assim estava o céu quando o rumo das nossas vidas se encontraram 💜";
+  const titleText = " Assim estava o céu quando os rumos de nossas vidas se encontraram 💜";
   let titleIndex = 0;
 
   let messageLoopTimeoutId;
