@@ -29,7 +29,7 @@ body::before {
   background-size: 150% auto;
   background-repeat: no-repeat;
   background-position: center center;
-  animation: moveBackground 80s linear infinite;
+  animation: moveBackground 125s linear infinite;
   opacity: 1;
   z-index: -1;
 }
