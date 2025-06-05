@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tooltip = document.getElementById("tooltip");
   const bgMusic = document.getElementById("bg-music");
   const playPauseBtn = document.getElementById("play-pause-btn");
-  const mainContainer = document.querySelector(".container"); 
+  const mainContainer = document.querySelector(".container");
 
   const planets = [...document.querySelectorAll(".planet")];
 
@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let messageLoopTimeoutId;
   let currentPlanetIndex = 0;
+  let isHovering = false;
 
   setInterval(() => {
     document.title = titleText.slice(titleIndex) + titleText.slice(0, titleIndex);
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sol: "☀️ Eu sou aquela luz que te ilumina de um jeitinho diferente, meio louco, meio sonhador e inesperado, que te faz sorrir sem saber por quê ☀️",
     lua: "🌙 E eu observo tudo de longe, como quem não se apega, mas sente. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho 🌙",
     venus: "💖 Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca. É toque que acontece até no silêncio entre dois olhares 💖",
-    marte: "🔥 Sou o fogo que arde no peito, o chute que te empurra suavemente à frente, e o abraço quente de quem não tem intenção de te soltar 🔥",
+    marte: "🔥 Sou o fogo que arde no peito, o chute que te empurra suavemente à frente, e o abraço quente de quem não tem intenção de te soltar �",
     mercurio: "🧠 Falo baixinho, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir entende 🧠",
     jupiter: "🌱 Crescer não é pressa, é raiz. A fé é uma semente que escolhe seu tempo pra brotar 🌱",
     saturno: "⏳ O tempo me ensinou que o que é verdadeiro não se apressa. A maturidade é um gesto calmo de quem já esperou muito ⏳",
@@ -111,33 +112,37 @@ document.addEventListener("DOMContentLoaded", () => {
   function startMessageLoop() {
     clearTimeout(messageLoopTimeoutId);
 
-    function showNextTooltip() {
-      tooltip.classList.remove("visible");
-      tooltip.style.opacity = "0";
+    if (!isHovering) {
+      function showNextTooltip() {
+        tooltip.classList.remove("visible");
+        tooltip.style.opacity = "0";
 
-      setTimeout(() => {
-        const planet = planets[currentPlanetIndex];
-        const key = [...planet.classList].find(c => messages[c]) || "";
+        setTimeout(() => {
+          if (!isHovering) {
+            const planet = planets[currentPlanetIndex];
+            const key = [...planet.classList].find(c => messages[c]) || "";
 
-        if (messages[key]) {
-          positionTooltip(planet, messages[key]);
-        } else {
-          currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
-          messageLoopTimeoutId = setTimeout(showNextTooltip, 100);
-          return;
-        }
+            if (messages[key]) {
+              positionTooltip(planet, messages[key]);
+            } else {
+              currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
+              messageLoopTimeoutId = setTimeout(showNextTooltip, 100);
+              return;
+            }
 
-        currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
-        messageLoopTimeoutId = setTimeout(showNextTooltip, 8500);
-      }, 500);
+            currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
+            messageLoopTimeoutId = setTimeout(showNextTooltip, 8500);
+          }
+        }, 500);
+      }
+      showNextTooltip();
     }
-
-    showNextTooltip();
   }
 
   function addPlanetHoverListeners() {
     planets.forEach(planet => {
       planet.addEventListener("mouseenter", () => {
+        isHovering = true;
         clearTimeout(messageLoopTimeoutId);
         tooltip.classList.remove("visible");
         tooltip.style.opacity = "0";
@@ -153,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tooltip.style.opacity = "0";
 
         setTimeout(() => {
+          isHovering = false;
           startMessageLoop();
         }, 500);
       });
