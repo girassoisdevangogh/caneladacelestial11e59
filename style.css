@@ -27,7 +27,7 @@ body::before {
   left: 0;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%),
               url('https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/main/fundo-espectral.png');
-  background-size: cover;
+  background-size: 100vw auto;
   background-repeat: no-repeat;
   background-position: center center;
   animation: moveBackground 30s linear infinite;
