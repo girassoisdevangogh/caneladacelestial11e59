@@ -241,17 +241,21 @@ h1 {
 .planet {
   position: absolute;
   font-size: 1.2rem;
-  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, border 0.3s;
   cursor: pointer;
   padding: 0.2rem 0.5rem;
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
 }
 
 .planet:hover {
   transform: scale(1.15);
   color: #7FDBFF;
-  background-color: rgba(127, 219, 255, 0.1);
-  box-shadow: 0 0 10px rgba(127, 219, 255, 0.4);
+  background-color: rgba(127, 219, 255, 0.25);
+  box-shadow: 0 0 15px rgba(127, 219, 255, 0.6);
+  border: 1px solid #7FDBFF;
 }
 
 #tooltip {
