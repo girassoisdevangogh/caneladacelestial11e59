@@ -26,12 +26,12 @@ body::before {
   top: 0;
   left: 0;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%),
-    url('https://img2.wallspic.com/crops/1/0/1/9/4/149101/149101-astronomy-sky-outer_space-night-space-7680x4320.jpg');
+              url('https://img2.wallspic.com/crops/1/0/1/9/4/149101/149101-astronomy-sky-outer_space-night-space-7680x4320.jpg');
   background-size: auto;
   background-repeat: repeat;
-  background-position: top left;
+  background-position: 0 0;
   background-blend-mode: screen;
-  animation: none;
+  animation: moveBackground 200s linear infinite;
   opacity: 1;
   z-index: -1;
 }
@@ -340,9 +340,9 @@ h1 {
   }
 }
 
-@keyframes subtlePan {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
+@keyframes moveBackground {
+  0% { background-position: 0 0; }
+  100% { background-position: -7680px 4320px;
 }
 
 @keyframes fadeInOutExplosion {
