@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const planets = [...document.querySelectorAll(".planet")];
   let currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
   if (currentPlanetIndex === -1) {
-      currentPlanetIndex = 0;
+    currentPlanetIndex = 0;
   }
 
   const titleText = "🌌 Assim estava o céu quando o rumo das nossas vidas se cruzaram";
@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let messageLoopTimeoutId;
   let isHovering = false;
+  const TOOLTIP_TRANSITION_DURATION = 500; // Duração da transição do tooltip em ms (igual ao seu CSS)
+  const AUTO_MESSAGE_DELAY = 8500; // Tempo que a mensagem fica visível antes de mudar
 
   setInterval(() => {
     document.title = titleText.slice(titleIndex) + titleText.slice(0, titleIndex);
@@ -88,10 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
   bgMusic.addEventListener('pause', updateMusicButtonState);
   bgMusic.addEventListener('ended', updateMusicButtonState);
 
-  function positionTooltip(planet, message) {
-    tooltip.classList.remove("visible");
-    tooltip.style.opacity = "0";
-    tooltip.textContent = message;
+  // Função para posicionar e mostrar o tooltip
+  function showTooltip(planet, message) {
+    tooltip.textContent = message; // Define o conteúdo antes de posicionar para pegar o tamanho correto
 
     requestAnimationFrame(() => {
       const tooltipRect = tooltip.getBoundingClientRect();
@@ -108,50 +109,73 @@ document.addEventListener("DOMContentLoaded", () => {
       tooltip.classList.add("visible");
     });
   }
+
+  // Função para esconder o tooltip
+  function hideTooltip() {
+    tooltip.style.opacity = "0";
+    tooltip.classList.remove("visible");
+  }
+
+  // Função para iniciar ou reiniciar o loop de mensagens automáticas
   function startMessageLoop() {
-    clearTimeout(messageLoopTimeoutId);
+    clearTimeout(messageLoopTimeoutId); // Limpa qualquer loop anterior
+
+    // Se o mouse estiver sobre um planeta, não iniciamos o loop automático
     if (isHovering) {
         return;
     }
+
+    // Primeiro, esconde o tooltip atual para iniciar o fade-out
+    hideTooltip();
+
+    // Depois de um pequeno atraso (igual à duração do fade-out), mostra o próximo tooltip
     messageLoopTimeoutId = setTimeout(() => {
-        if (isHovering) {
-            clearTimeout(messageLoopTimeoutId);
-            return;
-        }
+      // Se o mouse estiver sobre um planeta durante o atraso, aborta a mudança automática
+      if (isHovering) {
+          clearTimeout(messageLoopTimeoutId);
+          return;
+      }
 
-        const planetToDisplay = planets[currentPlanetIndex];
-        const keyToDisplay = [...planetToDisplay.classList].find(c => messages[c]) || "";
+      const planetToDisplay = planets[currentPlanetIndex];
+      // Encontra a classe do planeta que corresponde a uma chave nas mensagens
+      const keyToDisplay = [...planetToDisplay.classList].find(c => messages[c]) || "";
 
-        if (messages[keyToDisplay]) {
-            positionTooltip(planetToDisplay, messages[keyToDisplay]);
-        }
-        currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
-        messageLoopTimeoutId = setTimeout(startMessageLoop, 8500);
-    }, 500);
+      if (messages[keyToDisplay]) {
+          showTooltip(planetToDisplay, messages[keyToDisplay]); // Mostra o novo tooltip
+      }
+
+      currentPlanetIndex = (currentPlanetIndex + 1) % planets.length; // Prepara para o próximo planeta
+      // Agenda a próxima mudança automática
+      messageLoopTimeoutId = setTimeout(startMessageLoop, AUTO_MESSAGE_DELAY);
+    }, TOOLTIP_TRANSITION_DURATION); // Espera a transição de fade-out terminar
   }
+
 
   function addPlanetHoverListeners() {
     planets.forEach(planet => {
       planet.addEventListener("mouseenter", () => {
-        isHovering = true;
-        clearTimeout(messageLoopTimeoutId);
-        
-        tooltip.classList.remove("visible");
-        tooltip.style.opacity = "0";
+        isHovering = true; // Sinaliza que o mouse está sobre um planeta
+        clearTimeout(messageLoopTimeoutId); // Para o loop automático
 
-        const key = [...planet.classList].find(c => messages[c]) || "";
-        if (messages[key]) {
-          positionTooltip(planet, messages[key]);
-        }
+        hideTooltip(); // Esconde o tooltip atual com fade-out
+
+        // Após a transição de fade-out, mostra o tooltip específico do planeta
+        setTimeout(() => {
+            const key = [...planet.classList].find(c => messages[c]) || "";
+            if (messages[key]) {
+                showTooltip(planet, messages[key]);
+            }
+        }, TOOLTIP_TRANSITION_DURATION);
       });
 
       planet.addEventListener("mouseleave", () => {
-        tooltip.classList.remove("visible");
-        tooltip.style.opacity = "0";
-        isHovering = false;
+        hideTooltip(); // Esconde o tooltip com fade-out
+        isHovering = false; // Sinaliza que o mouse saiu
+
+        // Após a transição de fade-out, reinicia o loop automático
         setTimeout(() => {
           startMessageLoop();
-        }, 500);
+        }, TOOLTIP_TRANSITION_DURATION); // Espera a transição de fade-out terminar
       });
     });
   }
