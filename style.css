@@ -16,15 +16,16 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: url('https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/refs/heads/main/mouse.gif') 8 8, auto;
 }
 
 body::before {
   content: "";
   position: fixed;
-  width: 200vw;
-  height: 200vh;
-  top: -50vh;
-  left: -50vw;
+  width: 125vw;
+  height: 125vh;
+  top: -25vh;
+  left: -25vw;
   background: url('https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/main/fundo-espectral.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -241,36 +242,37 @@ h1 {
 .planet {
   position: absolute;
   font-size: 1.2rem;
-  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, border 0.3s;
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, border 0.3s, color 0.3s;
   cursor: pointer;
   padding: 0.2rem 0.5rem;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(127, 219, 255, 0.3);
+  background-color: rgba(127, 219, 255, 0.05);
+  box-shadow: 0 0 5px rgba(127, 219, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .planet:hover {
   transform: scale(1.15);
   color: #7FDBFF;
-  background-color: rgba(127, 219, 255, 0.25);
-  box-shadow: 0 0 15px rgba(127, 219, 255, 0.6);
+  background-color: rgba(127, 219, 255, 0.4);
+  box-shadow: 0 0 20px rgba(127, 219, 255, 0.8);
   border: 1px solid #7FDBFF;
 }
 
 #tooltip {
   position: absolute;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fffbea;
+  background: rgba(127, 219, 255, 0.25);
+  color: #fffbee;
   padding: 1rem 1.5rem;
   border-radius: 16px;
   font-size: 1rem;
   font-family: 'Playfair Display', serif;
   max-width: 240px;
   text-align: center;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 25px rgba(127, 219, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid #7FDBFF;
   opacity: 0;
   transition: opacity 0.5s ease;
   z-index: 100;
@@ -399,13 +401,13 @@ h1 {
 }
 
 @keyframes moveBackground {
-  0% { background-position: 50% 50%; }
-  12.5% { background-position: 0% 0%; }
-  25% { background-position: 100% 0%; }
-  37.5% { background-position: 0% 100%; }
-  50% { background-position: 100% 100%; }
-  62.5% { background-position: 25% 75%; }
-  75% { background-position: 75% 25%; }
-  87.5% { background-position: 50% 0%; }
-  100% { background-position: 50% 50%; }
+  0% { background-position: 50% 50%; animation-timing-function: ease-in-out; }
+  12.5% { background-position: 0% 0%; animation-timing-function: ease-in-out; }
+  25% { background-position: 100% 0%; animation-timing-function: ease-in-out; }
+  37.5% { background-position: 0% 100%; animation-timing-function: ease-in-out; }
+  50% { background-position: 100% 100%; animation-timing-function: ease-in-out; }
+  62.5% { background-position: 25% 75%; animation-timing-function: ease-in-out; }
+  75% { background-position: 75% 25%; animation-timing-function: ease-in-out; }
+  87.5% { background-position: 50% 0%; animation-timing-function: ease-in-out; }
+  100% { background-position: 50% 50%; animation-timing-function: ease-in-out; }
 }
