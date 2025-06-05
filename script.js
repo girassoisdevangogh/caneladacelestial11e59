@@ -6,9 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const tooltip = document.getElementById("tooltip");
   const bgMusic = document.getElementById("bg-music");
   const playPauseBtn = document.getElementById("play-pause-btn");
+  const mainContainer = document.querySelector(".container"); 
+
+  const planets = [...document.querySelectorAll(".planet")];
 
   const titleText = "🌌 Assim estava o céu naquela noite em que o rumo das nossas vidas se encontraram... ";
   let titleIndex = 0;
+
+  let messageLoopTimeoutId;
+  let currentPlanetIndex = 0;
 
   setInterval(() => {
     document.title = titleText.slice(titleIndex) + titleText.slice(0, titleIndex);
@@ -42,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await bgMusic.play();
       updateMusicButtonState();
     } catch (e) {
+      console.log("Autoplay bloqueado pelo navegador. Por favor, interaja para reproduzir a música.");
     }
 
     giftBox.classList.add("kick-animation");
@@ -52,12 +59,18 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       giftBox.style.display = "none";
       allStar.style.opacity = "0";
+      explosion.classList.remove("animate");
+
+      mainContainer.classList.add("hidden");
 
       skyContainer.style.visibility = "visible";
       skyContainer.style.opacity = "1";
       playPauseBtn.style.display = "inline-block";
+
       startMessageLoop();
+      addPlanetHoverListeners();
     }, 2000);
+
   });
 
   playPauseBtn.addEventListener("click", () => {
@@ -74,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bgMusic.addEventListener('ended', updateMusicButtonState);
 
   function positionTooltip(planet, message) {
+    tooltip.classList.remove("visible");
     tooltip.style.opacity = "0";
     tooltip.textContent = message;
 
@@ -95,25 +109,54 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startMessageLoop() {
-    const planets = [...document.querySelectorAll(".planet")];
-    let current = planets.findIndex(p => p.classList.contains("sol"));
-    if (current === -1) current = 0;
+    clearTimeout(messageLoopTimeoutId);
 
     function showNextTooltip() {
       tooltip.classList.remove("visible");
       tooltip.style.opacity = "0";
 
       setTimeout(() => {
-        const planet = planets[current];
+        const planet = planets[currentPlanetIndex];
         const key = [...planet.classList].find(c => messages[c]) || "";
-        positionTooltip(planet, messages[key] || "");
 
-        current = (current + 1) % planets.length;
-        setTimeout(showNextTooltip, 8500);
+        if (messages[key]) {
+          positionTooltip(planet, messages[key]);
+        } else {
+          currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
+          messageLoopTimeoutId = setTimeout(showNextTooltip, 100);
+          return;
+        }
+
+        currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
+        messageLoopTimeoutId = setTimeout(showNextTooltip, 8500);
       }, 500);
     }
 
     showNextTooltip();
+  }
+
+  function addPlanetHoverListeners() {
+    planets.forEach(planet => {
+      planet.addEventListener("mouseenter", () => {
+        clearTimeout(messageLoopTimeoutId);
+        tooltip.classList.remove("visible");
+        tooltip.style.opacity = "0";
+
+        const key = [...planet.classList].find(c => messages[c]) || "";
+        if (messages[key]) {
+          positionTooltip(planet, messages[key]);
+        }
+      });
+
+      planet.addEventListener("mouseleave", () => {
+        tooltip.classList.remove("visible");
+        tooltip.style.opacity = "0";
+
+        setTimeout(() => {
+          startMessageLoop();
+        }, 500);
+      });
+    });
   }
 
   document.addEventListener("mousemove", (e) => {
