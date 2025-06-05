@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const giftBox = document.getElementById("gift-box");
   const skyContainer = document.getElementById("sky-container");
+  const kickElementsWrapper = document.getElementById("kick-elements-wrapper");
   const allStar = document.getElementById("allstar");
   const explosion = document.getElementById("explosion");
   const tooltip = document.getElementById("tooltip");
@@ -55,17 +56,19 @@ document.addEventListener("DOMContentLoaded", () => {
       await bgMusic.play();
       updateMusicButtonState();
     } catch (e) {
-      console.log("Autoplay bloqueado pelo navegador. Por favor, abra a caixa com para reproduzir a música.");
+      console.log("Autoplay bloqueado pelo navegador. Por favor, abra a caixa para reproduzir a música.");
     }
 
     giftBox.classList.add("kick-animation");
-    allStar.classList.add("animate");
 
-    setTimeout(() => explosion.classList.add("animate"), 500);
+    kickElementsWrapper.style.opacity = "1";
+    kickElementsWrapper.style.animation = "kickAndExplode 1.8s forwards";
+
     setTimeout(() => {
       giftBox.style.display = "none";
-      allStar.style.opacity = "0";
-      explosion.classList.remove("animate");
+
+      kickElementsWrapper.style.animation = "none";
+      kickElementsWrapper.style.opacity = "0";
 
       mainContainer.classList.add("hidden");
 
@@ -119,29 +122,28 @@ document.addEventListener("DOMContentLoaded", () => {
     clearTimeout(messageLoopTimeoutId);
 
     if (isHovering) {
-        return;
+      return;
     }
 
     hideTooltip();
 
     messageLoopTimeoutId = setTimeout(() => {
       if (isHovering) {
-          clearTimeout(messageLoopTimeoutId);
-          return;
+        clearTimeout(messageLoopTimeoutId);
+        return;
       }
 
       const planetToDisplay = planets[currentPlanetIndex];
       const keyToDisplay = [...planetToDisplay.classList].find(c => messages[c]) || "";
 
       if (messages[keyToDisplay]) {
-          showTooltip(planetToDisplay, messages[keyToDisplay]);
+        showTooltip(planetToDisplay, messages[keyToDisplay]);
       }
 
       currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
       messageLoopTimeoutId = setTimeout(startMessageLoop, AUTO_MESSAGE_DELAY);
     }, TOOLTIP_TRANSITION_DURATION);
   }
-
 
   function addPlanetHoverListeners() {
     planets.forEach(planet => {
@@ -154,10 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
         hideTooltip();
 
         setTimeout(() => {
-            const key = [...planet.classList].find(c => messages[c]) || "";
-            if (messages[key]) {
-                showTooltip(planet, messages[key]);
-            }
+          const key = [...planet.classList].find(c => messages[c]) || "";
+          if (messages[key]) {
+            showTooltip(planet, messages[key]);
+          }
         }, TOOLTIP_TRANSITION_DURATION);
       });
 
