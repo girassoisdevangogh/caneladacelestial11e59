@@ -13,6 +13,9 @@ html, body {
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   color: white;
   font-family: 'Quicksand', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 body::before {
@@ -25,12 +28,6 @@ body::before {
   animation: stars 200s linear infinite;
   opacity: 0.6;
   z-index: -1;
-}
-
-body, html {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .container {
@@ -177,7 +174,7 @@ h1 {
 }
 
 #allstar.animate {
-  animation: kick-allstar 1.5s forwards;
+  animation: kick-allstar 1.5s forwards, fadeOut 0.8s forwards 1.5s;
   opacity: 1;
 }
 
@@ -187,16 +184,16 @@ h1 {
     transform: translateY(0) rotate(0deg);
   }
   30% {
-    left: calc(50% - 60px);
-    transform: translateY(-20px) rotate(-10deg);
+    left: calc(50% - 100px);
+    transform: translateY(-10px) rotate(-5deg) scale(0.9);
   }
   60% {
-    left: calc(50% + 50px);
-    transform: translateY(0) rotate(20deg);
+    left: calc(50% - 30px);
+    transform: translateY(0) rotate(15deg);
   }
   100% {
-    left: 100%;
-    transform: translateY(-50px) rotate(45deg);
+    left: calc(50% - 20px);
+    transform: translateY(-5px) rotate(20deg) scale(0.8);
     opacity: 0;
   }
 }
@@ -204,8 +201,8 @@ h1 {
 #explosion {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
+  left: calc(50% - 50px);
+  transform: translateY(-50%) scale(0);
   font-size: 4rem;
   opacity: 0;
   z-index: 40;
@@ -215,6 +212,7 @@ h1 {
 }
 
 #explosion.animate {
+  animation: fadeIn 0.6s forwards;
   transform: translate(-50%, -50%) scale(1.2);
   opacity: 1;
 }
@@ -331,12 +329,17 @@ h1 {
   }
 }
 
-@keyframes marqueeAnim {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
 @keyframes stars {
   0% { background-position: 0 0; }
   100% { background-position: -10000px 5000px; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
