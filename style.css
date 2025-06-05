@@ -20,7 +20,6 @@ body::before {
   position: fixed;
   width: 200%;
   height: 200%;
-  /*background: transparent url('https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?fm=jpg') repeat;*/
   background: transparent url('https://res.cloudinary.com/gimmersta-wallpaper/image/upload/c_fill,f_auto,fl_progressive,q_auto,h_500/v1716294750/articles/SG0064BU03W_product.jpg') repeat;
   background-size: 1280px 1024px;
   animation: stars 200s linear infinite;
@@ -95,7 +94,6 @@ h1 {
   will-change: transform;
   overflow: hidden;
   margin: 2rem auto;
-  overflow: hidden;
 }
 
 #gift-box:hover {
@@ -116,9 +114,15 @@ h1 {
   100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-#gift-box.shake-animation {
-  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+#gift-box.kick-animation {
+  animation: shake 0.5s ease-in-out, kick-allstar-box 0.8s forwards;
   transform-origin: center center;
+}
+
+@keyframes kick-allstar-box {
+  0% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(-20px) rotate(-5deg); }
+  100% { transform: translateX(0) rotate(0deg); }
 }
 
 .sunflower-frame {
@@ -165,7 +169,7 @@ h1 {
   position: absolute;
   bottom: 50%;
   left: -150px;
-  z-index: 30;
+  z-index: 50;
   opacity: 0;
   transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -173,21 +177,27 @@ h1 {
 }
 
 #allstar.animate {
+  animation: kick-allstar 1.5s forwards;
   opacity: 1;
 }
 
 @keyframes kick-allstar {
   0% {
     left: -150px;
-    transform: rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
-  70% {
-    left: calc(50% + 120px);
-    transform: rotate(25deg) scale(1.1);
+  30% {
+    left: calc(50% - 60px);
+    transform: translateY(-20px) rotate(-10deg);
+  }
+  60% {
+    left: calc(50% + 50px);
+    transform: translateY(0) rotate(20deg);
   }
   100% {
-    left: calc(50% + 90px);
-    transform: rotate(20deg) scale(1);
+    left: 100%;
+    transform: translateY(-50px) rotate(45deg);
+    opacity: 0;
   }
 }
 
@@ -210,7 +220,6 @@ h1 {
 }
 
 #sky-container {
-  display: none;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   width: 100vw;
@@ -221,6 +230,7 @@ h1 {
   font-family: 'Quicksand', sans-serif;
   overflow: hidden;
   padding: 2rem;
+  transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
 }
 
 .planet {
@@ -296,14 +306,14 @@ h1 {
 }
 
 .gift-bow {
-position: absolute;
-top: -15px;
-left: 0;
-width: 100%;
-height: auto;
-z-index: 26;
-object-fit: contain;
-pointer-events: none;
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 26;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 @keyframes twinkle {
