@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const TOOLTIP_TRANSITION_DURATION = 500;
     const AUTO_MESSAGE_DELAY = 8500;
 
+    const STAR_CREATE_INTERVAL = 30;
+    let lastStarCreationTime = 0;
+
     const customCursor = document.createElement("img");
     customCursor.src = 'https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/refs/heads/main/mouse.gif';
     customCursor.alt = 'cursor estrela';
@@ -37,6 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.cursor = 'none';
 
     document.addEventListener("mousemove", (e) => {
+        const currentTime = Date.now();
+        if (currentTime - lastStarCreationTime < STAR_CREATE_INTERVAL) {
+            return;
+        }
+        lastStarCreationTime = currentTime;
+
         customCursor.style.left = `${e.clientX}px`;
         customCursor.style.top = `${e.clientY}px`;
 
@@ -47,10 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
         star.style.top = `${e.clientY}px`;
         star.style.pointerEvents = "none";
         document.body.appendChild(star);
-
-        setTimeout(() => {
-            if (star.parentNode) star.parentNode.removeChild(star);
-        }, 1000);
+        
+        star.addEventListener('animationend', () => {
+            if (star.parentNode) {
+                star.parentNode.removeChild(star);
+            }
+        }, { once: true });
     });
 
     setInterval(() => {
