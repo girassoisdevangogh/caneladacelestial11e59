@@ -19,8 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let messageLoopTimeoutId;
   let isHovering = false;
-  const TOOLTIP_TRANSITION_DURATION = 500; // Duração da transição do tooltip em ms (igual ao seu CSS)
-  const AUTO_MESSAGE_DELAY = 8500; // Tempo que a mensagem fica visível antes de mudar
+  let pausedPlanetIndex = currentPlanetIndex;
+  const TOOLTIP_TRANSITION_DURATION = 500;
+  const AUTO_MESSAGE_DELAY = 8500;
 
   setInterval(() => {
     document.title = titleText.slice(titleIndex) + titleText.slice(0, titleIndex);
@@ -30,14 +31,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const messages = {
     sol: "☀️ Sou aquele raio de luz meio torto que invade o aquário, faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença ☀️",
     lua: "🌙 E eu observo tudo de longe, como quem não se apega, mas sente. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho 🌙",
-    venus: "💖 Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca. Sou o toque que acontece até no silêncio entre dois olhares 💖",
-    marte: "🔥 Sou o fogo que arde no peito, o chute na canela empurra suavemente ao progresso e o abraço quente de quem não tem intenção de te soltar 🔥",
+    venus: "💖 Sou o toque que acontece até no silêncio entre dois olhares. Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca  💖",
+    marte: "🔥 Sou o fogo que arde no peito, o chute na canela que empurra suavemente ao progresso e o abraço quente de quem não tem intenção de te soltar 🔥",
     mercurio: "🧠 Falo baixinho, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir entende 🧠",
-    jupiter: "🌱 Crescer não é pressa, é raiz. Sou a fé, a semente que escolhe seu tempo pra brotar 🌱",
-    saturno: "⏳ O tempo me ensinou que o que é verdadeiro não se apressa. A maturidade é um gesto calmo de quem já esperou muito ⏳",
+    jupiter: "🌱 Sou a fé, a semente que escolhe seu tempo pra brotar. Crescer não é pressa, é raiz 🌱",
+    saturno: "⏳ Sou o tempo que ensina que o que é verdadeiro não se apressa. A maturidade é um gesto calmo de quem já esperou muito ⏳",
     urano: "⚡ Sou o estalo que tira o véu dos olhos, com leveza para não assustar e firmeza para permanecer ⚡",
-    netuno: "🌊 Sou a névoa dos sonhos e das saudades que a gente não sabe de onde vêm mas sempre atende 🌊",
-    plutao: "🏹 Dentro da desconstrução mora a semente da transformação. Eu sou o fim que prepara terreno pro recomeço 🏹"
+    netuno: "🌊 Trago a névoa dos sonhos e das saudades que a gente não sabe de onde vêm mas sempre atende 🌊",
+    plutao: "🏹 Mostro o fim que prepara terreno pro recomeço. Dentro da desconstrução mora a semente da transformação  🏹"
   };
 
   let animationStarted = false;
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await bgMusic.play();
       updateMusicButtonState();
     } catch (e) {
-      console.log("Autoplay bloqueado pelo navegador. Por favor, interaja para reproduzir a música.");
+      console.log("Autoplay bloqueado pelo navegador. Por favor, abra a caixa com para reproduzir a música.");
     }
 
     giftBox.classList.add("kick-animation");
@@ -90,9 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
   bgMusic.addEventListener('pause', updateMusicButtonState);
   bgMusic.addEventListener('ended', updateMusicButtonState);
 
-  // Função para posicionar e mostrar o tooltip
   function showTooltip(planet, message) {
-    tooltip.textContent = message; // Define o conteúdo antes de posicionar para pegar o tamanho correto
+    tooltip.textContent = message;
 
     requestAnimationFrame(() => {
       const tooltipRect = tooltip.getBoundingClientRect();
@@ -110,56 +110,49 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Função para esconder o tooltip
   function hideTooltip() {
     tooltip.style.opacity = "0";
     tooltip.classList.remove("visible");
   }
 
-  // Função para iniciar ou reiniciar o loop de mensagens automáticas
   function startMessageLoop() {
-    clearTimeout(messageLoopTimeoutId); // Limpa qualquer loop anterior
+    clearTimeout(messageLoopTimeoutId);
 
-    // Se o mouse estiver sobre um planeta, não iniciamos o loop automático
     if (isHovering) {
         return;
     }
 
-    // Primeiro, esconde o tooltip atual para iniciar o fade-out
     hideTooltip();
 
-    // Depois de um pequeno atraso (igual à duração do fade-out), mostra o próximo tooltip
     messageLoopTimeoutId = setTimeout(() => {
-      // Se o mouse estiver sobre um planeta durante o atraso, aborta a mudança automática
       if (isHovering) {
           clearTimeout(messageLoopTimeoutId);
           return;
       }
 
       const planetToDisplay = planets[currentPlanetIndex];
-      // Encontra a classe do planeta que corresponde a uma chave nas mensagens
       const keyToDisplay = [...planetToDisplay.classList].find(c => messages[c]) || "";
 
       if (messages[keyToDisplay]) {
-          showTooltip(planetToDisplay, messages[keyToDisplay]); // Mostra o novo tooltip
+          showTooltip(planetToDisplay, messages[keyToDisplay]);
       }
 
-      currentPlanetIndex = (currentPlanetIndex + 1) % planets.length; // Prepara para o próximo planeta
-      // Agenda a próxima mudança automática
+      currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
       messageLoopTimeoutId = setTimeout(startMessageLoop, AUTO_MESSAGE_DELAY);
-    }, TOOLTIP_TRANSITION_DURATION); // Espera a transição de fade-out terminar
+    }, TOOLTIP_TRANSITION_DURATION);
   }
 
 
   function addPlanetHoverListeners() {
     planets.forEach(planet => {
       planet.addEventListener("mouseenter", () => {
-        isHovering = true; // Sinaliza que o mouse está sobre um planeta
-        clearTimeout(messageLoopTimeoutId); // Para o loop automático
+        isHovering = true;
+        clearTimeout(messageLoopTimeoutId);
 
-        hideTooltip(); // Esconde o tooltip atual com fade-out
+        pausedPlanetIndex = currentPlanetIndex;
 
-        // Após a transição de fade-out, mostra o tooltip específico do planeta
+        hideTooltip();
+
         setTimeout(() => {
             const key = [...planet.classList].find(c => messages[c]) || "";
             if (messages[key]) {
@@ -169,13 +162,13 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       planet.addEventListener("mouseleave", () => {
-        hideTooltip(); // Esconde o tooltip com fade-out
-        isHovering = false; // Sinaliza que o mouse saiu
+        hideTooltip();
+        isHovering = false;
 
-        // Após a transição de fade-out, reinicia o loop automático
         setTimeout(() => {
+          currentPlanetIndex = pausedPlanetIndex;
           startMessageLoop();
-        }, TOOLTIP_TRANSITION_DURATION); // Espera a transição de fade-out terminar
+        }, TOOLTIP_TRANSITION_DURATION);
       });
     });
   }
