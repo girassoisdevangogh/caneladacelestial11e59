@@ -27,10 +27,10 @@ body::before {
   left: 0;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%),
               url('https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/main/fundo-espectral.png');
-  background-size: auto 100%;
-  background-repeat: repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: center center;
-  animation: moveBackground 10s linear infinite;
+  animation: moveBackground 30s linear infinite;
   opacity: 1;
   z-index: -1;
 }
@@ -375,9 +375,9 @@ h1 {
 }
 
 @keyframes moveBackground {
-  0% { background-position: 0% 0%; }
-  25% { background-position: 20% 10%; }
-  50% { background-position: 40% 0%; }
-  75% { background-position: 10% 30%; }
-  100% { background-position: 0% 0%; }
+  0% { background-position: 50% 50%; }
+  25% { background-position: 60% 40%; }
+  50% { background-position: 40% 60%; }
+  75% { background-position: 70% 30%; }
+  100% { background-position: 50% 50%; }
 }
