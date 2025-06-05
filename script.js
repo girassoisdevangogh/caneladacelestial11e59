@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let pausedPlanetIndex = currentPlanetIndex;
     const TOOLTIP_TRANSITION_DURATION = 500;
     const AUTO_MESSAGE_DELAY = 8500;
-  
+
     const customCursor = document.createElement("img");
     customCursor.src = 'https://raw.githubusercontent.com/girassoisdevangogh/caneladacelestial11e59/refs/heads/main/mouse.gif';
     customCursor.alt = 'cursor estrela';
@@ -32,9 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
     customCursor.style.zIndex = "9999";
     customCursor.style.width = "24px";
     customCursor.style.height = "24px";
-    customCursor.style.transform = "translate(-12px, -12px)"; 
+    customCursor.style.transform = "translate(-12px, -12px)";
     document.body.appendChild(customCursor);
-
     document.body.style.cursor = 'none';
 
     document.addEventListener("mousemove", (e) => {
@@ -109,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
             explosion.style.animation = "none";
             explosion.style.opacity = "0";
 
-            mainContainer.classList.add("hidden");
+            mainContainer.classList.add("hidden"); 
 
             skyContainer.style.visibility = "visible";
             skyContainer.style.opacity = "1";
@@ -161,8 +160,15 @@ document.addEventListener("DOMContentLoaded", () => {
         tooltip.classList.remove("visible");
     }
 
+    let autoHighlightedPlanet = null;
+
     function startMessageLoop() {
         clearTimeout(messageLoopTimeoutId);
+
+        if (autoHighlightedPlanet) {
+            autoHighlightedPlanet.classList.remove("planet-active-message");
+            autoHighlightedPlanet = null;
+        }
 
         if (isHovering) {
             return;
@@ -180,6 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const keyToDisplay = [...planetToDisplay.classList].find(c => messages[c]) || "";
 
             if (messages[keyToDisplay]) {
+                planetToDisplay.classList.add("planet-active-message");
+                autoHighlightedPlanet = planetToDisplay;
                 showTooltip(planetToDisplay, messages[keyToDisplay]);
             }
 
@@ -193,6 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
             planet.addEventListener("mouseenter", () => {
                 isHovering = true;
                 clearTimeout(messageLoopTimeoutId);
+                if (autoHighlightedPlanet) {
+                    autoHighlightedPlanet.classList.remove("planet-active-message");
+                    autoHighlightedPlanet = null;
+                }
 
                 pausedPlanetIndex = currentPlanetIndex;
 
