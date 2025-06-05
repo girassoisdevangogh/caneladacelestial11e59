@@ -260,6 +260,14 @@ h1 {
   border: 1px solid #7FDBFF;
 }
 
+.planet-active-message {
+  transform: scale(1.15);
+  color: #7FDBFF;
+  background-color: rgba(127, 219, 255, 0.4);
+  box-shadow: 0 0 20px rgba(127, 219, 255, 0.8);
+  border: 1px solid #7FDBFF;
+}
+
 #tooltip {
   position: absolute;
   background: rgba(127, 219, 255, 0.25);
