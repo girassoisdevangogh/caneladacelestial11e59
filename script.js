@@ -60,21 +60,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     giftBox.classList.add("kick-animation");
-
+    
     kickElementsWrapper.style.opacity = "1";
-    kickElementsWrapper.style.animation = "kickAndExplode 1.8s forwards";
+    
     allStar.style.animation = "allstarAnimation 1.8s forwards";
-    explosion.style.animation = "explosionAnimation 1.8s forwards";
-
-
+    
+    setTimeout(() => {
+      explosion.style.animation = "explosionAnimation 0.5s forwards";
+    }, 900);
+    
     setTimeout(() => {
       giftBox.style.display = "none";
-
+      
       kickElementsWrapper.style.animation = "none";
       kickElementsWrapper.style.opacity = "0";
       allStar.style.animation = "none";
+      allStar.style.opacity = "0";
       explosion.style.animation = "none";
-
+      explosion.style.opacity = "0";
 
       mainContainer.classList.add("hidden");
 
@@ -84,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       startMessageLoop();
       addPlanetHoverListeners();
-    }, 2000);
+    }, 2500);
   });
 
   playPauseBtn.addEventListener("click", () => {
