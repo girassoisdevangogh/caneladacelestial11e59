@@ -21,15 +21,17 @@ html, body {
 body::before {
   content: "";
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 200vw;
+  height: 200vh;
+  top: -50vh;
+  left: -50vw;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%),
               url('https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-blend-mode: screen;
-  animation: stars 200s linear infinite;
+  animation: subtlePan 200s linear infinite alternate;
   opacity: 1;
   z-index: -1;
 }
@@ -338,9 +340,9 @@ h1 {
   }
 }
 
-@keyframes stars {
-  0% { background-position: 0 0; }
-  100% { background-position: -5000px 2500px; }
+@keyframes subtlePan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
 }
 
 @keyframes fadeInOutExplosion {
