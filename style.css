@@ -37,6 +37,13 @@ body::before {
   padding: 2rem;
   z-index: 10;
   color: white;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.container.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 h1 {
@@ -181,8 +188,6 @@ h1 {
   font-size: 4rem;
   opacity: 0;
   z-index: 40;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, opacity;
 }
 
@@ -293,23 +298,18 @@ h1 {
     opacity: 0;
   }
   20% {
-    left: calc(50% - 120px);
+    left: calc(50% - 100px);
     transform: translateY(-20px) rotate(-10deg) scale(0.9);
     opacity: 1;
   }
   60% {
-    left: calc(50% - 30px);
+    left: calc(50% - 20px);
     transform: translateY(-5px) rotate(15deg) scale(0.95);
     opacity: 1;
   }
-  80% {
+  100% {
     left: calc(50% + 50px);
     transform: translateY(-10px) rotate(25deg) scale(0.8);
-    opacity: 0.5;
-  }
-  100% {
-    left: 100%;
-    transform: translateY(-20px) rotate(40deg) scale(0.6);
     opacity: 0;
   }
 }
