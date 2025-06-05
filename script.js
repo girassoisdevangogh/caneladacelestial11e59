@@ -66,16 +66,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200);
 
     const messages = {
-        sol: "☀️ Sou aquele raio de luz meio torto que invade o aquário, faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença ☀️",
-        lua: "🌙 E eu observo tudo de longe, como quem não se apega, mas sente. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho 🌙",
-        venus: "💖 Sou o toque que acontece até no silêncio entre dois olhares. Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca 💖",
-        marte: "🔥 Sou o fogo que arde no peito, o chute na canela que empurra suavemente ao progresso e o abraço quente de quem não tem intenção de te soltar 🔥",
-        mercurio: "🧠 Falo baixinho, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir entende 🧠",
-        jupiter: "🌱 Sou a fé, a semente que escolhe seu tempo pra brotar. Crescer não é pressa, é raiz 🌱",
-        saturno: "⏳ Sou o tempo que ensina que o que é verdadeiro não se apressa. A maturidade é um gesto calmo de quem já esperou muito ⏳",
-        urano: "⚡ Sou o estalo que tira o véu dos olhos, com leveza para não assustar e firmeza para permanecer ⚡",
-        netuno: "🌊 Trago a névoa dos sonhos e das saudades que a gente não sabe de onde vêm mas sempre atende 🌊",
-        plutao: "🏹 Mostro o fim que prepara terreno pro recomeço. Dentro da desconstrução mora a semente da transformação 🏹"
+        sol: "☀️ Sou aquele raio de luz meio torto que invade seu aquário, que faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença ☀️",
+        lua: "🌙 E eu observo de longe, como quem não se apega, mas sente tudo. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho 🌙",
+        venus: "💖 Sou o toque que acontece até no silêncio entre dois olhares. Amor, para mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca 💖",
+        marte: "💪 Sou a força que arde o peito, o chute na canela que empurra suavemente ao progresso e o abraço quente de quem não tem intenção de te soltar 💪",
+        mercurio: "🧠 Me comunico baixinho e calmo, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir entende 🧠",
+        jupiter: "🪐 Sou a fé, a semente que escolhe seu tempo pra brotar. Crescer não é agir com velocidade ou impulsividade, mas sim ter raízes e profundidade 🪐",
+        saturno: "⏳ Sou o tempo que ensina que o que é verdadeiro não se apressa. A maturidade é um gesto sutil de quem sabe esperar a colheita de bons frutos ⏳",
+        urano: "💡 Sou o estalo que tira o véu dos olhos, com leveza para não assustar as verdades e firmeza para permanecer com confiança 💡",
+        netuno: "🌊 Sou a onda dos sonhos e das saudades, às vezes uma névoa que não sabemos de onde vêm, porém sempre atendemos 🌊",
+        plutao: "🌱 Mostro o fim que prepara terreno pro recomeço. Dentro da desconstrução mora a semente da transformação 🌱"
     };
 
     let animationStarted = false;
