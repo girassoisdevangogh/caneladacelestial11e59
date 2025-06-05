@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(() => {
     document.title = titleText.slice(titleIndex) + titleText.slice(0, titleIndex);
     titleIndex = (titleIndex + 1) % titleText.length;
-  }, 400);
+  }, 800);
 
   const messages = {
     sol: "☀️ Sou aquele raio de luz meio torto que invade o aquário, faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença ☀️",
