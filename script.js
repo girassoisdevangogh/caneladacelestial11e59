@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sol: "☀️ Eu sou aquela luz que te ilumina de um jeitinho diferente, meio louco, meio sonhador e inesperado, que te faz sorrir sem saber por quê ☀️",
     lua: "🌙 E eu observo tudo de longe, como quem não se apega, mas sente. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho 🌙",
     venus: "💖 Amor, pra mim, é liberdade de coexistir lado a lado, sem cobrar nada em troca. É toque que acontece até no silêncio entre dois olhares 💖",
-    marte: "🔥 Sou o fogo que arde no peito, o chute que te empurra suavemente à frente, e o abraço quente de quem não tem intenção de te soltar 🔥",
+    marte: "🔥 Sou o fogo que arde no peito, o chute que te empurra suavemente à frente, e o abraço quente de quem não tem intenção de te soltar 🔥", // Emoji corrigido
     mercurio: "🧠 Falo baixinho, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir entende 🧠",
     jupiter: "🌱 Crescer não é pressa, é raiz. A fé é uma semente que escolhe seu tempo pra brotar 🌱",
     saturno: "⏳ O tempo me ensinou que o que é verdadeiro não se apressa. A maturidade é um gesto calmo de quem já esperou muito ⏳",
@@ -59,11 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
     allStar.classList.add("animate");
 
     setTimeout(() => explosion.classList.add("animate"), 500);
-
     setTimeout(() => {
-      giftBox.style.display = "none"; 
-      allStar.style.opacity = "0"; 
-      explosion.classList.remove("animate"); 
+      giftBox.style.display = "none";
+      allStar.style.opacity = "0";
+      explosion.classList.remove("animate");
 
       mainContainer.classList.add("hidden");
 
@@ -100,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let top = window.scrollY + rect.top - tooltipRect.height - 12;
       let left = window.scrollX + rect.left + rect.width / 2 - tooltipRect.width / 2;
-
       left = Math.min(Math.max(left, 8), window.innerWidth - tooltipRect.width - 8);
       if (top < window.scrollY + 8) top = window.scrollY + rect.bottom + 12;
 
@@ -110,39 +108,26 @@ document.addEventListener("DOMContentLoaded", () => {
       tooltip.classList.add("visible");
     });
   }
-
   function startMessageLoop() {
     clearTimeout(messageLoopTimeoutId);
     if (isHovering) {
-      return;
+        return;
     }
-
-    function showNextTooltip() {
-      tooltip.classList.remove("visible");
-      tooltip.style.opacity = "0";
-
-      messageLoopTimeoutId = setTimeout(() => {
-        if (!isHovering) {
-          const planet = planets[currentPlanetIndex];
-          const key = [...planet.classList].find(c => messages[c]) || "";
-
-          if (messages[key]) {
-            positionTooltip(planet, messages[key]);
-          } else {
-            currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
-            showNextTooltip(); 
+    messageLoopTimeoutId = setTimeout(() => {
+        if (isHovering) {
+            clearTimeout(messageLoopTimeoutId);
             return;
-          }
-
-          currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
-          messageLoopTimeoutId = setTimeout(showNextTooltip, 8500);
-        } else {
-          clearTimeout(messageLoopTimeoutId);
         }
-      }, 500);
-    }
 
-    showNextTooltip();
+        const planetToDisplay = planets[currentPlanetIndex];
+        const keyToDisplay = [...planetToDisplay.classList].find(c => messages[c]) || "";
+
+        if (messages[keyToDisplay]) {
+            positionTooltip(planetToDisplay, messages[keyToDisplay]);
+        }
+        currentPlanetIndex = (currentPlanetIndex + 1) % planets.length;
+        messageLoopTimeoutId = setTimeout(startMessageLoop, 8500);
+    }, 500);
   }
 
   function addPlanetHoverListeners() {
@@ -150,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
       planet.addEventListener("mouseenter", () => {
         isHovering = true;
         clearTimeout(messageLoopTimeoutId);
+        
         tooltip.classList.remove("visible");
         tooltip.style.opacity = "0";
 
@@ -162,9 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
       planet.addEventListener("mouseleave", () => {
         tooltip.classList.remove("visible");
         tooltip.style.opacity = "0";
-
+        isHovering = false;
         setTimeout(() => {
-          isHovering = false;
           startMessageLoop();
         }, 500);
       });
