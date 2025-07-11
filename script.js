@@ -36,14 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.cursor = 'none';
 
     document.addEventListener("mousemove", (e) => {
+        customCursor.style.left = `${e.clientX}px`;
+        customCursor.style.top = `${e.clientY}px`;
+
         const currentTime = Date.now();
         if (currentTime - lastStarCreationTime < STAR_CREATE_INTERVAL) {
             return;
         }
         lastStarCreationTime = currentTime;
-
-        customCursor.style.left = `${e.clientX}px`;
-        customCursor.style.top = `${e.clientY}px`;
 
         const star = document.createElement("div");
         star.className = "star";
