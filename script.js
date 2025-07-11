@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tooltip = document.getElementById("tooltip");
     const bgMusic = document.getElementById("bg-music");
     const playPauseBtn = document.getElementById("play-pause-btn");
+    const nextPageBtn = document.getElementById("next-page-btn");
     const mainContainer = document.querySelector(".container");
 
     const planets = [...document.querySelectorAll(".planet")];
@@ -119,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
             skyContainer.style.visibility = "visible";
             skyContainer.style.opacity = "1";
             playPauseBtn.style.display = "inline-block";
+            nextPageBtn.style.display = "inline-block";
 
             currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
             if (currentPlanetIndex === -1) {
@@ -235,6 +237,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    nextPageBtn.addEventListener('click', () => {
+        window.location.href = 'mapa.html';
+    });
+
+    nextPageBtn.addEventListener('wheel', () => {
+        window.location.href = 'mapa.html';
+    });
 
     updateMusicButtonState();
 });
