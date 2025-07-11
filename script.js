@@ -1,18 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
     const giftBox = document.getElementById("gift-box");
     const skyContainer = document.getElementById("sky-container");
+    const natalContainer = document.getElementById("natal-container");
     const kickElementsWrapper = document.getElementById("kick-elements-wrapper");
     const allStar = document.getElementById("allstar");
     const explosion = document.getElementById("explosion");
     const tooltip = document.getElementById("tooltip");
     const bgMusic = document.getElementById("bg-music");
     const playPauseBtn = document.getElementById("play-pause-btn");
+    const nextPageBtn = document.getElementById("next-page-btn");
     const mainContainer = document.querySelector(".container");
 
-    const planets = [...document.querySelectorAll(".planet")];
-    let currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
-    if (currentPlanetIndex === -1) {
-        currentPlanetIndex = 0;
+    let planets = [];
+    let currentPlanetIndex = 0;
+
+    function refreshPlanets(container) {
+        planets = [...container.querySelectorAll(".planet")];
+        currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
+        if (currentPlanetIndex === -1) {
+            currentPlanetIndex = 0;
+        }
+        addPlanetHoverListeners();
     }
 
     const titleText = " Assim estava o céu quando os rumos de nossas vidas se encontraram 💜";
@@ -120,12 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
             skyContainer.style.opacity = "1";
             playPauseBtn.style.display = "inline-block";
 
-            currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
-            if (currentPlanetIndex === -1) {
-                currentPlanetIndex = 0;
-            }
+            nextPageBtn.style.display = 'inline-block';
+            refreshPlanets(skyContainer);
             startMessageLoop();
-            addPlanetHoverListeners();
         }, 2500);
     });
 
@@ -235,6 +240,25 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    function switchTo(container) {
+        skyContainer.style.visibility = "hidden";
+        skyContainer.style.opacity = "0";
+        natalContainer.style.visibility = "hidden";
+        natalContainer.style.opacity = "0";
+        container.style.visibility = "visible";
+        container.style.opacity = "1";
+        refreshPlanets(container);
+        startMessageLoop();
+    }
+
+    nextPageBtn.addEventListener("click", () => {
+        switchTo(natalContainer);
+    });
+    nextPageBtn.addEventListener("wheel", () => {
+        switchTo(natalContainer);
+    });
+
 
     updateMusicButtonState();
 });
