@@ -213,7 +213,8 @@ h1 {
     will-change: transform, opacity;
 }
 
-#sky-container {
+#sky-container,
+#birth-sky-container {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     width: 100vw;
@@ -317,6 +318,9 @@ h1 {
 
 #next-page-btn {
     position: fixed;
+    bottom: 20px;
+    right: 20px;
+    transform: none;
     bottom: 70px;
     left: 50%;
     transform: translateX(-50%);

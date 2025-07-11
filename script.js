@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const giftBox = document.getElementById("gift-box");
     const skyContainer = document.getElementById("sky-container");
+    const birthContainer = document.getElementById("birth-container");
+    const birthSkyContainer = document.getElementById("birth-sky-container");
     const kickElementsWrapper = document.getElementById("kick-elements-wrapper");
     const allStar = document.getElementById("allstar");
     const explosion = document.getElementById("explosion");
@@ -10,11 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextPageBtn = document.getElementById("next-page-btn");
     const mainContainer = document.querySelector(".container");
 
-    const planets = [...document.querySelectorAll(".planet")];
-    let currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
-    if (currentPlanetIndex === -1) {
-        currentPlanetIndex = 0;
-    }
+    let planets = [];
+    let currentPlanetIndex = 0;
 
     const titleText = " Assim estava o céu quando os rumos de nossas vidas se encontraram 💜";
     let titleIndex = 0;
@@ -121,8 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
             skyContainer.style.opacity = "1";
             playPauseBtn.style.display = "inline-block";
             nextPageBtn.style.display = "inline-block";
+            planets = [...skyContainer.querySelectorAll('.planet')];
+            currentPlanetIndex = planets.findIndex(p => p.classList.contains('sol'));
+
 
             currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
+
             if (currentPlanetIndex === -1) {
                 currentPlanetIndex = 0;
             }
@@ -237,6 +240,28 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    function showBirthChart() {
+        skyContainer.style.opacity = '0';
+        skyContainer.style.visibility = 'hidden';
+
+        birthContainer.classList.remove('hidden');
+        birthSkyContainer.style.visibility = 'visible';
+        birthSkyContainer.style.opacity = '1';
+        nextPageBtn.style.display = 'none';
+
+        planets = [...birthSkyContainer.querySelectorAll('.planet')];
+        currentPlanetIndex = planets.findIndex(p => p.classList.contains('sol'));
+        if (currentPlanetIndex === -1) {
+            currentPlanetIndex = 0;
+        }
+        startMessageLoop();
+        addPlanetHoverListeners();
+    }
+
+    nextPageBtn.addEventListener('click', showBirthChart);
+
+    nextPageBtn.addEventListener('wheel', showBirthChart);
 
     nextPageBtn.addEventListener('click', () => {
         window.location.href = 'mapa.html';
