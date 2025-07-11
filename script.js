@@ -122,6 +122,10 @@ document.addEventListener("DOMContentLoaded", () => {
             nextPageBtn.style.display = "inline-block";
             planets = [...skyContainer.querySelectorAll('.planet')];
             currentPlanetIndex = planets.findIndex(p => p.classList.contains('sol'));
+
+
+            currentPlanetIndex = planets.findIndex(p => p.classList.contains("sol"));
+
             if (currentPlanetIndex === -1) {
                 currentPlanetIndex = 0;
             }
@@ -258,6 +262,14 @@ document.addEventListener("DOMContentLoaded", () => {
     nextPageBtn.addEventListener('click', showBirthChart);
 
     nextPageBtn.addEventListener('wheel', showBirthChart);
+
+    nextPageBtn.addEventListener('click', () => {
+        window.location.href = 'mapa.html';
+    });
+
+    nextPageBtn.addEventListener('wheel', () => {
+        window.location.href = 'mapa.html';
+    });
 
     updateMusicButtonState();
 });
