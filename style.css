@@ -772,3 +772,55 @@ h1 {
 ::-webkit-scrollbar-thumb:hover {
   background: #3b82f6;
 }
+
+#btn-fullscreen {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(30, 58, 138, 0.3);
+  border: 1px solid rgba(65, 105, 225, 0.7);
+  border-radius: 10px;
+  padding: 10px 13px;
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(65, 105, 225, 0.5);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+#btn-cinema {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(30, 58, 138, 0.3);
+  border: 1px solid rgba(65, 105, 225, 0.7);
+  border-radius: 10px;
+  padding: 8px 16px;
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(65, 105, 225, 0.5);
+  z-index: 300;
+  font-family: 'The Storyline', serif;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+#btn-fullscreen:hover,
+#btn-cinema:hover {
+  background: rgba(65, 105, 225, 0.35);
+  box-shadow: 0 0 18px rgba(65, 105, 225, 0.8);
+}
+
+body.cinema-mode > *:not(#music-controls):not(#btn-cinema):not(#btn-fullscreen):not(audio):not(video):not(.custom-star-cursor) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.6s ease !important;
+}

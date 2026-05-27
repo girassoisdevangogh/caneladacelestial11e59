@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const timeDisplay = document.getElementById('time-display');
   const btnVoltarInicio = document.getElementById('btn-voltar-inicio');
   const transitionOverlay = document.getElementById('transition-overlay');
+  const skyTitle = document.getElementById('sky-title');
+  const btnFullscreen = document.getElementById('btn-fullscreen');
+  const btnCinema = document.getElementById('btn-cinema');
+  const fsExpand = document.getElementById('fs-expand');
+  const fsCompress = document.getElementById('fs-compress');
 
   function formatTime(s) {
     const m = Math.floor(s / 60);
@@ -70,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   randomizePlanetPositions(mapaContainer);
 
   const titleText =
-    ' Assim estava o céu quando os rumos de nossas vidas se encontraram 💜';
+    ' De todos os 13,8 bilhões de anos do universo e as 8 bilhões de pessoas, é um privilégio poder dividir o mesmo espaço-tempo que você... Eu amo você e amo poder te amar ';
   let titleIndex = 0;
 
   let messageLoopTimeoutId;
@@ -79,6 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let isHovering = false;
   const TOOLTIP_TRANSITION_DURATION = 500;
   const AUTO_MESSAGE_DELAY = 11000;
+  let hideTooltipTimeoutId = null;
+  let tooltipIsVisible = false;
 
   const STAR_CREATE_INTERVAL = 28;
   let lastStarCreationTime = 0;
@@ -262,6 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
       skyContainer.style.display = 'block';
       skyContainer.style.visibility = 'visible';
       skyContainer.style.opacity = '1';
+      skyTitle.style.display = 'none';
       musicControls.style.opacity = '1';
       musicControls.style.visibility = 'visible';
       musicControls.style.pointerEvents = 'auto';
@@ -273,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       btnVerMapa.style.display = 'inline-block';
       btnVoltarInicio.style.display = 'inline-block';
+      skyTitle.style.display = '';
       transitionOverlay.classList.remove('dark');
       setTimeout(() => {
         fadeInPlanets(planets);
@@ -344,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resetTooltipImmediate();
     btnVoltarInicio.style.display = 'none';
     btnVerMapa.style.display = 'none';
+    skyTitle.style.display = 'none';
 
     transitionOverlay.classList.add('dark');
     await fadeOutPlanets(planets);
@@ -466,8 +476,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function showTooltip(planet, message) {
+    if (hideTooltipTimeoutId !== null) {
+      clearTimeout(hideTooltipTimeoutId);
+      hideTooltipTimeoutId = null;
+    }
     const myGen = ++tooltipRafGen;
     tooltip.innerHTML = message;
+    if (!tooltipIsVisible) tooltip.style.opacity = '0';
+    tooltip.classList.add('visible');
+    tooltipIsVisible = true;
 
     requestAnimationFrame(() => {
       if (tooltipRafGen !== myGen) return;
@@ -487,13 +504,15 @@ document.addEventListener('DOMContentLoaded', () => {
       tooltip.style.top = `${top}px`;
       tooltip.style.left = `${left}px`;
       tooltip.style.opacity = '1';
-      tooltip.classList.add('visible');
     });
   }
 
   function hideTooltip() {
     tooltip.style.opacity = '0';
-    setTimeout(() => {
+    tooltipIsVisible = false;
+    if (hideTooltipTimeoutId !== null) clearTimeout(hideTooltipTimeoutId);
+    hideTooltipTimeoutId = setTimeout(() => {
+      hideTooltipTimeoutId = null;
       tooltip.classList.remove('visible');
     }, TOOLTIP_TRANSITION_DURATION);
   }
@@ -513,10 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (reset) messageLoopCurrentIndex = 0;
 
-    tooltip.style.opacity = '0';
-    setTimeout(() => {
-      tooltip.classList.remove('visible');
-    }, TOOLTIP_TRANSITION_DURATION);
+    hideTooltip();
 
     const isMapaAtivo = mapaContainer.style.display !== 'none';
     const planetasAtuais = isMapaAtivo ? mapaPlanets : planets;
@@ -554,7 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function addPlanetHoverListeners() {
     planets.concat(mapaPlanets).forEach((planet) => {
       planet.addEventListener('mouseenter', () => {
-        const enterGen = messageLoopGeneration;
         isHovering = true;
         clearTimeout(messageLoopTimeoutId);
         if (autoHighlightedPlanet) {
@@ -562,30 +577,21 @@ document.addEventListener('DOMContentLoaded', () => {
           autoHighlightedPlanet = null;
         }
 
-        hideTooltip();
-
-        setTimeout(() => {
-          if (messageLoopGeneration !== enterGen) return;
-          const key =
-            [...planet.classList].find((c) => messages[c] || mapaMessages[c]) ||
-            '';
-          if (skyContainer.style.display !== 'none' && messages[key]) {
-            showTooltip(planet, messages[key]);
-          } else if (
-            mapaContainer.style.display !== 'none' &&
-            mapaMessages[key]
-          ) {
-            showTooltip(planet, mapaMessages[key]);
-          }
-        }, TOOLTIP_TRANSITION_DURATION);
+        const key =
+          [...planet.classList].find((c) => messages[c] || mapaMessages[c]) || '';
+        if (skyContainer.style.display !== 'none' && messages[key]) {
+          showTooltip(planet, messages[key]);
+        } else if (mapaContainer.style.display !== 'none' && mapaMessages[key]) {
+          showTooltip(planet, mapaMessages[key]);
+        }
       });
 
       planet.addEventListener('mouseleave', () => {
-        hideTooltip();
         isHovering = false;
+        hideTooltip();
 
         setTimeout(() => {
-          startMessageLoop(false);
+          if (!isHovering) startMessageLoop(false);
         }, TOOLTIP_TRANSITION_DURATION);
       });
     });
@@ -610,6 +616,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resetTooltipImmediate() {
     tooltipRafGen++;
+    if (hideTooltipTimeoutId !== null) {
+      clearTimeout(hideTooltipTimeoutId);
+      hideTooltipTimeoutId = null;
+    }
+    tooltipIsVisible = false;
     tooltip.style.transition = 'none';
     tooltip.style.opacity = '0';
     void tooltip.offsetHeight;
@@ -617,6 +628,31 @@ document.addEventListener('DOMContentLoaded', () => {
     tooltip.classList.remove('visible');
     tooltip.textContent = '';
   }
+
+  btnFullscreen.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', () => {
+    const isFs = !!document.fullscreenElement;
+    fsExpand.style.display = isFs ? 'none' : '';
+    fsCompress.style.display = isFs ? '' : 'none';
+    btnFullscreen.title = isFs ? 'Sair da tela cheia' : 'Tela cheia';
+    btnFullscreen.setAttribute('aria-label', isFs ? 'Sair da tela cheia' : 'Tela cheia');
+  });
+
+  let cinemaMode = false;
+  btnCinema.addEventListener('click', () => {
+    cinemaMode = !cinemaMode;
+    document.body.classList.toggle('cinema-mode', cinemaMode);
+    btnCinema.textContent = cinemaMode ? '✦ Iluminar a tela' : '🌌 Escurecer a tela';
+    btnCinema.title = cinemaMode ? 'Iluminar a tela' : 'Escurecer a tela';
+    btnCinema.setAttribute('aria-label', cinemaMode ? 'Iluminar a tela' : 'Escurecer a tela');
+  });
 
   updateMusicButtonState();
 });
