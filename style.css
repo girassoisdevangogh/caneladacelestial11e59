@@ -265,6 +265,7 @@ h1 {
   box-shadow: 0 0 5px rgba(127, 219, 255, 0.1);
   color: rgba(255, 255, 255, 0.8);
   opacity: 1;
+  white-space: nowrap;
   transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s,
     border 0.3s, color 0.3s, opacity 0.5s ease-in-out;
 }
@@ -296,9 +297,9 @@ h1 {
   color: #fffbee;
   padding: 1rem 1.5rem;
   border-radius: 16px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-family: 'Playfair Display', serif;
-  max-width: 240px;
+  max-width: 300px;
   text-align: center;
   box-shadow: 0 0 25px rgba(127, 219, 255, 0.8);
   backdrop-filter: blur(8px);

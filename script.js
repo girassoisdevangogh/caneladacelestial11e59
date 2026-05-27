@@ -183,14 +183,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function randomizePlanetPositions(container) {
     const els = [...container.querySelectorAll('.planet')];
     const placed = [];
-    const minDist = 15;
     els.forEach(el => {
       let top, left, tries = 0;
       do {
         top = 8 + Math.random() * 76;
-        left = 5 + Math.random() * 82;
+        left = 5 + Math.random() * 68;
         tries++;
-      } while (tries < 60 && placed.some(p => Math.hypot(p.top - top, p.left - left) < minDist));
+      } while (tries < 100 && placed.some(p =>
+        Math.abs(p.top - top) < 8 || Math.hypot(p.top - top, p.left - left) < 17
+      ));
       placed.push({ top, left });
       el.style.top = `${top.toFixed(1)}%`;
       el.style.left = `${left.toFixed(1)}%`;
@@ -521,19 +522,6 @@ document.addEventListener('DOMContentLoaded', () => {
           startMessageLoop(false);
         }, TOOLTIP_TRANSITION_DURATION);
       });
-    });
-  }
-
-  function copiarPosicoesDoCeuParaMapa() {
-    const cielo = [...document.querySelectorAll('#sky-container .planet')];
-    const mapa = [...document.querySelectorAll('#mapa-container .planet')];
-
-    cielo.forEach((planetaCeo, i) => {
-      const planetaMapa = mapa[i];
-      if (planetaMapa && planetaCeo.style.top && planetaCeo.style.left) {
-        planetaMapa.style.top = planetaCeo.style.top;
-        planetaMapa.style.left = planetaCeo.style.left;
-      }
     });
   }
 
