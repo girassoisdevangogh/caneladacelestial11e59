@@ -204,6 +204,23 @@ h1 {
   will-change: transform, opacity;
 }
 
+#sky-title,
+#mapa-title {
+  position: absolute;
+  top: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: #fef4c1;
+  text-shadow: 0 0 6px #f1c40faa, 0 0 14px #f39c12bb;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 101;
+  letter-spacing: 0.02em;
+}
+
 #sky-container {
   position: fixed;
   top: 0;
