@@ -120,11 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const mapaMessages = {
     sol: 'Você brilha sem avisar. Mas quando eu chego perto, seu brilho hesita. Talvez porque eu enxergo o que tem por trás: a luz que cansa de iluminar os outros sem ser vista de volta.',
     mercurio:
-      'Sua mente sonha em silêncio, mas às vezes tropeça nas palavras. Eu ouço o que você não diz. E nos seus devaneios, encontro respostas que o mundo apressado nunca teria paciência de esperar.',
+      'Sua mente não desperdiça palavras. Você pensa antes de falar, mede antes de agir — e quando fala, cada palavra carrega peso. Tem uma inteligência prática em você que prefere o concreto ao fantasioso. Aprendi a ouvir o que você diz, mas principalmente como você diz: com cuidado, com clareza, com intenção.',
     venus:
-      'Você ama à sua maneira: livre, meio avessa a promessas. Mas eu nunca quis te prender — só dançar ao seu lado, no seu tempo, sem pressa, sem moldes. Amar você é entender que beleza é o que fica depois que a expectativa vai embora.',
+      'Você ama fundo e sem reservas, como quem mergulha sem medir a profundidade. Sua forma de amar é uma das mais puras — incondicional, entregue, que não pede recibo nem garantia. Às vezes isso te faz perder um pouco de si no que sente. Mas é exatamente aí que mora o que te faz tão especial: poucos amam assim.',
     marte:
-      'Você resiste com leveza. Mas eu vi sua força real: o tipo que não grita, só insiste. Quando todo mundo acha que você desiste fácil, é aí que você mostra que permanece — mesmo se não diz nada.',
+      'Você vai atrás do que quer sem pedir permissão e sem esperar convite. Sua força é direta, nascida antes do pensamento — quando decide, decide de verdade. Nunca precisei adivinhar o que você sentia: você deixa claro, mesmo nos gestos mais pequenos. Essa coragem, mesmo que você não perceba, é uma das coisas mais bonitas em você.',
     jupiter:
       'Sua fé não precisa de altar. Ela mora nas pequenas alegrias: um cheiro, uma música, um toque que ninguém viu. Quando eu te olho, vejo alguém que ainda acredita. Mesmo depois de tudo.',
     saturno:
