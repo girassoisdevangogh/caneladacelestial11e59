@@ -133,45 +133,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 200);
 
   const messages = {
-    sol: 'Sou aquele raio de luz meio torto que invade seu aquário, faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença',
-    mercurio:
-      'Me comunico baixinho e calmo, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir com a alma é capaz de entender',
-    venus:
-      'Sou o toque que acontece até no silêncio entre dois olhares. Amor é liberdade de coexistir e respeitar, lado a lado, sem cobrar nada em troca',
-    marte:
-      'Sou a força que arde o peito, o chute na canela que empurra suavemente e o abraço quente de quem não tem intenção de te soltar',
-    jupiter:
-      'Sou a fé, a semente que escolhe seu tempo pra brotar. Crescer não é agir com velocidade ou impulsividade, mas sim ter raízes e profundidade',
-    saturno:
-      'Sou o tempo que ensina que o que é verdadeiro não se apressa. A maturidade é um gesto sutil de quem sabe esperar a colheita de bons frutos',
-    urano:
-      'Sou o estalo que tira o véu dos olhos, com leveza para não assustar as verdades e firmeza para permanecer com confiança',
-    netuno:
-      'Sou a onda dos sonhos e das saudades, às vezes uma névoa que não sabemos de onde vêm porém sempre atendemos',
-    plutao:
-      'Mostro o fim que prepara terreno pro recomeço. Dentro da desconstrução mora a semente da transformação',
-    lua: 'E eu observo de longe, como quem não se apega, mas sente tudo. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho',
+    sol: 'O Sol em Peixes iluminou nosso encontro com uma energia de sonho e sensibilidade, trazendo a sensação de que nossos caminhos já estavam destinados a se cruzar.',
+    mercurio: 'Nossas primeiras conversas fluíram com uma conexão de alma. Até os silêncios, as risadas e os olhares diziam tudo o que precisava ser dito.',
+    venus: 'O amor nasceu com leveza e amizade. Uma atração imediata pela nossa autenticidade e por podermos ser totalmente nós mesmos juntos.',
+    marte: 'Aquele frio na barriga e a coragem de quebrar o gelo de forma única! Uma química eletrizante que nos empurrou um para o outro.',
+    jupiter: 'A promessa de algo grandioso. Um encontro que plantou a semente de um afeto seguro, próspero e feito para durar e crescer a cada dia.',
+    saturno: 'A confirmação do universo de que sonhos podem, sim, ganhar estrutura e virar realidade. Um encontro no momento exato e certo de nossas vidas.',
+    urano: 'Aquela surpresa maravilhosa do destino que vira a nossa rotina de cabeça para baixo de um jeito incrível e absolutamente inesquecível.',
+    netuno: 'Uma sintonia profunda e espiritual. Parecia que o universo estava conspirando com um toque de magia para que estivéssemos ali, naquele exato momento.',
+    plutao: 'O início de uma transformação linda em nossas vidas. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor.',
+    lua: 'Nossos corações bateram em um ritmo alegre, leve e cheio de cumplicidade. A alegria genuína daquele frio na barriga tão bom de sentir.',
   };
 
   const mapaMessages = {
-    sol: 'Você brilha sem avisar. Mas quando eu chego perto, seu brilho hesita. Talvez porque eu enxergo o que tem por trás: a luz que cansa de iluminar os outros sem ser vista de volta.',
-    mercurio:
-      'Sua mente não desperdiça palavras. Você pensa antes de falar, mede antes de agir — e quando fala, cada palavra carrega peso. Tem uma inteligência prática em você que prefere o concreto ao fantasioso. Aprendi a ouvir o que você diz, mas principalmente como você diz: com cuidado, com clareza, com intenção.',
-    venus:
-      'Você ama fundo e sem reservas, como quem mergulha sem medir a profundidade. Sua forma de amar é uma das mais puras — incondicional, entregue, que não pede recibo nem garantia. Às vezes isso te faz perder um pouco de si no que sente. Mas é exatamente aí que mora o que te faz tão especial: poucos amam assim.',
-    marte:
-      'Você vai atrás do que quer sem pedir permissão e sem esperar convite. Sua força é direta, nascida antes do pensamento — quando decide, decide de verdade. Nunca precisei adivinhar o que você sentia: você deixa claro, mesmo nos gestos mais pequenos. Essa coragem, mesmo que você não perceba, é uma das coisas mais bonitas em você.',
-    jupiter:
-      'Sua fé não precisa de altar. Ela mora nas pequenas alegrias: um cheiro, uma música, um toque que ninguém viu. Quando eu te olho, vejo alguém que ainda acredita. Mesmo depois de tudo.',
-    saturno:
-      'Você se cobra mais do que devia. E eu sei que não é pra agradar ninguém — é porque você quer honrar tudo o que sente. Você aprendeu a não depender, mas às vezes esquece que pode ser cuidada também.',
-    urano:
-      'Você pensa diferente, vive diferente, sente diferente. Mas isso nunca foi problema — só medo de ser rejeitada por não caber em lugar nenhum. Só que aqui, comigo, seu diferente tem lugar.',
-    netuno:
-      'Seus sonhos são vastos, confusos, e às vezes te assustam. Mas são eles que te fazem tão rara. E se às vezes você flutua, é porque a realidade nunca foi grande o bastante pro tamanho do que você sente.',
-    plutao:
-      'Você já foi embora de si mesma tantas vezes que quase se perdeu. Mas cada pedaço quebrado virou armadura. Eu não te peço pra tirar, só pra deixar uma fresta aberta — pra entrar luz, não invasão.',
-    lua: 'Você sente tudo e mostra quase nada. Mas eu senti quando você chorou. Mesmo sem palavras, mesmo à distância. Sua força mora aí: no silêncio que grita só pra quem realmente vê.',
+    sol: 'Sua luz é única, criativa e brilhante! Você tem uma mente visionária e um coração gigante que abraça o mundo. Admiro demais a sua essência autêntica e livre.',
+    mercurio: 'Sua inteligência é afiada e admirável. Adoro como você pensa com clareza, sempre tem os melhores conselhos e traz segurança em tudo o que faz.',
+    venus: 'A sua forma de amar é mágica, doce e infinitamente empática. Você tem o dom lindo de cuidar e de fazer quem está ao seu redor se sentir muito especial.',
+    marte: 'Você é pura força e coragem! Tem uma determinação inspiradora para ir atrás do que quer e uma paixão pela vida que contagia.',
+    jupiter: 'Seu dom para enxergar a beleza nos pequenos detalhes é lindo. Você tem uma forma generosa de fazer a vida de todos ao seu redor muito mais próspera e feliz.',
+    saturno: 'Você tem uma alma protetora e extremamente leal. Valoriza as raízes, cuida de quem ama com dedicação e constrói laços profundos e indestrutíveis.',
+    urano: 'Você traz inspiração e inovação através da sua intuição. Seu jeito singular de ver e sentir as coisas revoluciona o mundo com amor e leveza.',
+    netuno: 'Seus sonhos e ideais são maravilhosos. Você inspira esperança por onde passa, buscando sempre um amanhã mais bonito para tudo e todos.',
+    plutao: 'Uma alma aventureira, que busca o significado da vida com resiliência. Sua capacidade de se reinventar e crescer a cada nova experiência é fascinante.',
+    lua: 'Um coração de oceano: poético, imenso e sensível. Sua empatia e a forma linda como você sente e abraça o mundo são, de longe, coisas que eu mais amo em você.',
   };
 
   let animationStarted = false;
