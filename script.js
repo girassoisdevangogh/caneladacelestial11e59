@@ -266,14 +266,14 @@ document.addEventListener('DOMContentLoaded', () => {
       musicControls.style.opacity = '1';
       musicControls.style.visibility = 'visible';
       musicControls.style.pointerEvents = 'auto';
-      btnVerMapa.style.display = 'inline-block';
-      btnVoltarInicio.style.display = 'inline-block';
 
       if (!listenersAdded) { addPlanetHoverListeners(); listenersAdded = true; }
     }, 1800);
 
-    // overlay some → planetas crescem junto com a iluminação
+    // overlay some → botões e planetas crescem junto com a iluminação
     setTimeout(() => {
+      btnVerMapa.style.display = 'inline-block';
+      btnVoltarInicio.style.display = 'inline-block';
       transitionOverlay.classList.remove('dark');
       setTimeout(() => {
         fadeInPlanets(planets);
@@ -552,6 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function addPlanetHoverListeners() {
     planets.concat(mapaPlanets).forEach((planet) => {
       planet.addEventListener('mouseenter', () => {
+        const enterGen = messageLoopGeneration;
         isHovering = true;
         clearTimeout(messageLoopTimeoutId);
         if (autoHighlightedPlanet) {
@@ -562,6 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hideTooltip();
 
         setTimeout(() => {
+          if (messageLoopGeneration !== enterGen) return;
           const key =
             [...planet.classList].find((c) => messages[c] || mapaMessages[c]) ||
             '';
@@ -589,7 +591,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function fadeOutPlanets(planets) {
     return new Promise((resolve) => {
-      planets.forEach((planet) => planet.classList.add('fade-out'));
+      planets.forEach((planet) => {
+        planet.classList.remove('fade-in');
+        planet.classList.add('fade-out');
+      });
       setTimeout(resolve, 600);
     });
   }
