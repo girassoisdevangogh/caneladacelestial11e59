@@ -270,12 +270,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       startMessageLoop();
       if (!listenersAdded) { addPlanetHoverListeners(); listenersAdded = true; }
-    }, 2800);
+    }, 2300);
 
     // overlay some → universo reaparece junto com o sky
     setTimeout(() => {
       transitionOverlay.classList.remove('dark');
-    }, 2900);
+    }, 2350);
   });
 
   playPauseBtn.addEventListener('click', () => {
@@ -330,8 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('click', () => playlistMenu.classList.remove('open'));
 
-  btnVoltarInicio.addEventListener('click', () => {
-    animationStarted = false;
+  btnVoltarInicio.addEventListener('click', async () => {
     isHovering = false;
     messageLoopGeneration++;
     clearTimeout(messageLoopTimeoutId);
@@ -340,6 +339,13 @@ document.addEventListener('DOMContentLoaded', () => {
       autoHighlightedPlanet = null;
     }
     resetTooltipImmediate();
+    btnVoltarInicio.style.display = 'none';
+    btnVerMapa.style.display = 'none';
+
+    transitionOverlay.classList.add('dark');
+    await fadeOutPlanets(planets);
+
+    animationStarted = false;
 
     skyContainer.style.opacity = '0';
     skyContainer.style.visibility = 'hidden';
@@ -350,15 +356,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     giftBox.classList.remove('kick-animation', 'hidden');
-    mainContainer.classList.remove('hidden');
     allStar.style.opacity = '';
     allStar.style.animation = 'none';
     explosion.style.opacity = '';
     explosion.style.animation = 'none';
     kickElementsWrapper.style.opacity = '0';
 
-    btnVoltarInicio.style.display = 'none';
-    btnVerMapa.style.display = 'none';
+    transitionOverlay.classList.remove('dark');
+    mainContainer.classList.remove('hidden');
   });
 
   bgMusic.addEventListener('timeupdate', () => {
@@ -384,20 +389,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnVerMapa.addEventListener('click', async () => {
     messageLoopGeneration++;
+    btnVerMapa.style.display = 'none';
+    btnVoltarInicio.style.display = 'none';
+
+    // Pré-seta planetas do mapa em estado oculto para o grow-in
+    mapaPlanets.forEach(p => {
+      p.classList.remove('fade-in', 'planet-active-message');
+      p.classList.add('fade-out');
+    });
+
+    transitionOverlay.classList.add('dark');
     await fadeOutPlanets(planets);
 
     skyContainer.style.display = 'none';
     mapaContainer.style.display = 'block';
-    btnVerMapa.style.display = 'none';
-    btnVoltarInicio.style.display = 'none';
     btnVoltarSky.style.display = 'inline-block';
-
     resetTooltipImmediate();
+    planets.forEach(p => p.classList.remove('fade-in', 'fade-out', 'planet-active-message'));
 
-    [...planets, ...mapaPlanets].forEach((p) => {
-      p.classList.remove('fade-in', 'fade-out', 'planet-active-message');
-    });
-
+    transitionOverlay.classList.remove('dark');
     setTimeout(() => {
       fadeInPlanets(mapaPlanets);
       startMessageLoop();
@@ -406,22 +416,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnVoltarSky.addEventListener('click', async () => {
     messageLoopGeneration++;
+    btnVoltarSky.style.display = 'none';
+
+    // Pré-seta planetas do céu em estado oculto para o grow-in
+    planets.forEach(p => {
+      p.classList.remove('fade-in', 'planet-active-message');
+      p.classList.add('fade-out');
+    });
+
+    transitionOverlay.classList.add('dark');
     await fadeOutPlanets(mapaPlanets);
 
     resetTooltipImmediate();
+    shufflePositions(skyContainer);
 
     mapaContainer.style.display = 'none';
     skyContainer.style.display = 'block';
-    btnVoltarSky.style.display = 'none';
     btnVerMapa.style.display = 'inline-block';
     btnVoltarInicio.style.display = 'inline-block';
+    mapaPlanets.forEach(p => p.classList.remove('fade-in', 'fade-out', 'planet-active-message'));
 
-    shufflePositions(skyContainer);
-
-    [...planets, ...mapaPlanets].forEach((p) => {
-      p.classList.remove('fade-in', 'fade-out', 'planet-active-message');
-    });
-
+    transitionOverlay.classList.remove('dark');
     setTimeout(() => {
       fadeInPlanets(planets);
       startMessageLoop();

@@ -49,13 +49,14 @@ body {
   backdrop-filter: blur(10px);
   z-index: 10;
   color: white;
-  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out, transform 0.5s ease-out;
 }
 
 .container.hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform: scale(0.85);
 }
 
 h1 {
@@ -725,7 +726,7 @@ h1 {
   opacity: 0;
   pointer-events: none;
   z-index: 500;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 }
 
 #transition-overlay.dark {
