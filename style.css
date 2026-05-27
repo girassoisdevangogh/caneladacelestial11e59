@@ -256,9 +256,9 @@ h1 {
 
 .planet {
   position: absolute;
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   cursor: none;
-  padding: 0.2rem 0.5rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 8px;
   border: 1px solid rgba(127, 219, 255, 0.3);
   background-color: rgba(127, 219, 255, 0.05);
