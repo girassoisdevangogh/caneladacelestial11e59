@@ -420,7 +420,13 @@ h1 {
   transition: opacity 0.2s ease;
 }
 
-#play-pause-btn { font-size: 1.3rem; margin-top: 2px; }
+#play-pause-btn { font-size: 1.3rem; margin-top: 5px; }
+
+.vol-group {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
 #prev-btn, #next-btn { font-size: 1.8rem; }
 
 #playlist-btn {

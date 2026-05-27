@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let titleIndex = 0;
 
   let messageLoopTimeoutId;
+  let messageLoopGeneration = 0;
   let messageLoopCurrentIndex = 0;
   let isHovering = false;
   const TOOLTIP_TRANSITION_DURATION = 500;
@@ -318,6 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
   btnVoltarInicio.addEventListener('click', () => {
     animationStarted = false;
     isHovering = false;
+    messageLoopGeneration++;
     clearTimeout(messageLoopTimeoutId);
     if (autoHighlightedPlanet) {
       autoHighlightedPlanet.classList.remove('planet-active-message');
@@ -362,6 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   btnVerMapa.addEventListener('click', async () => {
+    messageLoopGeneration++;
     await fadeOutPlanets(planets);
 
     skyContainer.style.display = 'none';
@@ -383,6 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   btnVoltarSky.addEventListener('click', async () => {
+    messageLoopGeneration++;
     await fadeOutPlanets(mapaPlanets);
 
     resetTooltipImmediate();
@@ -439,6 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startMessageLoop(reset = true) {
     clearTimeout(messageLoopTimeoutId);
+    const gen = ++messageLoopGeneration;
 
     if (autoHighlightedPlanet) {
       autoHighlightedPlanet.classList.remove('planet-active-message');
@@ -459,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensagensAtuais = isMapaAtivo ? mapaMessages : messages;
 
     function mostrarProximo() {
-      if (isHovering) return;
+      if (isHovering || messageLoopGeneration !== gen) return;
 
       if (autoHighlightedPlanet) {
         autoHighlightedPlanet.classList.remove('planet-active-message');
@@ -474,7 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
       messageLoopCurrentIndex = (messageLoopCurrentIndex + 1) % planetasAtuais.length;
 
       setTimeout(() => {
-        if (isHovering) return;
+        if (isHovering || messageLoopGeneration !== gen) return;
         if (mensagensAtuais[chave]) {
           planeta.classList.add('planet-active-message');
           autoHighlightedPlanet = planeta;
