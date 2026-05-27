@@ -10,11 +10,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const tooltip = document.getElementById('tooltip');
   const bgMusic = document.getElementById('bg-music');
   const playPauseBtn = document.getElementById('play-pause-btn');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
   const volumeSlider = document.getElementById('volume-slider');
   const musicControls = document.getElementById('music-controls');
   const mainContainer = document.querySelector('.container');
 
+  const playlist = [
+    'https://girassoisdevangogh.github.io/caneladacelestial11e59/RUELLE-I-get-to-love-you.mp3',
+  ];
+  let currentTrackIndex = 0;
+
+  function loadTrack(index, autoplay) {
+    currentTrackIndex = (index + playlist.length) % playlist.length;
+    bgMusic.src = playlist[currentTrackIndex];
+    bgMusic.load();
+    if (autoplay) bgMusic.play().then(updateMusicButtonState).catch(() => {});
+    else updateMusicButtonState();
+  }
+
   bgMusic.volume = 0.5;
+  loadTrack(0, false);
 
   const planets = [...document.querySelectorAll('#sky-container .planet')];
   const mapaPlanets = [...document.querySelectorAll('#mapa-container .planet')];
@@ -203,7 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bgMusic.addEventListener('play', updateMusicButtonState);
   bgMusic.addEventListener('pause', updateMusicButtonState);
-  bgMusic.addEventListener('ended', updateMusicButtonState);
+  bgMusic.addEventListener('ended', () => loadTrack(currentTrackIndex + 1, true));
+
+  prevBtn.addEventListener('click', () => loadTrack(currentTrackIndex - 1, !bgMusic.paused));
+  nextBtn.addEventListener('click', () => loadTrack(currentTrackIndex + 1, !bgMusic.paused));
 
   volumeSlider.addEventListener('input', () => {
     bgMusic.volume = volumeSlider.value / 100;
