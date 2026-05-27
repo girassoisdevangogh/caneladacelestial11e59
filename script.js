@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let messageLoopCurrentIndex = 0;
   let isHovering = false;
   const TOOLTIP_TRANSITION_DURATION = 500;
-  const AUTO_MESSAGE_DELAY = 8500;
+  const AUTO_MESSAGE_DELAY = 12000;
 
   const STAR_CREATE_INTERVAL = 28;
   let lastStarCreationTime = 0;
