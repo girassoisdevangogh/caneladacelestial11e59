@@ -244,6 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   let animationStarted = false;
+  let isNavigating = false;
   let listenersAdded = false;
   let tooltipRafGen = 0;
 
@@ -436,6 +437,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', () => playlistMenu.classList.remove('open'));
 
   btnVoltarInicio.addEventListener('click', async () => {
+    if (isNavigating) return;
+    isNavigating = true;
     isHovering = false;
     messageLoopGeneration++;
     clearTimeout(messageLoopTimeoutId);
@@ -472,6 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionOverlay.classList.remove('dark');
     setTimeout(() => {
       mainContainer.classList.remove('hidden');
+      isNavigating = false;
     }, 400);
   });
 
@@ -503,6 +507,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   btnVerMapa.addEventListener('click', async () => {
+    if (isNavigating) return;
+    isNavigating = true;
     messageLoopGeneration++;
 
     mapaPlanets.forEach(p => {
@@ -537,11 +543,14 @@ document.addEventListener('DOMContentLoaded', () => {
       fadeInPlanets(mapaPlanets);
     }, 400);
     setTimeout(() => {
+      isNavigating = false;
       startMessageLoop();
     }, 950);
   });
 
   btnVoltarSky.addEventListener('click', async () => {
+    if (isNavigating) return;
+    isNavigating = true;
     messageLoopGeneration++;
     btnVoltarSky.classList.add('btn-nav-out');
 
@@ -575,6 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fadeInPlanets(planets);
     }, 400);
     setTimeout(() => {
+      isNavigating = false;
       startMessageLoop();
     }, 950);
   });
@@ -643,6 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let autoHighlightedPlanet = null;
 
   function startMessageLoop(reset = true) {
+    if (isNavigating) return;
     clearTimeout(messageLoopTimeoutId);
     const gen = ++messageLoopGeneration;
 
@@ -714,7 +725,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hideTooltip();
 
         setTimeout(() => {
-          if (!isHovering) startMessageLoop(false);
+          if (!isHovering && !isNavigating) startMessageLoop(false);
         }, TOOLTIP_TRANSITION_DURATION);
       });
     });
