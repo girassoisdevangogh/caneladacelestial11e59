@@ -378,14 +378,26 @@ h1 {
   cursor: pointer;
 }
 
+#music-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: -2px;
+  margin-bottom: 1px;
+}
+
+#music-icon {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1;
+}
+
 #time-display {
   font-size: 1.65rem;
   font-family: 'The Storyline', serif;
   color: rgba(255, 255, 255, 0.45);
   letter-spacing: 0.04em;
-  align-self: flex-end;
-  margin-top: -2px;
-  margin-bottom: 1px;
 }
 
 #progress-bar-fill {
