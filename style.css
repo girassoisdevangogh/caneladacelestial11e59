@@ -207,11 +207,11 @@ h1 {
 #sky-title,
 #mapa-title {
   position: absolute;
-  top: 1.4rem;
+  top: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #fef4c1;
   text-shadow: 0 0 6px #f1c40faa, 0 0 14px #f39c12bb;
   text-align: center;
@@ -219,6 +219,23 @@ h1 {
   pointer-events: none;
   z-index: 101;
   letter-spacing: 0.02em;
+  background: rgba(127, 219, 255, 0.12);
+  border: 1px solid rgba(127, 219, 255, 0.35);
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 14px rgba(127, 219, 255, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.kat-icon {
+  width: 1.3em;
+  height: 1.3em;
+  object-fit: contain;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 #sky-container {
@@ -356,7 +373,7 @@ h1 {
   transition: opacity 0.2s ease;
 }
 
-#play-pause-btn { font-size: 1.3rem; }
+#play-pause-btn { font-size: 1.3rem; margin-top: 1px; }
 #prev-btn, #next-btn { font-size: 1.8rem; }
 
 #prev-btn:hover,
@@ -400,16 +417,16 @@ h1 {
   top: 50%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.15);
-  border: none;
+  border: 1px solid rgba(241, 196, 15, 0.6);
   border-radius: 50%;
   padding: 18px 20px;
   font-size: 1.8rem;
   color: white;
   cursor: pointer;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 12px rgba(241, 196, 15, 0.4), 0 0 22px rgba(241, 196, 15, 0.2);
   z-index: 200;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   user-select: none;
 }
 
@@ -426,6 +443,7 @@ h1 {
 #btn-voltar-sky:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 18px rgba(241, 196, 15, 0.7), 0 0 36px rgba(241, 196, 15, 0.35);
 }
 
 #mapa-container {
