@@ -8,7 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const allStar = document.getElementById('allstar');
   const explosion = document.getElementById('explosion');
   const tooltip = document.getElementById('tooltip');
+  const katTooltip = document.getElementById('kat-tooltip');
   const bgMusic = document.getElementById('bg-music');
+  const bgMusicB = new Audio();
+  bgMusicB.preload = 'auto';
+  let activeAudio = bgMusic;
+  let inactiveAudio = bgMusicB;
+  let userVolume = 0.5;
+  let isCrossfading = false;
+  let crossfadeRafId = null;
+  const CROSSFADE_DURATION = 1.5;
   const playPauseBtn = document.getElementById('play-pause-btn');
   const prevBtn = document.getElementById('prev-btn');
   const nextBtn = document.getElementById('next-btn');
@@ -57,16 +66,79 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentTrackIndex = 0;
 
   function loadTrack(index, autoplay) {
-    currentTrackIndex = (index + playlist.length) % playlist.length;
-    bgMusic.src = playlist[currentTrackIndex].src;
-    bgMusic.load();
+    const newIndex = (index + playlist.length) % playlist.length;
+
+    if (autoplay && !activeAudio.paused) {
+      doCrossfade(newIndex);
+      return;
+    }
+
+    if (isCrossfading) {
+      cancelAnimationFrame(crossfadeRafId);
+      isCrossfading = false;
+      inactiveAudio.pause();
+      inactiveAudio.currentTime = 0;
+      inactiveAudio.volume = 0;
+    }
+
+    currentTrackIndex = newIndex;
+    activeAudio.src = playlist[currentTrackIndex].src;
+    activeAudio.volume = userVolume;
+    activeAudio.load();
     trackNameEl.textContent = playlist[currentTrackIndex].name;
     progressFill.style.width = '0%';
-    if (autoplay) bgMusic.play().then(updateMusicButtonState).catch(() => {});
+    if (autoplay) activeAudio.play().then(updateMusicButtonState).catch(() => {});
     else updateMusicButtonState();
   }
 
-  bgMusic.volume = 0.5;
+  function doCrossfade(newIndex) {
+    if (isCrossfading) {
+      cancelAnimationFrame(crossfadeRafId);
+      isCrossfading = false;
+      activeAudio.pause();
+      activeAudio.currentTime = 0;
+      activeAudio.volume = userVolume;
+      inactiveAudio.volume = userVolume;
+      [activeAudio, inactiveAudio] = [inactiveAudio, activeAudio];
+    }
+
+    currentTrackIndex = newIndex;
+    inactiveAudio.src = playlist[currentTrackIndex].src;
+    inactiveAudio.volume = 0;
+    inactiveAudio.load();
+    trackNameEl.textContent = playlist[currentTrackIndex].name;
+    progressFill.style.width = '0%';
+
+    inactiveAudio.play().then(() => {
+      isCrossfading = true;
+      const fadingOut = activeAudio;
+      const fadingIn = inactiveAudio;
+      const fadeFromVol = fadingOut.volume;
+      const startTime = performance.now();
+      const durationMs = CROSSFADE_DURATION * 1000;
+
+      function step(now) {
+        const progress = Math.min((now - startTime) / durationMs, 1);
+        fadingOut.volume = fadeFromVol * (1 - progress);
+        fadingIn.volume = userVolume * progress;
+
+        if (progress < 1) {
+          crossfadeRafId = requestAnimationFrame(step);
+        } else {
+          fadingOut.pause();
+          fadingOut.currentTime = 0;
+          fadingOut.volume = userVolume;
+          [activeAudio, inactiveAudio] = [fadingIn, fadingOut];
+          isCrossfading = false;
+          updateMusicButtonState();
+        }
+      }
+      crossfadeRafId = requestAnimationFrame(step);
+      updateMusicButtonState();
+    }).catch(() => {});
+  }
+
+  activeAudio.volume = userVolume;
   loadTrack(0, false);
 
   const planets = [...document.querySelectorAll('#sky-container .planet')];
@@ -84,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let messageLoopCurrentIndex = 0;
   let isHovering = false;
   const TOOLTIP_TRANSITION_DURATION = 500;
-  const AUTO_MESSAGE_DELAY = 11000;
+  const AUTO_MESSAGE_DELAY = 9800;
   let hideTooltipTimeoutId = null;
   let tooltipIsVisible = false;
 
@@ -144,16 +216,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 200);
 
   const messages = {
-    sol: 'O <span class="destaque-dourado">ILUMINAR</span> da constelação de Peixes refletiu como um caleidoscópio o dia do nosso encontro com uma energia de sonho e sensibilidade, trazendo a sensação de que nossos caminhos já estavam destinados a se cruzar...',
-    mercurio: 'A <span class="destaque-dourado">COMUNICAÇÃO</span> esguia da constelação de Peixes permitiu que nossas primeiras conversas fluíssem e com o tempo fomos criando uma conexão inexplicável. Dentre os silêncios e as risadas, os olhares disseram tudo o que precisa ser dito...',
-    venus: 'Já com o <span class="destaque-dourado">AMOR</span> da constelação de Aquário, o nosso íntimo nasceu com leveza e amizade. Uma atração imediata pela nossa autenticidade e por podermos ser totalmente nós mesmos juntos...',
-    marte: 'Aquele frio na barriga veio junto das <span class="destaque-dourado">ESTRATÉGIAS</span> da constelação de Aquário e junto da coragem de cada um com sua faca. Foi surpreendente para os dois (Não recomendo). Uma química forte, de cheiro hipnotizante e que nos empurrou um para o outro...',
-    jupiter: 'A promessa velada de algo grandioso, um <span class="destaque-dourado">CRESCIMENTO</span> pessoal, coletivo e com a energia da constelação de Touro. Um encontro que plantou a semente de um afeto seguro, próspero e feito para durar e crescer a cada dia...',
-    saturno: 'A confirmação do universo de que sonhos podem, sim, ganhar estrutura e virar <span class="destaque-dourado">EXCELÊNCIA</span> em realidade. O universo nos guiou como uma correnteza, dentre 8 bilhões de pessoas. Um encontro da constelação de Peixes no momento exato e certo de nossas vidas...',
-    urano: 'Sem avisar, com a força de um Touro, aquela surpresa e a <span class="destaque-dourado">LIBERDADE</span> que vira a nossa rotina de cabeça para baixo de um jeito incrível e absolutamente inesquecível...',
-    netuno: 'Uma sintonia profunda e espiritual, com a <span class="destaque-dourado">PROFUNDIDADE</span> de Peixes. Parecia que o universo estava conspirando com um toque de magia para que estivéssemos ali, naquele exato momento...',
-    plutao: 'O início de uma transformação linda em nossas vidas, marcada pela <span class="destaque-dourado">OBSTINAÇÃO</span> de Aquário. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor...',
-    lua: 'Nossos corações bateram em um ritmo alegre, leve e cheio de <span class="destaque-dourado">CUMPLICIDADE</span>, como demanda a constelação de Aquário. A alegria genuína daquele frio na barriga tão bom de sentir.',
+    sol: 'O <span class="destaque-neon">ILUMINAR</span> da constelação de Peixes refletiu como um caleidoscópio o dia do nosso encontro com uma energia de sonho e sensibilidade, trazendo a sensação de que nossos caminhos já estavam destinados a se cruzar...',
+    mercurio: 'A <span class="destaque-neon">COMUNICAÇÃO</span> esguia da constelação de Peixes permitiu que nossas primeiras conversas fluíssem e com o tempo fomos criando uma conexão inexplicável. Dentre os silêncios e as risadas, os olhares disseram tudo o que precisa ser dito...',
+    venus: 'Já com o <span class="destaque-neon">AMOR</span> da constelação de Aquário, o nosso íntimo nasceu com leveza e amizade. Uma atração imediata pela nossa autenticidade e por podermos ser totalmente nós mesmos juntos...',
+    marte: 'Aquele frio na barriga veio junto das <span class="destaque-neon">ESTRATÉGIAS</span> da constelação de Aquário e junto da coragem de cada um com sua faca. Foi surpreendente para os dois (Não recomendo). Uma química forte, de cheiro hipnotizante e que nos empurrou um para o outro...',
+    jupiter: 'A promessa velada de algo grandioso, um <span class="destaque-neon">CRESCIMENTO</span> pessoal, coletivo e com a energia da constelação de Touro. Um encontro que plantou a semente de um afeto seguro, próspero e feito para durar e crescer a cada dia...',
+    saturno: 'A confirmação do universo de que sonhos podem, sim, ganhar estrutura e virar <span class="destaque-neon">EXCELÊNCIA</span> em realidade. O universo nos guiou como uma correnteza, dentre 8 bilhões de pessoas. Um encontro da constelação de Peixes no momento exato e certo de nossas vidas...',
+    urano: 'Sem avisar, com a força de um Touro, aquela surpresa e a <span class="destaque-neon">LIBERDADE</span> que vira a nossa rotina de cabeça para baixo de um jeito incrível e absolutamente inesquecível...',
+    netuno: 'Uma sintonia profunda e espiritual, com a <span class="destaque-neon">PROFUNDIDADE</span> de Peixes. Parecia que o universo estava conspirando com um toque de magia para que estivéssemos ali, naquele exato momento...',
+    plutao: 'O início de uma transformação linda em nossas vidas, marcada pela <span class="destaque-neon">OBSTINAÇÃO</span> de Aquário. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor...',
+    lua: 'Nossos corações bateram em um ritmo alegre, leve e cheio de <span class="destaque-neon">CUMPLICIDADE</span>, como demanda a constelação de Aquário. A alegria genuína daquele frio na barriga tão bom de sentir.',
   };
 
   const mapaMessages = {
@@ -174,8 +246,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let listenersAdded = false;
   let tooltipRafGen = 0;
 
+  function isAudioPlaying() {
+    return !activeAudio.paused || isCrossfading;
+  }
+
   function updateMusicButtonState() {
-    playPauseBtn.textContent = bgMusic.paused ? '▶️' : '⏸️';
+    playPauseBtn.textContent = isAudioPlaying() ? '⏸️' : '▶️';
   }
 
   function randomizePlanetPositions(container) {
@@ -234,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
     kickElementsWrapper.style.left = `${boxRect.left + boxRect.width / 2}px`;
 
     try {
-      await bgMusic.play();
+      await activeAudio.play();
       updateMusicButtonState();
     } catch (e) {
       console.log(
@@ -295,27 +371,43 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   playPauseBtn.addEventListener('click', () => {
-    if (bgMusic.paused) {
-      bgMusic.play();
+    if (isCrossfading) {
+      cancelAnimationFrame(crossfadeRafId);
+      isCrossfading = false;
+      activeAudio.pause();
+      activeAudio.currentTime = 0;
+      activeAudio.volume = userVolume;
+      inactiveAudio.volume = userVolume;
+      [activeAudio, inactiveAudio] = [inactiveAudio, activeAudio];
+      activeAudio.pause();
+    } else if (activeAudio.paused) {
+      activeAudio.play();
     } else {
-      bgMusic.pause();
+      activeAudio.pause();
     }
+    updateMusicButtonState();
   });
 
-  bgMusic.addEventListener('play', updateMusicButtonState);
-  bgMusic.addEventListener('pause', updateMusicButtonState);
-  bgMusic.addEventListener('ended', () => loadTrack(currentTrackIndex + 1, true));
+  [bgMusic, bgMusicB].forEach(audio => {
+    audio.addEventListener('play', function () { if (this === activeAudio) updateMusicButtonState(); });
+    audio.addEventListener('pause', function () { if (this === activeAudio) updateMusicButtonState(); });
+    audio.addEventListener('ended', function () {
+      if (this === activeAudio && !isCrossfading) doCrossfade((currentTrackIndex + 1) % playlist.length);
+    });
+  });
 
-  prevBtn.addEventListener('click', () => loadTrack(currentTrackIndex - 1, !bgMusic.paused));
-  nextBtn.addEventListener('click', () => loadTrack(currentTrackIndex + 1, !bgMusic.paused));
+  prevBtn.addEventListener('click', () => loadTrack(currentTrackIndex - 1, isAudioPlaying()));
+  nextBtn.addEventListener('click', () => loadTrack(currentTrackIndex + 1, isAudioPlaying()));
 
   document.getElementById('vol-down').addEventListener('click', () => {
-    bgMusic.volume = Math.max(0, Math.round((bgMusic.volume - 0.1) * 10) / 10);
-    volumeSlider.value = Math.round(bgMusic.volume * 100);
+    userVolume = Math.max(0, Math.round((userVolume - 0.1) * 10) / 10);
+    if (!isCrossfading) activeAudio.volume = userVolume;
+    volumeSlider.value = Math.round(userVolume * 100);
   });
   document.getElementById('vol-up').addEventListener('click', () => {
-    bgMusic.volume = Math.min(1, Math.round((bgMusic.volume + 0.1) * 10) / 10);
-    volumeSlider.value = Math.round(bgMusic.volume * 100);
+    userVolume = Math.min(1, Math.round((userVolume + 0.1) * 10) / 10);
+    if (!isCrossfading) activeAudio.volume = userVolume;
+    volumeSlider.value = Math.round(userVolume * 100);
   });
 
   const playlistBtn = document.getElementById('playlist-btn');
@@ -391,25 +483,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 400);
   });
 
-  bgMusic.addEventListener('timeupdate', () => {
-    if (bgMusic.duration) {
-      progressFill.style.width = `${(bgMusic.currentTime / bgMusic.duration) * 100}%`;
-      timeDisplay.textContent = `${formatTime(bgMusic.currentTime)} / ${formatTime(bgMusic.duration)}`;
-    }
-  });
-
-  bgMusic.addEventListener('loadedmetadata', () => {
-    timeDisplay.textContent = `00:00 / ${formatTime(bgMusic.duration)}`;
+  [bgMusic, bgMusicB].forEach(audio => {
+    audio.addEventListener('timeupdate', function () {
+      if (this !== activeAudio) return;
+      if (activeAudio.duration) {
+        progressFill.style.width = `${(activeAudio.currentTime / activeAudio.duration) * 100}%`;
+        timeDisplay.textContent = `${formatTime(activeAudio.currentTime)} / ${formatTime(activeAudio.duration)}`;
+        if (!isCrossfading && activeAudio.currentTime >= activeAudio.duration - CROSSFADE_DURATION) {
+          doCrossfade((currentTrackIndex + 1) % playlist.length);
+        }
+      }
+    });
+    audio.addEventListener('loadedmetadata', function () {
+      if (this === activeAudio) timeDisplay.textContent = `00:00 / ${formatTime(activeAudio.duration)}`;
+    });
   });
 
   progressContainer.addEventListener('click', (e) => {
-    if (!bgMusic.duration) return;
+    if (!activeAudio.duration) return;
     const rect = progressContainer.getBoundingClientRect();
-    bgMusic.currentTime = ((e.clientX - rect.left) / rect.width) * bgMusic.duration;
+    activeAudio.currentTime = ((e.clientX - rect.left) / rect.width) * activeAudio.duration;
   });
 
   volumeSlider.addEventListener('input', () => {
-    bgMusic.volume = volumeSlider.value / 100;
+    userVolume = volumeSlider.value / 100;
+    if (!isCrossfading) activeAudio.volume = userVolume;
   });
 
   btnVerMapa.addEventListener('click', async () => {
@@ -531,6 +629,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }, TOOLTIP_TRANSITION_DURATION);
   }
 
+  function showKatTooltip(element, message) {
+    katTooltip.innerHTML = message;
+    katTooltip.classList.add('visible');
+    requestAnimationFrame(() => {
+      const tipRect = katTooltip.getBoundingClientRect();
+      const rect = element.getBoundingClientRect();
+      let top = window.scrollY + rect.top - tipRect.height - 12;
+      let left = window.scrollX + rect.left + rect.width / 2 - tipRect.width / 2;
+      left = Math.min(Math.max(left, 8), window.innerWidth - tipRect.width - 8);
+      if (top < window.scrollY + 8) top = window.scrollY + rect.bottom + 12;
+      katTooltip.style.top = `${top}px`;
+      katTooltip.style.left = `${left}px`;
+    });
+  }
+
+  function hideKatTooltip() {
+    katTooltip.classList.remove('visible');
+  }
+
   let autoHighlightedPlanet = null;
 
   function startMessageLoop(reset = true) {
@@ -609,6 +726,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }, TOOLTIP_TRANSITION_DURATION);
       });
     });
+
+    const mapaKatIcon = document.querySelector('#mapa-container .kat-icon');
+    if (mapaKatIcon) {
+      mapaKatIcon.addEventListener('mouseenter', () => {
+        showKatTooltip(mapaKatIcon, 'Quando eu tô com vc minha vontade é essa ❤️');
+      });
+      mapaKatIcon.addEventListener('mouseleave', hideKatTooltip);
+    }
+
+    const skyKatIcon = document.querySelector('#sky-container .kat-icon');
+    if (skyKatIcon) {
+      skyKatIcon.addEventListener('mouseenter', () => {
+        showKatTooltip(skyKatIcon, 'Eu fico assim quando olho pra você ❤️');
+      });
+      skyKatIcon.addEventListener('mouseleave', hideKatTooltip);
+    }
+
+  }
+
+  const kat1Icon = document.querySelector('.kat-wrapper .kat-icon');
+  if (kat1Icon) {
+    kat1Icon.addEventListener('mouseenter', () => {
+      showKatTooltip(kat1Icon, 'Uma flor para a mais cheirosa e esbelta de todos os jardins ❤️');
+    });
+    kat1Icon.addEventListener('mouseleave', hideKatTooltip);
   }
 
   function fadeOutPlanets(planets) {
