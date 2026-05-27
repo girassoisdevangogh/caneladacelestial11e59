@@ -43,18 +43,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const playlist = [
-    { src: 'assets/ruelle-i-get-to-love-you.mp3',            name: 'Ruelle — I Get to Love You' },
-    { src: 'assets/ruelle-war-of-hearts.mp3',                name: 'Ruelle — War of Hearts' },
-    { src: 'assets/billie-eilish-chihiro.mp3',               name: 'Billie Eilish — CHIHIRO' },
-    { src: 'assets/billie-eilish-wildflower-guitar.mp3',     name: 'Billie Eilish — Wildflower' },
-    { src: 'assets/billie-eilish-bellyache.mp3',             name: 'Billie Eilish — Bellyache' },
-    { src: 'assets/billie-eilish-the-greatest.mp3',          name: 'Billie Eilish — The Greatest' },
-    { src: 'assets/labrinth-mount-everest.mp3',              name: 'Labrinth — Mount Everest' },
-    { src: 'assets/labrinth-zendaya-all-for-us.mp3',         name: 'Labrinth & Zendaya — All for Us' },
-    { src: 'assets/the-weeknd-die-for-you.mp3',              name: 'The Weeknd — Die for You' },
-    { src: 'assets/the-weeknd-the-hills.mp3',                name: 'The Weeknd — The Hills' },
-    { src: 'assets/two-feet-love-is-a-bitch.mp3',            name: 'Two Feet — Love Is a Bitch' },
-    { src: 'assets/two-feet-i-feel-like-im-drowning.mp3',    name: 'Two Feet — I Feel Like I\'m Drowning' },
+    { src: 'assets/ruelle-i-get-to-love-you.mp3',            name: 'Ruelle - I Get to Love You' },
+    { src: 'assets/ruelle-war-of-hearts.mp3',                name: 'Ruelle - War of Hearts' },
+    { src: 'assets/billie-eilish-chihiro.mp3',               name: 'Billie Eilish - CHIHIRO' },
+    { src: 'assets/billie-eilish-wildflower-guitar.mp3',     name: 'Billie Eilish - Wildflower' },
+    { src: 'assets/billie-eilish-bellyache.mp3',             name: 'Billie Eilish - Bellyache' },
+    { src: 'assets/billie-eilish-the-greatest.mp3',          name: 'Billie Eilish - The Greatest' },
+    { src: 'assets/labrinth-mount-everest.mp3',              name: 'Labrinth - Mount Everest' },
+    { src: 'assets/labrinth-zendaya-all-for-us.mp3',         name: 'Labrinth & Zendaya - All for Us' },
+    { src: 'assets/the-weeknd-die-for-you.mp3',              name: 'The Weeknd - Die for You' },
+    { src: 'assets/the-weeknd-the-hills.mp3',                name: 'The Weeknd - The Hills' },
+    { src: 'assets/two-feet-love-is-a-bitch.mp3',            name: 'Two Feet - Love Is a Bitch' },
+    { src: 'assets/two-feet-i-feel-like-im-drowning.mp3',    name: 'Two Feet - I Feel Like I\'m Drowning' },
     { src: 'assets/madonna-sicksick-frozen.mp3',             name: 'Madonna & SickSick - Frozen' },
   ];
 
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isCrossfading) {
-      cancelAnimationFrame(crossfadeRafId);
+      clearTimeout(crossfadeRafId);
       isCrossfading = false;
       inactiveAudio.pause();
       inactiveAudio.currentTime = 0;
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function doCrossfade(newIndex) {
     if (isCrossfading) {
-      cancelAnimationFrame(crossfadeRafId);
+      clearTimeout(crossfadeRafId);
       isCrossfading = false;
       activeAudio.pause();
       activeAudio.currentTime = 0;
@@ -117,13 +117,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const startTime = performance.now();
       const durationMs = CROSSFADE_DURATION * 1000;
 
-      function step(now) {
+      function step() {
+        const now = performance.now();
         const progress = Math.min((now - startTime) / durationMs, 1);
         fadingOut.volume = fadeFromVol * (1 - progress);
         fadingIn.volume = userVolume * progress;
 
         if (progress < 1) {
-          crossfadeRafId = requestAnimationFrame(step);
+          crossfadeRafId = setTimeout(step, 50);
         } else {
           fadingOut.pause();
           fadingOut.currentTime = 0;
@@ -133,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
           updateMusicButtonState();
         }
       }
-      crossfadeRafId = requestAnimationFrame(step);
+      crossfadeRafId = setTimeout(step, 50);
       updateMusicButtonState();
     }).catch(() => {});
   }
@@ -160,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let hideTooltipTimeoutId = null;
   let tooltipIsVisible = false;
 
-  const STAR_CREATE_INTERVAL = 28;
+  const STAR_CREATE_INTERVAL = 25;
   let lastStarCreationTime = 0;
   let cursorX = 0, cursorY = 0, cursorRafPending = false;
 
@@ -216,30 +217,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 200);
 
   const messages = {
-    sol: 'O <span class="destaque-neon">ILUMINAR</span> da constelação de Peixes refletiu como um caleidoscópio o dia do nosso encontro com uma energia de sonho e sensibilidade, trazendo a sensação de que nossos caminhos já estavam destinados a se cruzar...',
-    mercurio: 'A <span class="destaque-neon">COMUNICAÇÃO</span> esguia da constelação de Peixes permitiu que nossas primeiras conversas fluíssem e com o tempo fomos criando uma conexão inexplicável. Dentre os silêncios e as risadas, os olhares disseram tudo o que precisa ser dito...',
-    venus: 'Já com o <span class="destaque-neon">AMOR</span> da constelação de Aquário, o nosso íntimo nasceu com leveza e amizade. Uma atração imediata pela nossa autenticidade e por podermos ser totalmente nós mesmos juntos...',
-    marte: 'Aquele frio na barriga veio junto das <span class="destaque-neon">ESTRATÉGIAS</span> da constelação de Aquário e junto da coragem de cada um com sua faca. Foi surpreendente para os dois (Não recomendo). Uma química forte, de cheiro hipnotizante e que nos empurrou um para o outro...',
-    jupiter: 'A promessa velada de algo grandioso, um <span class="destaque-neon">CRESCIMENTO</span> pessoal, coletivo e com a energia da constelação de Touro. Um encontro que plantou a semente de um afeto seguro, próspero e feito para durar e crescer a cada dia...',
-    saturno: 'A confirmação do universo de que sonhos podem, sim, ganhar estrutura e virar <span class="destaque-neon">EXCELÊNCIA</span> em realidade. O universo nos guiou como uma correnteza, dentre 8 bilhões de pessoas. Um encontro da constelação de Peixes no momento exato e certo de nossas vidas...',
-    urano: 'Sem avisar, com a força de um Touro, aquela surpresa e a <span class="destaque-neon">LIBERDADE</span> que vira a nossa rotina de cabeça para baixo de um jeito incrível e absolutamente inesquecível...',
-    netuno: 'Uma sintonia profunda e espiritual, com a <span class="destaque-neon">PROFUNDIDADE</span> de Peixes. Parecia que o universo estava conspirando com um toque de magia para que estivéssemos ali, naquele exato momento...',
-    plutao: 'O início de uma transformação linda em nossas vidas, marcada pela <span class="destaque-neon">OBSTINAÇÃO</span> de Aquário. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor...',
-    lua: 'Nossos corações bateram em um ritmo alegre, leve e cheio de <span class="destaque-neon">CUMPLICIDADE</span>, como demanda a constelação de Aquário. A alegria genuína daquele frio na barriga tão bom de sentir.',
+    sol: 'O Sol em Peixes banhou aquela noite com uma energia de puro <span class="destaque-neon">SONHO</span>. Peixes é o signo que sente o que não é dito e foi exatamente isso, algo se acertou sem precisar de palavras, como se o universo já soubesse antes da gente...',
+    mercurio: 'Com Mercúrio em Peixes, a comunicação naquele dia era feita de camadas, o que se fala, do que se cala e do que os olhos entregam. Nossas primeiras risadas, as histórias maluquinhas, os silêncios que não precisavam ser preenchidos... tudo fluiu com uma <span class="destaque-neon">CUMPLICIDADE</span> de quem já se conhece há muito tempo...',
+    venus: 'Vênus em Aquário diz que o amor verdadeiro nasce da <span class="destaque-neon">AMIZADE</span>, da liberdade de ser quem se é, do respeito que vem antes de tudo. Foi exatamente assim, sem pressão, sem performance, só a autenticidade de dois que puderam ser completamente eles mesmos juntos...',
+    marte: 'Marte em Aquário age com <span class="destaque-neon">SURPRESA</span>, e foi assim que aconteceu. Aquele frio na barriga que chegou sem avisar, o cheiro que ficou na memória, a química que nos empurrou um em direção ao outro de um jeito que nenhum dos dois esperava (e nem recomenda kkk)...',
+    jupiter: 'Júpiter em Touro planta sementes de <span class="destaque-neon">CRESCIMENTO</span> real, sólido e duradouro. Aquele encontro não foi só um momento bonito, foi o início de algo que cresceu a cada conversa, a cada noite acordados até tarde, a cada vez que a vida ficou mais leve por causa da presença um do outro...',
+    saturno: 'Saturno em Peixes é o universo dizendo que alguns encontros não são acidente, são puro <span class="destaque-neon">DESTINO</span>. Dentre todos os 8 bilhões de pessoas nesse planeta, nossas histórias se cruzaram no momento exato. Isso não foi coincidência. Foi o universo ajustando as peças no lugar certo...',
+    urano: 'Urano em Touro traz <span class="destaque-neon">REVOLUÇÃO</span> onde menos se espera, transformações que chegam quietas mas mudam tudo. Sem planejamento, sem roteiro, aquela noite de março virou um dos antes e depois mais marcantes e inexplicáveis da nossa história...',
+    netuno: 'Netuno em Peixes, o planeta no seu próprio lar, a energia mais espiritual de toda a carta do céu. Uma <span class="destaque-neon">SINTONIA</span> que vai além do que a lógica explica: a sensação de que aquilo era real, era especial, era exatamente onde deveríamos estar...',
+    plutao: 'Plutão em Aquário marca <span class="destaque-neon">TRANSFORMAÇÃO</span> que não tem volta. Um encontro que mudou a forma de ver o outro, de sentir a amizade, de entender o que é ter alguém de verdade ao lado. Para sempre e para muito melhor...',
+    lua: 'A Lua em Aquário naquele dia pedia <span class="destaque-neon">LEVEZA</span> e conexão genuína, sem dramatismo, sem cobranças, só o prazer de estar junto. Aquele frio na barriga não foi só atração, foi o reconhecimento de que algo especial estava começando...',
   };
-
+ 
   const mapaMessages = {
-    sol: 'Sua luz é única, criativa e brilhante, você tem uma mente visionária e um coração que sabe o significado da palavra valor. É admirante a sua essência autêntica e livre...',
-    ascendente: 'O seu brilho pessoal é inconfundível! Você tem uma presença magnética e calorosa que ilumina qualquer lugar. É impossível não notar o seu carisma e a forma radiante como você se apresenta para o mundo...',
-    mercurio: 'Sua inteligência é afiada e precisa. Adoro como você pensa com clareza, sempre tem os melhores conselhos e traz segurança em tudo o que faz...',
-    venus: 'A sua forma de amar é mágica, doce e infinitamente empática. Você tem o dom lindo de cuidar e de fazer quem está ao seu redor se sentir muito especial...',
-    marte: 'Vejo em você pura força e coragem. Em ti há uma determinação inspiradora para ir atrás do que quer e uma paixão pela vida que contagia...',
-    jupiter: 'Seu dom para enxergar a beleza nos pequenos detalhes é lindo. Você tem uma forma generosa de fazer a vida de todos ao seu redor muito mais próspera e feliz...',
-    saturno: 'Você tem uma alma protetora e extremamente leal. Valoriza as raízes, cuida de quem ama com dedicação e constrói laços profundos e indestrutíveis...',
-    urano: 'Você traz inspiração e inovação através da sua intuição. Seu jeito singular de ver e sentir as coisas revoluciona o mundo com amor e leveza...',
-    netuno: 'Seus sonhos e ideais são maravilhosos. Você inspira esperança por onde passa, buscando sempre um amanhã mais bonito para tudo e todos...',
-    plutao: 'Uma alma aventureira, que busca o significado da vida com resiliência. Sua capacidade de se reinventar e crescer a cada nova experiência é fascinante...',
-    lua: 'Um coração de oceano: poético, imenso e sensível. Sua empatia e a forma linda como você sente e abraça o mundo são, de longe, coisas que eu mais amo em você...',
+    sol: 'Seu Sol em Aquário faz de você alguém original, livre e à frente do seu tempo. Você pensa diferente, sente diferente, existe diferente. Tem uma mente que não para e um coração que, quando escolhe, escolhe com toda a <span class="destaque-dourado">VERDADE</span>...',
+    ascendente: 'Seu Ascendente em Leão é o que o mundo vê primeiro e não consegue ignorar. Você chega num lugar e a energia muda, é <span class="destaque-dourado">PRESENÇA</span> magnética, calorosa e genuína. Impossível não notar, impossível não querer perto...',
+    mercurio: 'Com Mercúrio em Capricórnio, você não fala à toa, quando fala, tem peso. Seus conselhos ficam, suas palavras marcam. Você tem uma <span class="destaque-dourado">CLAREZA</span> de pensamento que é ao mesmo tempo afiada e cuidadosa...',
+    venus: 'Vênus em Peixes é a posição mais bonita do zodíaco, Vênus exaltada, no auge do seu poder. Seu <span class="destaque-dourado">AMOR</span> é profundo e sem medida. Você não ama pela metade, você se entrega de verdade, com magia, com cuidado, com uma generosidade de coração que é rara demais nesse mundo...',
+    marte: 'Seu Marte em Áries é puro fogo, <span class="destaque-dourado">CORAGEM</span>, determinação e uma energia de vida que contagia quem está ao redor. Você vai atrás do que quer com uma intensidade que inspira. Tem uma paixão pela vida que pouquíssimas pessoas carregam dessa forma...',
+    jupiter: 'Júpiter em Virgem traz <span class="destaque-dourado">CRESCIMENTO</span> através da atenção e do cuidado com os detalhes. Você cresce ajudando, aprendendo, observando o que ninguém mais vê. Tem um dom especial de tornar tudo ao seu redor mais bonito só por existir...',
+    saturno: 'Com Saturno em Câncer, você constrói laços com uma <span class="destaque-dourado">LEALDADE</span> e uma profundidade que assustam quem não tá acostumado. Cuida das pessoas que ama de um jeito inabalável, e quando alguém entra de verdade na sua vida, entra pra ficar...',
+    urano: 'Urano em Peixes traz uma <span class="destaque-dourado">INTUIÇÃO</span> que vai além do que a razão alcança. Você sente o que ainda não aconteceu, percebe o que não é dito, enxerga o mundo com uma sensibilidade que é sua, completamente sua, e que faz você ser inesquecível...',
+    netuno: 'Seu Netuno em Aquário conecta seus <span class="destaque-dourado">SONHOS</span> às pessoas ao redor. Você inspira sem perceber com o seu jeito de existir, de questionar, de imaginar mundos melhores. Tem um idealismo bonito que não é ingenuidade: é fé genuína no que pode ser...',
+    plutao: 'Plutão em Sagitário marca uma geração que busca <span class="destaque-dourado">SIGNIFICADO</span>, verdade e transformação. Em você isso se manifesta com uma coragem de viver linda de ver, a disposição de crescer, de se reinventar, de buscar o que faz sentido mesmo quando é difícil...',
+    lua: 'Sua Lua em Peixes é um oceano de <span class="destaque-dourado">TERNURA</span>, empatia e sensibilidade. Você sente tudo, às vezes até o que os outros ainda não perceberam que sentem. Tem sonhos que carregam pressentimentos, uma intuição que raramente erra, e um coração que abraça o mundo de um jeito impossível não amar...',
   };
 
   let animationStarted = false;
@@ -261,8 +262,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const W = window.innerWidth;
     const H = window.innerHeight;
 
-    const PLANET_W = 460;
-    const PLANET_H = 52;
+    const PLANET_W = 560;
+    const PLANET_H = 64;
 
     const topMin  = 95;                      
     const topMax  = H - 155 - PLANET_H;     
@@ -312,11 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       await activeAudio.play();
       updateMusicButtonState();
-    } catch (e) {
-      console.log(
-        'Autoplay bloqueado pelo navegador. Por favor, abra a caixa para reproduzir a música.'
-      );
-    }
+    } catch (e) {}
 
     giftBox.classList.add('kick-animation');
     kickElementsWrapper.style.opacity = '1';
@@ -372,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   playPauseBtn.addEventListener('click', () => {
     if (isCrossfading) {
-      cancelAnimationFrame(crossfadeRafId);
+      clearTimeout(crossfadeRafId);
       isCrossfading = false;
       activeAudio.pause();
       activeAudio.currentTime = 0;
@@ -455,11 +452,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btnVerMapa.classList.add('btn-nav-out');
     skyTitle.classList.add('title-out');
 
-    if (autoHighlightedPlanet) {
-      autoHighlightedPlanet.classList.remove('planet-active-message');
-      autoHighlightedPlanet = null;
-    }
-    resetTooltipImmediate();
     animationStarted = false;
 
     skyContainer.style.opacity = '0';
