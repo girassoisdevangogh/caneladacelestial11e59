@@ -133,29 +133,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 200);
 
   const messages = {
-    sol: 'O Sol em Peixes iluminou nosso encontro com uma energia de sonho e sensibilidade, trazendo a sensação de que nossos caminhos já estavam destinados a se cruzar.',
-    mercurio: 'Nossas primeiras conversas fluíram com uma conexão de alma. Até os silêncios, as risadas e os olhares diziam tudo o que precisava ser dito.',
-    venus: 'O amor nasceu com leveza e amizade. Uma atração imediata pela nossa autenticidade e por podermos ser totalmente nós mesmos juntos.',
-    marte: 'Aquele frio na barriga e a coragem de quebrar o gelo de forma única! Uma química eletrizante que nos empurrou um para o outro.',
-    jupiter: 'A promessa de algo grandioso. Um encontro que plantou a semente de um afeto seguro, próspero e feito para durar e crescer a cada dia.',
-    saturno: 'A confirmação do universo de que sonhos podem, sim, ganhar estrutura e virar realidade. Um encontro no momento exato e certo de nossas vidas.',
-    urano: 'Aquela surpresa maravilhosa do destino que vira a nossa rotina de cabeça para baixo de um jeito incrível e absolutamente inesquecível.',
-    netuno: 'Uma sintonia profunda e espiritual. Parecia que o universo estava conspirando com um toque de magia para que estivéssemos ali, naquele exato momento.',
-    plutao: 'O início de uma transformação linda em nossas vidas. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor.',
-    lua: 'Nossos corações bateram em um ritmo alegre, leve e cheio de cumplicidade. A alegria genuína daquele frio na barriga tão bom de sentir.',
+    sol: 'O ILUMINAR da constelação de Peixes refletiu como um caleidoscópio o dia do nosso encontro com uma energia de sonho e sensibilidade, trazendo a sensação de que nossos caminhos já estavam destinados a se cruzar...',
+    mercurio: 'A COMUNICAÇÃO esguia da constelação de Peixes permitiu que nossas primeiras conversas fluíssem e com o tempo fomos criando uma conexão inexplicável. Dentre os silêncios e as risadas, os olhares disseram tudo o que precisa ser dito...',
+    venus: 'Já com o AMOR da constelação de Aquário, o nosso íntimo nasceu com leveza e amizade. Uma atração imediata pela nossa autenticidade e por podermos ser totalmente nós mesmos juntos...',
+    marte: 'Aquele frio na barriga veio junto das ESTRATÉGIAS da constelação de Aquário e junto da coragem de cada um com sua faca. Foi supreendente para os dois (Não recomendo). Uma química forte, de cheiro hipnotizante e que nos empurrou um para o outro...',
+    jupiter: 'A promessa velada de algo grandioso, um CRESCIMENTO pessoal, coletivo e com a energia da constelação de Touro. Um encontro que plantou a semente de um afeto seguro, próspero e feito para durar e crescer a cada dia...',
+    saturno: 'A confirmação do universo de que sonhos podem, sim, ganhar estrutura e virar EXCELÊNCIA em realidade. O universo nos guiou como uma correnteza, dentre 8 bilhões de pessoas. Um encontro da constelação de Peixes no momento exato e certo de nossas vidas...',
+    urano: 'Sem avisar, com a força de um Touro, aquela surpresa e a LIBERDADE que vira a nossa rotina de cabeça para baixo de um jeito incrível e absolutamente inesquecível...',
+    netuno: 'Uma sintonia profunda e espiritual, com a PROFUNDIDADE de Peixes. Parecia que o universo estava conspirando com um toque de magia para que estivéssemos ali, naquele exato momento...',
+    plutao: 'O início de uma transformação linda em nossas vidas, marcada pela OBSTINAÇÃO de Sagitário. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor...',
+    lua: 'Nossos corações bateram em um ritmo alegre, leve e cheio de cumplicidade, como demanda a constelação de Aquário. A alegria genuína daquele frio na barriga tão bom de sentir.',
   };
 
   const mapaMessages = {
-    sol: 'Sua luz é única, criativa e brilhante! Você tem uma mente visionária e um coração gigante que abraça o mundo. Admiro demais a sua essência autêntica e livre.',
-    mercurio: 'Sua inteligência é afiada e admirável. Adoro como você pensa com clareza, sempre tem os melhores conselhos e traz segurança em tudo o que faz.',
-    venus: 'A sua forma de amar é mágica, doce e infinitamente empática. Você tem o dom lindo de cuidar e de fazer quem está ao seu redor se sentir muito especial.',
-    marte: 'Você é pura força e coragem! Tem uma determinação inspiradora para ir atrás do que quer e uma paixão pela vida que contagia.',
-    jupiter: 'Seu dom para enxergar a beleza nos pequenos detalhes é lindo. Você tem uma forma generosa de fazer a vida de todos ao seu redor muito mais próspera e feliz.',
-    saturno: 'Você tem uma alma protetora e extremamente leal. Valoriza as raízes, cuida de quem ama com dedicação e constrói laços profundos e indestrutíveis.',
-    urano: 'Você traz inspiração e inovação através da sua intuição. Seu jeito singular de ver e sentir as coisas revoluciona o mundo com amor e leveza.',
-    netuno: 'Seus sonhos e ideais são maravilhosos. Você inspira esperança por onde passa, buscando sempre um amanhã mais bonito para tudo e todos.',
-    plutao: 'Uma alma aventureira, que busca o significado da vida com resiliência. Sua capacidade de se reinventar e crescer a cada nova experiência é fascinante.',
-    lua: 'Um coração de oceano: poético, imenso e sensível. Sua empatia e a forma linda como você sente e abraça o mundo são, de longe, coisas que eu mais amo em você.',
+    sol: 'Sua luz é única, criativa e brilhante, você tem uma mente visionária e um coração que sabe o significado da palavra valor. É admirante a sua essência autêntica e livre...',
+    ascendente: 'O seu brilho pessoal é inconfundível! Você tem uma presença magnética e calorosa que ilumina qualquer lugar. É impossível não notar o seu carisma e a forma radiante como você se apresenta para o mundo...',
+    mercurio: 'Sua inteligência é afiada e precisa. Adoro como você pensa com clareza, sempre tem os melhores conselhos e traz segurança em tudo o que faz...',
+    venus: 'A sua forma de amar é mágica, doce e infinitamente empática. Você tem o dom lindo de cuidar e de fazer quem está ao seu redor se sentir muito especial...',
+    marte: 'Vejo em você pura força e coragem. Em ti há uma determinação inspiradora para ir atrás do que quer e uma paixão pela vida que contagia...',
+    jupiter: 'Seu dom para enxergar a beleza nos pequenos detalhes é lindo. Você tem uma forma generosa de fazer a vida de todos ao seu redor muito mais próspera e feliz...',
+    saturno: 'Você tem uma alma protetora e extremamente leal. Valoriza as raízes, cuida de quem ama com dedicação e constrói laços profundos e indestrutíveis...',
+    urano: 'Você traz inspiração e inovação através da sua intuição. Seu jeito singular de ver e sentir as coisas revoluciona o mundo com amor e leveza...',
+    netuno: 'Seus sonhos e ideais são maravilhosos. Você inspira esperança por onde passa, buscando sempre um amanhã mais bonito para tudo e todos...',
+    plutao: 'Uma alma aventureira, que busca o significado da vida com resiliência. Sua capacidade de se reinventar e crescer a cada nova experiência é fascinante...',
+    lua: 'Um coração de oceano: poético, imenso e sensível. Sua empatia e a forma linda como você sente e abraça o mundo são, de longe, coisas que eu mais amo em você...',
   };
 
   let animationStarted = false;
