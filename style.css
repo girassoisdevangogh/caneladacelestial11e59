@@ -37,7 +37,7 @@ body {
 .container {
   text-align: center;
   width: 90%;
-  max-width: 580px;
+  max-width: 900px;
   margin: 2rem auto;
   padding: 1.5rem;
   align-self: flex-start;
@@ -60,7 +60,7 @@ body {
 
 h1 {
   font-family: 'The Storyline', serif;
-  font-size: 2.4rem;
+  font-size: 3.6rem;
   margin-bottom: 1rem;
   color: #f1c40f;
   text-shadow: 0 0 10px #f1c40faa;
@@ -68,7 +68,7 @@ h1 {
 
 .poem {
   font-family: 'The Storyline', serif;
-  font-size: 1.7rem;
+  font-size: 2.7rem;
   line-height: 1.6;
   color: #fef4c1;
   text-shadow: 0 0 4px #fff8c2cc, 0 0 8px #f1c40faa, 0 0 16px #f39c12bb;
@@ -82,7 +82,7 @@ h1 {
 
 .shooting-star {
   font-family: 'The Storyline', serif;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   line-height: 1.55;
   color: #fef4c1;
   text-shadow: 0 0 3px #fff8c2cc, 0 0 6px #f1c40faa, 0 0 12px #f39c12bb;
@@ -156,7 +156,7 @@ h1 {
 
 
 .gift-text-main {
-  font-size: 24px;
+  font-size: 1.7rem;
   font-weight: bold;
   color: #6b4c00;
   font-family: 'The Storyline', serif;
@@ -166,7 +166,7 @@ h1 {
 }
 
 .gift-text-secondary {
-  font-size: 18px;
+  font-size: 1.7rem;
   color: #8b5e00;
   margin-top: 10px;
   font-family: 'The Storyline', serif;
@@ -205,7 +205,7 @@ h1 {
   top: auto;
   left: auto;
   transform: translate(0, 0) scale(0);
-  font-size: 4rem;
+  font-size: 1.8rem;
   opacity: 0;
   z-index: auto;
   will-change: transform, opacity;
@@ -218,7 +218,7 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   font-family: 'The Storyline', serif;
-  font-size: 1.25rem;
+  font-size: 2.4rem;
   color: #fef4c1;
   text-shadow: 0 0 6px #f1c40faa, 0 0 14px #f39c12bb;
   text-align: center;
@@ -271,7 +271,8 @@ h1 {
 
 .planet {
   position: absolute;
-  font-size: 1.45rem;
+  font-family: 'The Storyline', serif !important;
+  font-size: 2.0rem;
   cursor: none;
   padding: 0.35rem 0.75rem;
   border-radius: 8px;
@@ -312,8 +313,8 @@ h1 {
   color: #fffbee;
   padding: 1rem 1.5rem;
   border-radius: 16px;
-  font-size: 1.2rem;
-  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-family: 'The Storyline', serif !important;
   max-width: 300px;
   text-align: center;
   box-shadow: 0 0 25px rgba(127, 219, 255, 0.8);
@@ -374,7 +375,7 @@ h1 {
 }
 
 #time-display {
-  font-size: 0.65rem;
+  font-size: 1.65rem;
   font-family: 'The Storyline', serif;
   color: rgba(255, 255, 255, 0.45);
   letter-spacing: 0.04em;
@@ -391,7 +392,7 @@ h1 {
 }
 
 #track-name {
-  font-size: 0.78rem;
+  font-size: 1.78rem;
   font-family: 'The Storyline', serif;
   color: #f1c40f;
   white-space: nowrap;
@@ -493,7 +494,7 @@ h1 {
   padding: 0.42rem 0.9rem;
   cursor: pointer;
   border-radius: 8px;
-  font-size: 0.82rem;
+  font-size: 1.82rem;
   font-family: 'The Storyline', serif;
   color: rgba(255, 255, 255, 0.8);
   transition: background 0.15s ease, color 0.15s ease;
