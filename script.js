@@ -190,8 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
         top = 8 + Math.random() * 76;
         left = 5 + Math.random() * 68;
         tries++;
-      } while (tries < 100 && placed.some(p =>
-        Math.abs(p.top - top) < 8 || Math.hypot(p.top - top, p.left - left) < 17
+      } while (tries < 200 && placed.some(p =>
+        Math.abs(p.top - top) < 7 && Math.abs(p.left - left) < 18
       ));
       placed.push({ top, left });
       el.style.top = `${top.toFixed(1)}%`;
