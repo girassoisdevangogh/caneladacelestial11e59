@@ -665,7 +665,7 @@ document.addEventListener('DOMContentLoaded', () => {
   btnCinema.addEventListener('click', () => {
     cinemaMode = !cinemaMode;
     document.body.classList.toggle('cinema-mode', cinemaMode);
-    btnCinema.textContent = cinemaMode ? '✨' : '🌌';
+    btnCinema.textContent = cinemaMode ? '🌝' : '🌚';
     btnCinema.title = cinemaMode ? 'Iluminar a tela' : 'Escurecer a tela';
     btnCinema.setAttribute('aria-label', cinemaMode ? 'Iluminar a tela' : 'Escurecer a tela');
   });
