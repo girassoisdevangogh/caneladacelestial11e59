@@ -171,18 +171,31 @@ document.addEventListener('DOMContentLoaded', () => {
   function randomizePlanetPositions(container) {
     const els = [...container.querySelectorAll('.planet')];
     const placed = [];
+
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+
+    const PLANET_W = 460; // px — largura máxima estimada do label mais longo
+    const PLANET_H = 52;  // px — altura do elemento planet (fonte 2rem + padding)
+
+    const topMin  = 95;                      // abaixo do título
+    const topMax  = H - 155 - PLANET_H;      // acima dos controles de música
+    const leftMin = 115;                     // à direita do botão nav esquerdo
+    const leftMax = W - 115 - PLANET_W;      // à esquerda do botão nav direito
+
     els.forEach(el => {
       let top, left, tries = 0;
       do {
-        top = 8 + Math.random() * 76;
-        left = 5 + Math.random() * 68;
+        top  = topMin  + Math.random() * Math.max(0, topMax  - topMin);
+        left = leftMin + Math.random() * Math.max(0, leftMax - leftMin);
         tries++;
       } while (tries < 200 && placed.some(p =>
-        Math.abs(p.top - top) < 7 && Math.abs(p.left - left) < 18
+        Math.abs(p.top - top)   < PLANET_H + 14 &&
+        Math.abs(p.left - left) < PLANET_W + 24
       ));
       placed.push({ top, left });
-      el.style.top = `${top.toFixed(1)}%`;
-      el.style.left = `${left.toFixed(1)}%`;
+      el.style.top  = `${Math.round(top)}px`;
+      el.style.left = `${Math.round(left)}px`;
     });
   }
 
