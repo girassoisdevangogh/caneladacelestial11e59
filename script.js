@@ -50,20 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const TOOLTIP_TRANSITION_DURATION = 500;
   const AUTO_MESSAGE_DELAY = 8500;
 
-  const STAR_CREATE_INTERVAL = 30;
+  const STAR_CREATE_INTERVAL = 60;
   let lastStarCreationTime = 0;
+  let cursorX = 0, cursorY = 0, cursorRafPending = false;
 
   const customCursor = document.createElement('div');
   customCursor.className = 'custom-star-cursor';
-  customCursor.style.position = 'fixed';
   customCursor.style.pointerEvents = 'none';
   customCursor.style.zIndex = '9999';
+  customCursor.style.transform = 'translate(-100px, -100px)';
   document.body.appendChild(customCursor);
   document.body.style.cursor = 'none';
 
   document.addEventListener('mousemove', (e) => {
-    customCursor.style.left = `${e.clientX}px`;
-    customCursor.style.top = `${e.clientY}px`;
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+
+    if (!cursorRafPending) {
+      cursorRafPending = true;
+      requestAnimationFrame(() => {
+        customCursor.style.transform = `translate(${cursorX - 16}px, ${cursorY - 16}px)`;
+        cursorRafPending = false;
+      });
+    }
 
     const currentTime = Date.now();
     if (currentTime - lastStarCreationTime < STAR_CREATE_INTERVAL) {
@@ -210,7 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       skyContainer.style.visibility = 'visible';
       skyContainer.style.opacity = '1';
-      musicControls.style.display = 'flex';
+      musicControls.style.opacity = '1';
+      musicControls.style.visibility = 'visible';
+      musicControls.style.pointerEvents = 'auto';
       btnVerMapa.style.display = 'inline-block';
 
       startMessageLoop();
@@ -340,18 +351,22 @@ document.addEventListener('DOMContentLoaded', () => {
         autoHighlightedPlanet = null;
       }
 
+      tooltip.style.opacity = '0';
+
       const planeta = planetasAtuais[messageLoopCurrentIndex];
       const chave =
         [...planeta.classList].find((c) => mensagensAtuais[c]) || '';
-
-      if (mensagensAtuais[chave]) {
-        planeta.classList.add('planet-active-message');
-        autoHighlightedPlanet = planeta;
-        showTooltip(planeta, mensagensAtuais[chave]);
-      }
-
       messageLoopCurrentIndex = (messageLoopCurrentIndex + 1) % planetasAtuais.length;
-      messageLoopTimeoutId = setTimeout(mostrarProximo, AUTO_MESSAGE_DELAY);
+
+      setTimeout(() => {
+        if (isHovering) return;
+        if (mensagensAtuais[chave]) {
+          planeta.classList.add('planet-active-message');
+          autoHighlightedPlanet = planeta;
+          showTooltip(planeta, mensagensAtuais[chave]);
+        }
+        messageLoopTimeoutId = setTimeout(mostrarProximo, AUTO_MESSAGE_DELAY);
+      }, 500);
     }
 
     mostrarProximo();
