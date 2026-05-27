@@ -70,6 +70,7 @@ h1 {
   font-family: 'The Storyline', serif;
   font-size: 2.7rem;
   line-height: 1.6;
+  font-weight: bold;
   color: #fef4c1;
   text-shadow: 0 0 4px #fff8c2cc, 0 0 8px #f1c40faa, 0 0 16px #f39c12bb;
   margin-bottom: 1rem;
@@ -273,6 +274,7 @@ h1 {
   position: absolute;
   font-family: 'The Storyline', serif !important;
   font-size: 2.0rem;
+  font-weight: bold;
   cursor: none;
   padding: 0.35rem 0.75rem;
   border-radius: 8px;
