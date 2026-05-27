@@ -715,6 +715,23 @@ h1 {
   }
 }
 
+#transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 500;
+  transition: opacity 1s ease-in-out;
+}
+
+#transition-overlay.dark {
+  opacity: 1;
+}
+
 .destaque-dourado {
   color: #f1c40f;
   font-weight: bold;

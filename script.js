@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressContainer = document.getElementById('progress-bar-container');
   const timeDisplay = document.getElementById('time-display');
   const btnVoltarInicio = document.getElementById('btn-voltar-inicio');
+  const transitionOverlay = document.getElementById('transition-overlay');
 
   function formatTime(s) {
     const m = Math.floor(s / 60);
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let messageLoopCurrentIndex = 0;
   let isHovering = false;
   const TOOLTIP_TRANSITION_DURATION = 500;
-  const AUTO_MESSAGE_DELAY = 15000;
+  const AUTO_MESSAGE_DELAY = 11000;
 
   const STAR_CREATE_INTERVAL = 28;
   let lastStarCreationTime = 0;
@@ -226,7 +227,10 @@ document.addEventListener('DOMContentLoaded', () => {
       explosion.style.animation = 'explosionAnimation 0.5s forwards';
     }, 900);
 
+    // allstar termina → overlay escurece, landing some por baixo
     setTimeout(() => {
+      transitionOverlay.classList.add('dark');
+
       giftBox.classList.add('hidden');
       mainContainer.classList.add('hidden');
       kickElementsWrapper.style.animation = 'none';
@@ -238,7 +242,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       skyContainer.style.display = 'block';
       skyContainer.style.visibility = 'visible';
+      skyContainer.style.opacity = '0';
       void skyContainer.offsetHeight;
+    }, 1800);
+
+    // overlay totalmente preto → prepara tudo por baixo
+    setTimeout(() => {
       skyContainer.style.opacity = '1';
       musicControls.style.opacity = '1';
       musicControls.style.visibility = 'visible';
@@ -248,7 +257,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       startMessageLoop();
       if (!listenersAdded) { addPlanetHoverListeners(); listenersAdded = true; }
-    }, 2500);
+    }, 2800);
+
+    // overlay some → universo reaparece junto com o sky
+    setTimeout(() => {
+      transitionOverlay.classList.remove('dark');
+    }, 2900);
   });
 
   playPauseBtn.addEventListener('click', () => {
