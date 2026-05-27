@@ -416,7 +416,6 @@ document.addEventListener('DOMContentLoaded', () => {
   btnVerMapa.addEventListener('click', async () => {
     messageLoopGeneration++;
 
-    // Pré-seta planetas do mapa em estado oculto para o grow-in
     mapaPlanets.forEach(p => {
       p.classList.remove('fade-in', 'planet-active-message');
       p.classList.add('fade-out');
