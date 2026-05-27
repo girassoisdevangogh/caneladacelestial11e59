@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   let animationStarted = false;
+  let listenersAdded = false;
 
   function updateMusicButtonState() {
     playPauseBtn.textContent = bgMusic.paused ? '▶️' : '⏸️';
@@ -247,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
       explosion.style.animation = 'none';
       explosion.style.opacity = '0';
 
+      skyContainer.style.display = 'block';
       skyContainer.style.visibility = 'visible';
       skyContainer.style.opacity = '1';
       musicControls.style.opacity = '1';
@@ -256,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btnVoltarInicio.style.display = 'inline-block';
 
       startMessageLoop();
-      addPlanetHoverListeners();
+      if (!listenersAdded) { addPlanetHoverListeners(); listenersAdded = true; }
     }, 2500);
   });
 
@@ -274,6 +276,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   prevBtn.addEventListener('click', () => loadTrack(currentTrackIndex - 1, !bgMusic.paused));
   nextBtn.addEventListener('click', () => loadTrack(currentTrackIndex + 1, !bgMusic.paused));
+
+  document.getElementById('vol-down').addEventListener('click', () => {
+    bgMusic.volume = Math.max(0, Math.round((bgMusic.volume - 0.1) * 10) / 10);
+    volumeSlider.value = Math.round(bgMusic.volume * 100);
+  });
+  document.getElementById('vol-up').addEventListener('click', () => {
+    bgMusic.volume = Math.min(1, Math.round((bgMusic.volume + 0.1) * 10) / 10);
+    volumeSlider.value = Math.round(bgMusic.volume * 100);
+  });
 
   const playlistBtn = document.getElementById('playlist-btn');
   const playlistMenu = document.getElementById('playlist-menu');
@@ -304,17 +315,28 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', () => playlistMenu.classList.remove('open'));
 
   btnVoltarInicio.addEventListener('click', () => {
+    animationStarted = false;
+    isHovering = false;
     clearTimeout(messageLoopTimeoutId);
     if (autoHighlightedPlanet) {
       autoHighlightedPlanet.classList.remove('planet-active-message');
       autoHighlightedPlanet = null;
     }
     resetTooltipImmediate();
+
     skyContainer.style.opacity = '0';
     skyContainer.style.visibility = 'hidden';
+
+    giftBox.classList.remove('kick-animation', 'hidden');
     mainContainer.classList.remove('hidden');
-    giftBox.classList.remove('hidden');
-    setTimeout(() => { skyContainer.style.display = 'none'; }, 1000);
+    allStar.style.opacity = '';
+    allStar.style.animation = 'none';
+    explosion.style.opacity = '';
+    explosion.style.animation = 'none';
+    kickElementsWrapper.style.opacity = '0';
+
+    btnVoltarInicio.style.display = 'none';
+    btnVerMapa.style.display = 'none';
   });
 
   bgMusic.addEventListener('timeupdate', () => {
