@@ -17,7 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const trackNameEl = document.getElementById('track-name');
   const mainContainer = document.querySelector('.container');
   const progressFill = document.getElementById('progress-bar-fill');
+  const progressContainer = document.getElementById('progress-bar-container');
+  const timeDisplay = document.getElementById('time-display');
   const btnVoltarInicio = document.getElementById('btn-voltar-inicio');
+
+  function formatTime(s) {
+    const m = Math.floor(s / 60);
+    return `${String(m).padStart(2, '0')}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  }
 
   const playlist = [
     { src: 'assets/ruelle-i-get-to-love-you.mp3',           name: 'Ruelle — I Get to Love You' },
@@ -313,7 +320,18 @@ document.addEventListener('DOMContentLoaded', () => {
   bgMusic.addEventListener('timeupdate', () => {
     if (bgMusic.duration) {
       progressFill.style.width = `${(bgMusic.currentTime / bgMusic.duration) * 100}%`;
+      timeDisplay.textContent = `${formatTime(bgMusic.currentTime)} / ${formatTime(bgMusic.duration)}`;
     }
+  });
+
+  bgMusic.addEventListener('loadedmetadata', () => {
+    timeDisplay.textContent = `00:00 / ${formatTime(bgMusic.duration)}`;
+  });
+
+  progressContainer.addEventListener('click', (e) => {
+    if (!bgMusic.duration) return;
+    const rect = progressContainer.getBoundingClientRect();
+    bgMusic.currentTime = ((e.clientX - rect.left) / rect.width) * bgMusic.duration;
   });
 
   volumeSlider.addEventListener('input', () => {
