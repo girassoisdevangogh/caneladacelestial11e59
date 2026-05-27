@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionOverlay.classList.remove('dark');
     setTimeout(() => {
       mainContainer.classList.remove('hidden');
-    }, 300);
+    }, 400);
   });
 
   bgMusic.addEventListener('timeupdate', () => {
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       fadeInPlanets(mapaPlanets);
       startMessageLoop();
-    }, 300);
+    }, 400);
   });
 
   btnVoltarSky.addEventListener('click', async () => {
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       fadeInPlanets(planets);
       startMessageLoop();
-    }, 300);
+    }, 400);
   });
 
   function showTooltip(planet, message) {

@@ -726,11 +726,12 @@ h1 {
   opacity: 0;
   pointer-events: none;
   z-index: 500;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.8s ease-in-out; /* clarear: mais lento pra ver o grow-in */
 }
 
 #transition-overlay.dark {
   opacity: 1;
+  transition: opacity 0.5s ease-in-out; /* escurecer: rápido */
 }
 
 .destaque-dourado {
