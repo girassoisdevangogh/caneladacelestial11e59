@@ -18,12 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainContainer = document.querySelector('.container');
 
   const playlist = [
-    { src: 'assets/ruelle-i-get-to-love-you.mp3',      name: 'Ruelle — I Get to Love You' },
-    { src: 'assets/ruelle-war-of-hearts.mp3',           name: 'Ruelle — War of Hearts' },
-    { src: 'assets/billie-eilish-chihiro.mp3',          name: 'Billie Eilish — CHIHIRO' },
-    { src: 'assets/billie-eilish-wildflower-guitar.mp3', name: 'Billie Eilish — Wildflower' },
-    { src: 'assets/labrinth-mount-everest.mp3',         name: 'Labrinth — Mount Everest' },
-    { src: 'assets/labrinth-zendaya-all-for-us.mp3',    name: 'Labrinth & Zendaya — All for Us' },
+    { src: 'assets/ruelle-i-get-to-love-you.mp3',           name: 'Ruelle — I Get to Love You' },
+    { src: 'assets/ruelle-war-of-hearts.mp3',                name: 'Ruelle — War of Hearts' },
+    { src: 'assets/billie-eilish-chihiro.mp3',               name: 'Billie Eilish — CHIHIRO' },
+    { src: 'assets/billie-eilish-wildflower-guitar.mp3',     name: 'Billie Eilish — Wildflower' },
+    { src: 'assets/billie-eilish-bellyache.mp3',             name: 'Billie Eilish — Bellyache' },
+    { src: 'assets/labrinth-mount-everest.mp3',              name: 'Labrinth — Mount Everest' },
+    { src: 'assets/labrinth-zendaya-all-for-us.mp3',         name: 'Labrinth & Zendaya — All for Us' },
+    { src: 'assets/the-weeknd-die-for-you.mp3',              name: 'The Weeknd — Die for You' },
+    { src: 'assets/the-weeknd-the-hills.mp3',                name: 'The Weeknd — The Hills' },
+    { src: 'assets/two-feet-love-is-a-bitch.mp3',            name: 'Two Feet — Love Is a Bitch' },
+    { src: 'assets/two-feet-i-feel-like-im-drowning.mp3',    name: 'Two Feet — I Feel Like I\'m Drowning' },
   ];
 
   for (let i = playlist.length - 1; i > 0; i--) {
@@ -254,6 +259,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   prevBtn.addEventListener('click', () => loadTrack(currentTrackIndex - 1, !bgMusic.paused));
   nextBtn.addEventListener('click', () => loadTrack(currentTrackIndex + 1, !bgMusic.paused));
+
+  const playlistBtn = document.getElementById('playlist-btn');
+  const playlistMenu = document.getElementById('playlist-menu');
+
+  function buildPlaylistMenu() {
+    playlistMenu.innerHTML = '';
+    playlist.forEach((track, i) => {
+      const item = document.createElement('div');
+      item.className = 'playlist-item' + (i === currentTrackIndex ? ' active' : '');
+      item.textContent = track.name;
+      item.addEventListener('click', () => {
+        loadTrack(i, true);
+        playlistMenu.classList.remove('open');
+      });
+      playlistMenu.appendChild(item);
+    });
+  }
+
+  playlistBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    buildPlaylistMenu();
+    playlistMenu.classList.toggle('open');
+  });
+
+  document.addEventListener('click', () => playlistMenu.classList.remove('open'));
 
   volumeSlider.addEventListener('input', () => {
     bgMusic.volume = volumeSlider.value / 100;
