@@ -133,16 +133,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 200);
 
   const messages = {
-    sol: 'O ILUMINAR da constelação de Peixes refletiu como um caleidoscópio o dia do nosso encontro com uma energia de sonho e sensibilidade, trazendo a sensação de que nossos caminhos já estavam destinados a se cruzar...',
-    mercurio: 'A COMUNICAÇÃO esguia da constelação de Peixes permitiu que nossas primeiras conversas fluíssem e com o tempo fomos criando uma conexão inexplicável. Dentre os silêncios e as risadas, os olhares disseram tudo o que precisa ser dito...',
-    venus: 'Já com o AMOR da constelação de Aquário, o nosso íntimo nasceu com leveza e amizade. Uma atração imediata pela nossa autenticidade e por podermos ser totalmente nós mesmos juntos...',
-    marte: 'Aquele frio na barriga veio junto das ESTRATÉGIAS da constelação de Aquário e junto da coragem de cada um com sua faca. Foi supreendente para os dois (Não recomendo). Uma química forte, de cheiro hipnotizante e que nos empurrou um para o outro...',
-    jupiter: 'A promessa velada de algo grandioso, um CRESCIMENTO pessoal, coletivo e com a energia da constelação de Touro. Um encontro que plantou a semente de um afeto seguro, próspero e feito para durar e crescer a cada dia...',
-    saturno: 'A confirmação do universo de que sonhos podem, sim, ganhar estrutura e virar EXCELÊNCIA em realidade. O universo nos guiou como uma correnteza, dentre 8 bilhões de pessoas. Um encontro da constelação de Peixes no momento exato e certo de nossas vidas...',
-    urano: 'Sem avisar, com a força de um Touro, aquela surpresa e a LIBERDADE que vira a nossa rotina de cabeça para baixo de um jeito incrível e absolutamente inesquecível...',
-    netuno: 'Uma sintonia profunda e espiritual, com a PROFUNDIDADE de Peixes. Parecia que o universo estava conspirando com um toque de magia para que estivéssemos ali, naquele exato momento...',
-    plutao: 'O início de uma transformação linda em nossas vidas, marcada pela OBSTINAÇÃO de Sagitário. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor...',
-    lua: 'Nossos corações bateram em um ritmo alegre, leve e cheio de cumplicidade, como demanda a constelação de Aquário. A alegria genuína daquele frio na barriga tão bom de sentir.',
+    sol: 'O <span class="destaque-dourado">ILUMINAR</span> da constelação de Peixes refletiu como um caleidoscópio o dia do nosso encontro com uma energia de sonho e sensibilidade, trazendo a sensação de que nossos caminhos já estavam destinados a se cruzar...',
+    mercurio: 'A <span class="destaque-dourado">COMUNICAÇÃO</span> esguia da constelação de Peixes permitiu que nossas primeiras conversas fluíssem e com o tempo fomos criando uma conexão inexplicável. Dentre os silêncios e as risadas, os olhares disseram tudo o que precisa ser dito...',
+    venus: 'Já com o <span class="destaque-dourado">AMOR</span> da constelação de Aquário, o nosso íntimo nasceu com leveza e amizade. Uma atração imediata pela nossa autenticidade e por podermos ser totalmente nós mesmos juntos...',
+    marte: 'Aquele frio na barriga veio junto das <span class="destaque-dourado">ESTRATÉGIAS</span> da constelação de Aquário e junto da coragem de cada um com sua faca. Foi surpreendente para os dois (Não recomendo). Uma química forte, de cheiro hipnotizante e que nos empurrou um para o outro...',
+    jupiter: 'A promessa velada de algo grandioso, um <span class="destaque-dourado">CRESCIMENTO</span> pessoal, coletivo e com a energia da constelação de Touro. Um encontro que plantou a semente de um afeto seguro, próspero e feito para durar e crescer a cada dia...',
+    saturno: 'A confirmação do universo de que sonhos podem, sim, ganhar estrutura e virar <span class="destaque-dourado">EXCELÊNCIA</span> em realidade. O universo nos guiou como uma correnteza, dentre 8 bilhões de pessoas. Um encontro da constelação de Peixes no momento exato e certo de nossas vidas...',
+    urano: 'Sem avisar, com a força de um Touro, aquela surpresa e a <span class="destaque-dourado">LIBERDADE</span> que vira a nossa rotina de cabeça para baixo de um jeito incrível e absolutamente inesquecível...',
+    netuno: 'Uma sintonia profunda e espiritual, com a <span class="destaque-dourado">PROFUNDIDADE</span> de Peixes. Parecia que o universo estava conspirando com um toque de magia para que estivéssemos ali, naquele exato momento...',
+    plutao: 'O início de uma transformação linda em nossas vidas, marcada pela <span class="destaque-dourado">OBSTINAÇÃO</span> de Sagitário. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor...',
+    lua: 'Nossos corações bateram em um ritmo alegre, leve e cheio de <span class="destaque-dourado">CUMPLICIDADE</span>, como demanda a constelação de Aquário. A alegria genuína daquele frio na barriga tão bom de sentir.',
   };
 
   const mapaMessages = {
@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function showTooltip(planet, message) {
-    tooltip.textContent = message;
+    tooltip.innerHTML = message;
 
     requestAnimationFrame(() => {
       const tooltipRect = tooltip.getBoundingClientRect();
