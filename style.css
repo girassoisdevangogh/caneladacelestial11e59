@@ -238,6 +238,13 @@ h1 {
   display: inline-block;
 }
 
+.loveu-icon {
+  width: 1.2em; /* Mantém o tamanho proporcional à fonte do título */
+  height: auto;
+  vertical-align: middle;
+  margin-top: 10px; /* Dá um respiro entre a data e a imagem */
+}
+
 #sky-container {
   position: fixed;
   top: 0;
