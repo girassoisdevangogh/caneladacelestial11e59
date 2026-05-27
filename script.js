@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { src: 'assets/the-weeknd-the-hills.mp3',                name: 'The Weeknd — The Hills' },
     { src: 'assets/two-feet-love-is-a-bitch.mp3',            name: 'Two Feet — Love Is a Bitch' },
     { src: 'assets/two-feet-i-feel-like-im-drowning.mp3',    name: 'Two Feet — I Feel Like I\'m Drowning' },
+    { src: 'assets/madonna-sicksick-frozen.mp3',             name: 'Madonna & SickSick - Frozen' },
   ];
 
   for (let i = playlist.length - 1; i > 0; i--) {
