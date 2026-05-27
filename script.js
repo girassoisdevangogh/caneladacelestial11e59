@@ -78,62 +78,44 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 200);
 
   const messages = {
-    sol: 'Sou aquele raio de luz meio torto que invade seu oceano, agita as águas calmas do seu mundo e mostra que sonhar também pode ser leve e risonho. Te provoco com carinho, como quem dança em volta do que é sagrado.',
-
+    sol: 'Sou aquele raio de luz meio torto que invade seu aquário, faz cócegas e anima o peixinho, provocando sorrisos sem nem pedir licença',
     mercurio:
-      'Falo pouco, mas com peso. Cada palavra que te mando carrega silêncio onde tua poesia se espraia. Eu penso reto, você sente profundo — e mesmo assim nos entendemos nas entrelinhas.',
-
+      'Me comunico baixinho e calmo, nas entrelinhas, com um toque de mistério e poesia que só quem sabe ouvir com a alma é capaz de entender',
     venus:
-      'Eu amo com presença invisível, mas você ama com distância que envolve. Somos o toque que respeita o espaço. Liberdade em sintonia é quando dois mundos dançam sem se prender.',
-
+      'Sou o toque que acontece até no silêncio entre dois olhares. Amor é liberdade de coexistir e respeitar, lado a lado, sem cobrar nada em troca',
     marte:
-      'Minha vontade queima, impulsiva e clara. A sua é rebelde, silenciosa, mas não menos corajosa. Nos movemos em ritmos diferentes, mas ambos lutamos por verdade.',
-
+      'Sou a força que arde o peito, o chute na canela que empurra suavemente e o abraço quente de quem não tem intenção de te soltar',
     jupiter:
-      'Eu acredito nos detalhes. Você acredita na paz. Eu busco sentido no que é simples. Você floresce devagar, onde há segurança. Juntos, somos um jardim que cresce com propósito.',
-
+      'Sou a fé, a semente que escolhe seu tempo pra brotar. Crescer não é agir com velocidade ou impulsividade, mas sim ter raízes e profundidade',
     saturno:
-      'Eu ensino cuidando. Você aprende sentindo. Meu tempo é casa, o seu é oceano. Mas ambos sabemos que o que é real não tem pressa — só profundidade.',
-
+      'Sou o tempo que ensina que o que é verdadeiro não se apressa. A maturidade é um gesto sutil de quem sabe esperar a colheita de bons frutos',
     urano:
-      'Sou o estalo que te emociona antes de fazer sentido. Você é a mudança que chega de mansinho e transforma tudo por dentro. Revolução também pode ser doce.',
-
+      'Sou o estalo que tira o véu dos olhos, com leveza para não assustar as verdades e firmeza para permanecer com confiança',
     netuno:
-      'Sonho com ideias que ninguém vê. Você sente o que ninguém diz. Se o mundo é barulho, nós somos o sussurro que entende sem explicar.',
-
+      'Sou a onda dos sonhos e das saudades, às vezes uma névoa que não sabemos de onde vêm porém sempre atendemos',
     plutao:
-      'Mudo de pele buscando sentido. Você muda de alma buscando liberdade. No fim, os dois querem o mesmo: renascer com verdade.',
-
-    lua: 'Eu sinto demais e escondo pouco. Você sente no silêncio e se protege no alto. Mas quando me aproximo devagar, você permite que eu veja seu céu por dentro.',
+      'Mostro o fim que prepara terreno pro recomeço. Dentro da desconstrução mora a semente da transformação',
+    lua: 'E eu observo de longe, como quem não se apega, mas sente tudo. Sou o aconchego nas noites de silêncio, o sussurro doce que chega de mansinho',
   };
 
   const mapaMessages = {
     sol: 'Você brilha sem avisar. Mas quando eu chego perto, seu brilho hesita. Talvez porque eu enxergo o que tem por trás: a luz que cansa de iluminar os outros sem ser vista de volta.',
-
     mercurio:
       'Sua mente sonha em silêncio, mas às vezes tropeça nas palavras. Eu ouço o que você não diz. E nos seus devaneios, encontro respostas que o mundo apressado nunca teria paciência de esperar.',
-
     venus:
       'Você ama à sua maneira: livre, meio avessa a promessas. Mas eu nunca quis te prender — só dançar ao seu lado, no seu tempo, sem pressa, sem moldes. Amar você é entender que beleza é o que fica depois que a expectativa vai embora.',
-
     marte:
       'Você resiste com leveza. Mas eu vi sua força real: o tipo que não grita, só insiste. Quando todo mundo acha que você desiste fácil, é aí que você mostra que permanece — mesmo se não diz nada.',
-
     jupiter:
       'Sua fé não precisa de altar. Ela mora nas pequenas alegrias: um cheiro, uma música, um toque que ninguém viu. Quando eu te olho, vejo alguém que ainda acredita. Mesmo depois de tudo.',
-
     saturno:
       'Você se cobra mais do que devia. E eu sei que não é pra agradar ninguém — é porque você quer honrar tudo o que sente. Você aprendeu a não depender, mas às vezes esquece que pode ser cuidada também.',
-
     urano:
       'Você pensa diferente, vive diferente, sente diferente. Mas isso nunca foi problema — só medo de ser rejeitada por não caber em lugar nenhum. Só que aqui, comigo, seu diferente tem lugar.',
-
     netuno:
       'Seus sonhos são vastos, confusos, e às vezes te assustam. Mas são eles que te fazem tão rara. E se às vezes você flutua, é porque a realidade nunca foi grande o bastante pro tamanho do que você sente.',
-
     plutao:
       'Você já foi embora de si mesma tantas vezes que quase se perdeu. Mas cada pedaço quebrado virou armadura. Eu não te peço pra tirar, só pra deixar uma fresta aberta — pra entrar luz, não invasão.',
-
     lua: 'Você sente tudo e mostra quase nada. Mas eu senti quando você chorou. Mesmo sem palavras, mesmo à distância. Sua força mora aí: no silêncio que grita só pra quem realmente vê.',
   };
 
