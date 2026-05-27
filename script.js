@@ -164,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let animationStarted = false;
   let listenersAdded = false;
+  let tooltipRafGen = 0;
 
   function updateMusicButtonState() {
     playPauseBtn.textContent = bgMusic.paused ? '▶️' : '⏸️';
@@ -463,9 +464,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function showTooltip(planet, message) {
+    const myGen = ++tooltipRafGen;
     tooltip.innerHTML = message;
 
     requestAnimationFrame(() => {
+      if (tooltipRafGen !== myGen) return;
+
       const tooltipRect = tooltip.getBoundingClientRect();
       const rect = planet.getBoundingClientRect();
 
@@ -598,7 +602,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function resetTooltipImmediate() {
+    tooltipRafGen++;
+    tooltip.style.transition = 'none';
     tooltip.style.opacity = '0';
+    void tooltip.offsetHeight;
+    tooltip.style.transition = '';
     tooltip.classList.remove('visible');
     tooltip.textContent = '';
   }
