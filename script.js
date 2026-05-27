@@ -666,8 +666,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cinemaMode = !cinemaMode;
     document.body.classList.toggle('cinema-mode', cinemaMode);
     btnCinema.textContent = cinemaMode ? '🌝' : '🌚';
-    btnCinema.title = cinemaMode ? 'Iluminar a tela' : 'Escurecer a tela';
-    btnCinema.setAttribute('aria-label', cinemaMode ? 'Iluminar a tela' : 'Escurecer a tela');
+    btnCinema.title = cinemaMode ? 'Trazer planetas de volta' : 'Esconder os planetas';
+    btnCinema.setAttribute('aria-label', cinemaMode ? 'Trazer planetas de volta' : 'Esconder os planetas');
   });
 
   updateMusicButtonState();
