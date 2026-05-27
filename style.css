@@ -17,7 +17,7 @@ body {
   overflow-y: auto;
   background: transparent;
   color: white;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'The Storyline', serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,17 +36,20 @@ body {
 
 .container {
   text-align: center;
-  max-width: 600px;
+  max-width: 90%;
+  width: 480px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  align-self: flex-start;
+  margin-top: 40px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 1.5rem;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   z-index: 10;
   color: white;
   transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-  align-self: center;
 }
 
 .container.hidden {
@@ -56,7 +59,7 @@ body {
 }
 
 h1 {
-  font-family: 'Mistica', serif;
+  font-family: 'The Storyline', serif;
   font-size: 2.4rem;
   margin-bottom: 1rem;
   color: #f1c40f;
@@ -64,7 +67,7 @@ h1 {
 }
 
 .poem {
-  font-family: 'Mistica', serif;
+  font-family: 'The Storyline', serif;
   font-size: 1.7rem;
   line-height: 1.6;
   color: #fef4c1;
@@ -78,7 +81,7 @@ h1 {
 }
 
 .shooting-star {
-  font-family: 'Mistica', serif;
+  font-family: 'The Storyline', serif;
   font-size: 1.5rem;
   line-height: 1.55;
   color: #fef4c1;
@@ -156,7 +159,7 @@ h1 {
   font-size: 24px;
   font-weight: bold;
   color: #6b4c00;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'The Storyline', serif;
   z-index: 30;
   position: relative;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
@@ -166,7 +169,7 @@ h1 {
   font-size: 18px;
   color: #8b5e00;
   margin-top: 10px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'The Storyline', serif;
   z-index: 30;
   position: relative;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
@@ -260,7 +263,7 @@ h1 {
   height: 100vh;
   z-index: 100;
   color: #fff;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'The Storyline', serif;
   overflow: hidden;
   padding: 2rem;
   transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
@@ -372,7 +375,7 @@ h1 {
 
 #time-display {
   font-size: 0.65rem;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'The Storyline', serif;
   color: rgba(255, 255, 255, 0.45);
   letter-spacing: 0.04em;
   align-self: flex-end;
@@ -389,7 +392,7 @@ h1 {
 
 #track-name {
   font-size: 0.78rem;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'The Storyline', serif;
   color: #f1c40f;
   white-space: nowrap;
   letter-spacing: 0.03em;
@@ -491,7 +494,7 @@ h1 {
   cursor: pointer;
   border-radius: 8px;
   font-size: 0.82rem;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'The Storyline', serif;
   color: rgba(255, 255, 255, 0.8);
   transition: background 0.15s ease, color 0.15s ease;
   white-space: nowrap;
@@ -599,7 +602,7 @@ h1 {
   padding: 2rem;
   z-index: 100;
   color: #fff;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'The Storyline', serif;
   overflow: hidden;
   display: none;
 }
