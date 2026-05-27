@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   randomizePlanetPositions(mapaContainer);
 
   const titleText =
-    ' De todos os 13,8 bilhões de anos do universo e as 8 bilhões de pessoas, é um privilégio poder dividir o mesmo espaço-tempo que você... Eu amo você e amo poder te amar ';
+    ' É um privilégio poder dividir o mesmo espaço-tempo que você... O aqui, o agora... 💜 ';
   let titleIndex = 0;
 
   let messageLoopTimeoutId;
