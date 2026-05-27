@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const musicControls = document.getElementById('music-controls');
   const trackNameEl = document.getElementById('track-name');
   const mainContainer = document.querySelector('.container');
+  const progressFill = document.getElementById('progress-bar-fill');
+  const btnVoltarInicio = document.getElementById('btn-voltar-inicio');
 
   const playlist = [
     { src: 'assets/ruelle-i-get-to-love-you.mp3',           name: 'Ruelle — I Get to Love You' },
@@ -43,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bgMusic.src = playlist[currentTrackIndex].src;
     bgMusic.load();
     trackNameEl.textContent = playlist[currentTrackIndex].name;
+    progressFill.style.width = '0%';
     if (autoplay) bgMusic.play().then(updateMusicButtonState).catch(() => {});
     else updateMusicButtonState();
   }
@@ -206,6 +209,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (animationStarted) return;
     animationStarted = true;
 
+    const boxRect = giftBox.getBoundingClientRect();
+    kickElementsWrapper.style.top = `${boxRect.top + boxRect.height / 2}px`;
+    kickElementsWrapper.style.left = `${boxRect.left + boxRect.width / 2}px`;
+
     try {
       await bgMusic.play();
       updateMusicButtonState();
@@ -239,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
       musicControls.style.visibility = 'visible';
       musicControls.style.pointerEvents = 'auto';
       btnVerMapa.style.display = 'inline-block';
+      btnVoltarInicio.style.display = 'inline-block';
 
       startMessageLoop();
       addPlanetHoverListeners();
@@ -288,6 +296,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('click', () => playlistMenu.classList.remove('open'));
 
+  btnVoltarInicio.addEventListener('click', () => {
+    clearTimeout(messageLoopTimeoutId);
+    if (autoHighlightedPlanet) {
+      autoHighlightedPlanet.classList.remove('planet-active-message');
+      autoHighlightedPlanet = null;
+    }
+    resetTooltipImmediate();
+    skyContainer.style.opacity = '0';
+    skyContainer.style.visibility = 'hidden';
+    mainContainer.classList.remove('hidden');
+    giftBox.classList.remove('hidden');
+    setTimeout(() => { skyContainer.style.display = 'none'; }, 1000);
+  });
+
+  bgMusic.addEventListener('timeupdate', () => {
+    if (bgMusic.duration) {
+      progressFill.style.width = `${(bgMusic.currentTime / bgMusic.duration) * 100}%`;
+    }
+  });
+
   volumeSlider.addEventListener('input', () => {
     bgMusic.volume = volumeSlider.value / 100;
   });
@@ -298,6 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
     skyContainer.style.display = 'none';
     mapaContainer.style.display = 'block';
     btnVerMapa.style.display = 'none';
+    btnVoltarInicio.style.display = 'none';
     btnVoltarSky.style.display = 'inline-block';
 
     resetTooltipImmediate();
@@ -321,6 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
     skyContainer.style.display = 'block';
     btnVoltarSky.style.display = 'none';
     btnVerMapa.style.display = 'inline-block';
+    btnVoltarInicio.style.display = 'inline-block';
 
     shufflePositions(skyContainer);
 

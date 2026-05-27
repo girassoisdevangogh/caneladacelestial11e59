@@ -53,7 +53,7 @@ body {
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.4rem;
+  font-size: 2.7rem;
   margin-bottom: 1rem;
   color: #f1c40f;
   text-shadow: 0 0 10px #f1c40faa;
@@ -61,7 +61,7 @@ h1 {
 
 .poem {
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   line-height: 1.8;
   color: #fef4c1;
   text-shadow: 0 0 4px #fff8c2cc, 0 0 8px #f1c40faa, 0 0 16px #f39c12bb;
@@ -75,7 +75,7 @@ h1 {
 
 .shooting-star {
   font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   line-height: 1.7;
   color: #fef4c1;
   text-shadow: 0 0 3px #fff8c2cc, 0 0 6px #f1c40faa, 0 0 12px #f39c12bb;
@@ -347,12 +347,37 @@ h1 {
   transition: opacity 0.7s ease, visibility 0.7s ease;
 }
 
+#progress-bar-container {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+#progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, rgba(127, 219, 255, 0.9), #f1c40f);
+  border-radius: 2px;
+}
+
 #track-name {
   font-size: 0.78rem;
   font-family: 'Quicksand', sans-serif;
-  color: rgba(255, 255, 255, 0.8);
+  color: #f1c40f;
   white-space: nowrap;
   letter-spacing: 0.03em;
+  text-shadow: 0 0 6px rgba(241, 196, 15, 0.5);
+}
+
+.vol-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  user-select: none;
+  line-height: 1;
+  padding: 0 2px;
 }
 
 #music-buttons {
@@ -486,7 +511,8 @@ h1 {
 }
 
 #btn-ver-mapa,
-#btn-voltar-sky {
+#btn-voltar-sky,
+#btn-voltar-inicio {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
@@ -510,11 +536,17 @@ h1 {
 
 #btn-voltar-sky {
   left: 20px;
-  display: none; /* começa escondido */
+  display: none;
+}
+
+#btn-voltar-inicio {
+  left: 20px;
+  display: none;
 }
 
 #btn-ver-mapa:hover,
-#btn-voltar-sky:hover {
+#btn-voltar-sky:hover,
+#btn-voltar-inicio:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: translateY(-50%) scale(1.1);
   box-shadow: 0 0 18px rgba(241, 196, 15, 0.7), 0 0 36px rgba(241, 196, 15, 0.35);
