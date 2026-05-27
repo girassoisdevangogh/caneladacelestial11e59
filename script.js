@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnVoltarInicio = document.getElementById('btn-voltar-inicio');
   const transitionOverlay = document.getElementById('transition-overlay');
   const skyTitle = document.getElementById('sky-title');
+  const mapaTitle = document.getElementById('mapa-title');
   const btnFullscreen = document.getElementById('btn-fullscreen');
   const btnCinema = document.getElementById('btn-cinema');
   const fsExpand = document.getElementById('fs-expand');
@@ -351,12 +352,13 @@ document.addEventListener('DOMContentLoaded', () => {
       autoHighlightedPlanet = null;
     }
     resetTooltipImmediate();
-    btnVoltarInicio.style.display = 'none';
-    btnVerMapa.style.display = 'none';
-    skyTitle.style.display = 'none';
 
     transitionOverlay.classList.add('dark');
     await fadeOutPlanets(planets);
+
+    btnVoltarInicio.style.display = 'none';
+    btnVerMapa.style.display = 'none';
+    skyTitle.style.display = 'none';
 
     if (autoHighlightedPlanet) {
       autoHighlightedPlanet.classList.remove('planet-active-message');
@@ -409,8 +411,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnVerMapa.addEventListener('click', async () => {
     messageLoopGeneration++;
-    btnVerMapa.style.display = 'none';
-    btnVoltarInicio.style.display = 'none';
 
     // Pré-seta planetas do mapa em estado oculto para o grow-in
     mapaPlanets.forEach(p => {
@@ -421,6 +421,10 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionOverlay.classList.add('dark');
     await fadeOutPlanets(planets);
 
+    btnVerMapa.style.display = 'none';
+    btnVoltarInicio.style.display = 'none';
+    skyTitle.style.display = 'none';
+
     if (autoHighlightedPlanet) {
       autoHighlightedPlanet.classList.remove('planet-active-message');
       autoHighlightedPlanet = null;
@@ -428,6 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     skyContainer.style.display = 'none';
     mapaContainer.style.display = 'block';
+    mapaTitle.style.display = 'none';
     btnVoltarSky.style.display = 'inline-block';
     resetTooltipImmediate();
     planets.forEach(p => p.classList.remove('fade-in', 'fade-out', 'planet-active-message'));
@@ -435,6 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionOverlay.classList.remove('dark');
     setTimeout(() => {
       fadeInPlanets(mapaPlanets);
+      mapaTitle.style.display = '';
     }, 400);
     setTimeout(() => {
       startMessageLoop();
@@ -462,6 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mapaContainer.style.display = 'none';
     skyContainer.style.display = 'block';
+    skyTitle.style.display = 'none';
     btnVerMapa.style.display = 'inline-block';
     btnVoltarInicio.style.display = 'inline-block';
     mapaPlanets.forEach(p => p.classList.remove('fade-in', 'fade-out', 'planet-active-message'));
@@ -469,6 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionOverlay.classList.remove('dark');
     setTimeout(() => {
       fadeInPlanets(planets);
+      skyTitle.style.display = '';
     }, 400);
     setTimeout(() => {
       startMessageLoop();
@@ -649,7 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
   btnCinema.addEventListener('click', () => {
     cinemaMode = !cinemaMode;
     document.body.classList.toggle('cinema-mode', cinemaMode);
-    btnCinema.textContent = cinemaMode ? '✦ Iluminar a tela' : '🌌 Escurecer a tela';
+    btnCinema.textContent = cinemaMode ? '✨' : '🌌';
     btnCinema.title = cinemaMode ? 'Iluminar a tela' : 'Escurecer a tela';
     btnCinema.setAttribute('aria-label', cinemaMode ? 'Iluminar a tela' : 'Escurecer a tela');
   });

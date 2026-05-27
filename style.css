@@ -62,7 +62,7 @@ body {
 h1 {
   font-family: 'The Storyline', serif;
   font-size: 3.6rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.35rem;
   color: #93c5fd;
   text-shadow: 0 0 10px #60a5faaa, 0 0 22px #4169e166;
 }
@@ -799,24 +799,27 @@ h1 {
   right: 20px;
   background: rgba(30, 58, 138, 0.3);
   border: 1px solid rgba(65, 105, 225, 0.7);
-  border-radius: 10px;
-  padding: 8px 16px;
+  border-radius: 50%;
+  padding: 22px 26px;
+  font-size: 2.2rem;
   color: white;
   cursor: pointer;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 12px rgba(65, 105, 225, 0.5);
+  box-shadow: 0 0 12px rgba(65, 105, 225, 0.5), 0 0 22px rgba(65, 105, 225, 0.25);
   z-index: 300;
-  font-family: 'The Storyline', serif;
-  font-size: 1.5rem;
-  white-space: nowrap;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   user-select: none;
 }
 
-#btn-fullscreen:hover,
-#btn-cinema:hover {
+#btn-fullscreen:hover {
   background: rgba(65, 105, 225, 0.35);
   box-shadow: 0 0 18px rgba(65, 105, 225, 0.8);
+}
+
+#btn-cinema:hover {
+  background: rgba(65, 105, 225, 0.35);
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(65, 105, 225, 0.8), 0 0 36px rgba(65, 105, 225, 0.4);
 }
 
 body.cinema-mode > *:not(#music-controls):not(#btn-cinema):not(#btn-fullscreen):not(audio):not(video):not(.custom-star-cursor) {
