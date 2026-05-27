@@ -10,7 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const tooltip = document.getElementById('tooltip');
   const bgMusic = document.getElementById('bg-music');
   const playPauseBtn = document.getElementById('play-pause-btn');
+  const volumeSlider = document.getElementById('volume-slider');
+  const musicControls = document.getElementById('music-controls');
   const mainContainer = document.querySelector('.container');
+
+  bgMusic.volume = 0.5;
 
   const planets = [...document.querySelectorAll('#sky-container .planet')];
   const mapaPlanets = [...document.querySelectorAll('#mapa-container .planet')];
@@ -174,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       skyContainer.style.visibility = 'visible';
       skyContainer.style.opacity = '1';
-      playPauseBtn.style.display = 'inline-block';
+      musicControls.style.display = 'flex';
       btnVerMapa.style.display = 'inline-block';
 
       currentPlanetIndex = planets.findIndex((p) =>
@@ -200,6 +204,10 @@ document.addEventListener('DOMContentLoaded', () => {
   bgMusic.addEventListener('play', updateMusicButtonState);
   bgMusic.addEventListener('pause', updateMusicButtonState);
   bgMusic.addEventListener('ended', updateMusicButtonState);
+
+  volumeSlider.addEventListener('input', () => {
+    bgMusic.volume = volumeSlider.value / 100;
+  });
 
   btnVerMapa.addEventListener('click', async () => {
     await fadeOutPlanets(planets);

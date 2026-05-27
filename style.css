@@ -296,28 +296,41 @@ h1 {
   will-change: transform, opacity;
 }
 
-#play-pause-btn {
+#music-controls {
   position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  gap: 10px;
   background: rgba(255, 255, 255, 0.15);
-  border: none;
   border-radius: 30px;
-  padding: 12px 20px;
-  font-size: 1.5rem;
-  color: white;
-  cursor: pointer;
+  padding: 8px 18px;
   backdrop-filter: blur(8px);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   z-index: 150;
-  transition: background-color 0.3s ease;
+}
+
+#play-pause-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
   user-select: none;
-  display: none;
+  padding: 4px 6px;
+  transition: opacity 0.2s ease;
 }
 
 #play-pause-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  opacity: 0.75;
+}
+
+#volume-slider {
+  width: 80px;
+  accent-color: #7fdbff;
+  cursor: pointer;
 }
 
 .gift-bow {
