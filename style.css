@@ -62,7 +62,7 @@ body {
 h1 {
   font-family: 'The Storyline', serif;
   font-size: 3.6rem;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0;
   color: #93c5fd;
   text-shadow: 0 0 10px #60a5faaa, 0 0 22px #4169e166;
 }
@@ -255,12 +255,15 @@ h1 {
   display: inline-block;
 }
 
+.loveu-wrapper {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
 .loveu-icon {
   width: 1.6em;
   height: auto;
-  vertical-align: middle;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  display: inline-block;
 }
 
 #sky-container {
