@@ -18,7 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainContainer = document.querySelector('.container');
 
   const playlist = [
-    { src: 'https://girassoisdevangogh.github.io/caneladacelestial11e59/RUELLE-I-get-to-love-you.mp3', name: 'Ruelle — I Get to Love You' },
+    { src: 'assets/ruelle-i-get-to-love-you.mp3',      name: 'Ruelle — I Get to Love You' },
+    { src: 'assets/ruelle-war-of-hearts.mp3',           name: 'Ruelle — War of Hearts' },
+    { src: 'assets/billie-eilish-chihiro.mp3',          name: 'Billie Eilish — CHIHIRO' },
+    { src: 'assets/billie-eilish-wildflower-guitar.mp3', name: 'Billie Eilish — Wildflower' },
+    { src: 'assets/labrinth-mount-everest.mp3',         name: 'Labrinth — Mount Everest' },
+    { src: 'assets/labrinth-zendaya-all-for-us.mp3',    name: 'Labrinth & Zendaya — All for Us' },
   ];
   let currentTrackIndex = 0;
 
