@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Quicksand&display=swap');
+@font-face {
+  font-family: 'Mistica';
+  src: url('assets/mistica.ttf') format('truetype');
+}
 
 * {
   margin: 0;
@@ -52,7 +56,7 @@ body {
 }
 
 h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Mistica', serif;
   font-size: 2.4rem;
   margin-bottom: 1rem;
   color: #f1c40f;
@@ -60,7 +64,7 @@ h1 {
 }
 
 .poem {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Mistica', serif;
   font-size: 1.7rem;
   line-height: 1.6;
   color: #fef4c1;
@@ -74,7 +78,7 @@ h1 {
 }
 
 .shooting-star {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Mistica', serif;
   font-size: 1.5rem;
   line-height: 1.55;
   color: #fef4c1;
@@ -210,7 +214,7 @@ h1 {
   top: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Playfair Display', serif;
+  font-family: 'Mistica', serif
   font-size: 1.25rem;
   color: #fef4c1;
   text-shadow: 0 0 6px #f1c40faa, 0 0 14px #f39c12bb;
