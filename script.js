@@ -252,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       skyContainer.style.display = 'block';
       skyContainer.style.visibility = 'visible';
+      void skyContainer.offsetHeight;
       skyContainer.style.opacity = '1';
       musicControls.style.opacity = '1';
       musicControls.style.visibility = 'visible';
@@ -329,6 +330,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     skyContainer.style.opacity = '0';
     skyContainer.style.visibility = 'hidden';
+    skyContainer.style.display = 'none';
+    mapaContainer.style.display = 'none';
+    [...planets, ...mapaPlanets].forEach(p => {
+      p.classList.remove('fade-in', 'fade-out', 'planet-active-message');
+    });
 
     giftBox.classList.remove('kick-animation', 'hidden');
     mainContainer.classList.remove('hidden');
