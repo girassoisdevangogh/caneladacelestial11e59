@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Quicksand&display=swap');
 @font-face {
-  font-family: 'Mistica';
-  src: url('assets/mistica.ttf') format('truetype');
+  font-family: 'The Storyline';
+  src: url('assets/the-storyline.otf') format('opentype');
 }
 
 * {
@@ -217,7 +217,7 @@ h1 {
   top: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Mistica', serif
+  font-family: 'The Storyline', serif;
   font-size: 1.25rem;
   color: #fef4c1;
   text-shadow: 0 0 6px #f1c40faa, 0 0 14px #f39c12bb;
