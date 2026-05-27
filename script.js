@@ -177,13 +177,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const W = window.innerWidth;
     const H = window.innerHeight;
 
-    const PLANET_W = 460; // px — largura máxima estimada do label mais longo
-    const PLANET_H = 52;  // px — altura do elemento planet (fonte 2rem + padding)
+    const PLANET_W = 460;
+    const PLANET_H = 52;
 
-    const topMin  = 95;                      // abaixo do título
-    const topMax  = H - 155 - PLANET_H;      // acima dos controles de música
-    const leftMin = 115;                     // à direita do botão nav esquerdo
-    const leftMax = W - 115 - PLANET_W;      // à esquerda do botão nav direito
+    const topMin  = 95;                      
+    const topMax  = H - 155 - PLANET_H;     
+    const leftMin = 115;                     
+    const leftMax = W - 115 - PLANET_W;      
 
     els.forEach(el => {
       let top, left, tries = 0;
@@ -242,7 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
       explosion.style.animation = 'explosionAnimation 0.5s forwards';
     }, 900);
 
-    // allstar termina → overlay escurece, sky pronto com planetas ocultos (igual demais telas)
     setTimeout(() => {
       transitionOverlay.classList.add('dark');
 
@@ -426,15 +425,16 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionOverlay.classList.remove('dark');
     setTimeout(() => {
       fadeInPlanets(mapaPlanets);
-      startMessageLoop();
     }, 400);
+    setTimeout(() => {
+      startMessageLoop();
+    }, 950);
   });
 
   btnVoltarSky.addEventListener('click', async () => {
     messageLoopGeneration++;
     btnVoltarSky.style.display = 'none';
 
-    // Pré-seta planetas do céu em estado oculto para o grow-in
     planets.forEach(p => {
       p.classList.remove('fade-in', 'planet-active-message');
       p.classList.add('fade-out');
@@ -459,8 +459,10 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionOverlay.classList.remove('dark');
     setTimeout(() => {
       fadeInPlanets(planets);
-      startMessageLoop();
     }, 400);
+    setTimeout(() => {
+      startMessageLoop();
+    }, 950);
   });
 
   function showTooltip(planet, message) {
