@@ -261,7 +261,7 @@ h1 {
 }
 
 .loveu-icon {
-  width: 1.6em;
+  width: 2.4em;
   height: auto;
   display: inline-block;
 }
@@ -594,7 +594,7 @@ h1 {
   backdrop-filter: blur(8px);
   box-shadow: 0 0 12px rgba(65, 105, 225, 0.5), 0 0 22px rgba(65, 105, 225, 0.25);
   z-index: 200;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.5s ease, box-shadow 0.3s ease, opacity 0.5s ease-in-out;
   user-select: none;
 }
 
@@ -604,12 +604,18 @@ h1 {
 
 #btn-voltar-sky {
   left: 20px;
-  display: none;
 }
 
 #btn-voltar-inicio {
   left: 20px;
-  display: none;
+}
+
+#btn-ver-mapa.btn-nav-out,
+#btn-voltar-sky.btn-nav-out,
+#btn-voltar-inicio.btn-nav-out {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.85);
+  pointer-events: none;
 }
 
 #btn-ver-mapa:hover,

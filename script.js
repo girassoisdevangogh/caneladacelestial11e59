@@ -271,6 +271,8 @@ document.addEventListener('DOMContentLoaded', () => {
       skyContainer.style.visibility = 'visible';
       skyContainer.style.opacity = '1';
       skyTitle.classList.add('title-out');
+      btnVerMapa.classList.add('btn-nav-out');
+      btnVoltarInicio.classList.add('btn-nav-out');
       musicControls.style.opacity = '1';
       musicControls.style.visibility = 'visible';
       musicControls.style.pointerEvents = 'auto';
@@ -280,10 +282,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // overlay some → botões e planetas crescem junto com a iluminação
     setTimeout(() => {
-      btnVerMapa.style.display = 'inline-block';
-      btnVoltarInicio.style.display = 'inline-block';
       transitionOverlay.classList.remove('dark');
-      requestAnimationFrame(() => skyTitle.classList.remove('title-out'));
+      requestAnimationFrame(() => {
+        skyTitle.classList.remove('title-out');
+        btnVerMapa.classList.remove('btn-nav-out');
+        btnVoltarInicio.classList.remove('btn-nav-out');
+      });
       setTimeout(() => {
         fadeInPlanets(planets);
         startMessageLoop();
@@ -356,8 +360,8 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionOverlay.classList.add('dark');
     await fadeOutPlanets(planets);
 
-    btnVoltarInicio.style.display = 'none';
-    btnVerMapa.style.display = 'none';
+    btnVoltarInicio.classList.add('btn-nav-out');
+    btnVerMapa.classList.add('btn-nav-out');
     skyTitle.classList.add('title-out');
 
     if (autoHighlightedPlanet) {
@@ -421,8 +425,8 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionOverlay.classList.add('dark');
     await fadeOutPlanets(planets);
 
-    btnVerMapa.style.display = 'none';
-    btnVoltarInicio.style.display = 'none';
+    btnVerMapa.classList.add('btn-nav-out');
+    btnVoltarInicio.classList.add('btn-nav-out');
     skyTitle.classList.add('title-out');
 
     if (autoHighlightedPlanet) {
@@ -433,12 +437,14 @@ document.addEventListener('DOMContentLoaded', () => {
     skyContainer.style.display = 'none';
     mapaContainer.style.display = 'block';
     mapaTitle.classList.add('title-out');
-    btnVoltarSky.style.display = 'inline-block';
     resetTooltipImmediate();
     planets.forEach(p => p.classList.remove('fade-in', 'fade-out', 'planet-active-message'));
 
     transitionOverlay.classList.remove('dark');
-    requestAnimationFrame(() => mapaTitle.classList.remove('title-out'));
+    requestAnimationFrame(() => {
+      mapaTitle.classList.remove('title-out');
+      btnVoltarSky.classList.remove('btn-nav-out');
+    });
     setTimeout(() => {
       fadeInPlanets(mapaPlanets);
     }, 400);
@@ -449,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnVoltarSky.addEventListener('click', async () => {
     messageLoopGeneration++;
-    btnVoltarSky.style.display = 'none';
+    btnVoltarSky.classList.add('btn-nav-out');
 
     planets.forEach(p => {
       p.classList.remove('fade-in', 'planet-active-message');
@@ -469,12 +475,14 @@ document.addEventListener('DOMContentLoaded', () => {
     mapaContainer.style.display = 'none';
     skyContainer.style.display = 'block';
     skyTitle.classList.add('title-out');
-    btnVerMapa.style.display = 'inline-block';
-    btnVoltarInicio.style.display = 'inline-block';
     mapaPlanets.forEach(p => p.classList.remove('fade-in', 'fade-out', 'planet-active-message'));
 
     transitionOverlay.classList.remove('dark');
-    requestAnimationFrame(() => skyTitle.classList.remove('title-out'));
+    requestAnimationFrame(() => {
+      skyTitle.classList.remove('title-out');
+      btnVerMapa.classList.remove('btn-nav-out');
+      btnVoltarInicio.classList.remove('btn-nav-out');
+    });
     setTimeout(() => {
       fadeInPlanets(planets);
     }, 400);
