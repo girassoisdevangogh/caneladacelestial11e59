@@ -25,6 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     { src: 'assets/labrinth-mount-everest.mp3',         name: 'Labrinth — Mount Everest' },
     { src: 'assets/labrinth-zendaya-all-for-us.mp3',    name: 'Labrinth & Zendaya — All for Us' },
   ];
+
+  for (let i = playlist.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [playlist[i], playlist[j]] = [playlist[j], playlist[i]];
+  }
+
   let currentTrackIndex = 0;
 
   function loadTrack(index, autoplay) {
