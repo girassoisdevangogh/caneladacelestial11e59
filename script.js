@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saturno: 'A confirmação do universo de que sonhos podem, sim, ganhar estrutura e virar <span class="destaque-dourado">EXCELÊNCIA</span> em realidade. O universo nos guiou como uma correnteza, dentre 8 bilhões de pessoas. Um encontro da constelação de Peixes no momento exato e certo de nossas vidas...',
     urano: 'Sem avisar, com a força de um Touro, aquela surpresa e a <span class="destaque-dourado">LIBERDADE</span> que vira a nossa rotina de cabeça para baixo de um jeito incrível e absolutamente inesquecível...',
     netuno: 'Uma sintonia profunda e espiritual, com a <span class="destaque-dourado">PROFUNDIDADE</span> de Peixes. Parecia que o universo estava conspirando com um toque de magia para que estivéssemos ali, naquele exato momento...',
-    plutao: 'O início de uma transformação linda em nossas vidas, marcada pela <span class="destaque-dourado">OBSTINAÇÃO</span> de Sagitário. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor...',
+    plutao: 'O início de uma transformação linda em nossas vidas, marcada pela <span class="destaque-dourado">OBSTINAÇÃO</span> de Aquário. Um marco poderoso que mudou a nossa história para sempre, e para muito melhor...',
     lua: 'Nossos corações bateram em um ritmo alegre, leve e cheio de <span class="destaque-dourado">CUMPLICIDADE</span>, como demanda a constelação de Aquário. A alegria genuína daquele frio na barriga tão bom de sentir.',
   };
 
