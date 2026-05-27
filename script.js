@@ -280,7 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!listenersAdded) { addPlanetHoverListeners(); listenersAdded = true; }
     }, 1800);
 
-    // overlay some → botões e planetas crescem junto com a iluminação
     setTimeout(() => {
       transitionOverlay.classList.remove('dark');
       requestAnimationFrame(() => {
