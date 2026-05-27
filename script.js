@@ -34,20 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const planets = [...document.querySelectorAll('#sky-container .planet')];
   const mapaPlanets = [...document.querySelectorAll('#mapa-container .planet')];
-  let currentPlanetIndex = planets.findIndex((p) =>
-    p.classList.contains('sol')
-  );
-  if (currentPlanetIndex === -1) {
-    currentPlanetIndex = 0;
-  }
+
+  randomizePlanetPositions(skyContainer);
+  randomizePlanetPositions(mapaContainer);
 
   const titleText =
     ' Assim estava o céu quando os rumos de nossas vidas se encontraram 💜';
   let titleIndex = 0;
 
   let messageLoopTimeoutId;
+  let messageLoopCurrentIndex = 0;
   let isHovering = false;
-  let pausedPlanetIndex = currentPlanetIndex;
   const TOOLTIP_TRANSITION_DURATION = 500;
   const AUTO_MESSAGE_DELAY = 8500;
 
@@ -145,6 +142,23 @@ document.addEventListener('DOMContentLoaded', () => {
     playPauseBtn.textContent = bgMusic.paused ? '▶️' : '⏸️';
   }
 
+  function randomizePlanetPositions(container) {
+    const els = [...container.querySelectorAll('.planet')];
+    const placed = [];
+    const minDist = 15;
+    els.forEach(el => {
+      let top, left, tries = 0;
+      do {
+        top = 8 + Math.random() * 76;
+        left = 5 + Math.random() * 82;
+        tries++;
+      } while (tries < 60 && placed.some(p => Math.hypot(p.top - top, p.left - left) < minDist));
+      placed.push({ top, left });
+      el.style.top = `${top.toFixed(1)}%`;
+      el.style.left = `${left.toFixed(1)}%`;
+    });
+  }
+
   function shufflePositions(container) {
     const elements = [...container.querySelectorAll('.planet')];
 
@@ -197,12 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
       musicControls.style.display = 'flex';
       btnVerMapa.style.display = 'inline-block';
 
-      currentPlanetIndex = planets.findIndex((p) =>
-        p.classList.contains('sol')
-      );
-      if (currentPlanetIndex === -1) {
-        currentPlanetIndex = 0;
-      }
       startMessageLoop();
       addPlanetHoverListeners();
     }, 2500);
@@ -214,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       bgMusic.pause();
     }
-    updateMusicButtonState();
   });
 
   bgMusic.addEventListener('play', updateMusicButtonState);
@@ -236,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btnVerMapa.style.display = 'none';
     btnVoltarSky.style.display = 'inline-block';
 
-    copiarPosicoesDoCeuParaMapa();
     resetTooltipImmediate();
 
     [...planets, ...mapaPlanets].forEach((p) => {
@@ -303,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let autoHighlightedPlanet = null;
 
-  function startMessageLoop() {
+  function startMessageLoop(reset = true) {
     clearTimeout(messageLoopTimeoutId);
 
     if (autoHighlightedPlanet) {
@@ -312,6 +318,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isHovering) return;
+
+    if (reset) messageLoopCurrentIndex = 0;
 
     tooltip.style.opacity = '0';
     setTimeout(() => {
@@ -322,8 +330,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const planetasAtuais = isMapaAtivo ? mapaPlanets : planets;
     const mensagensAtuais = isMapaAtivo ? mapaMessages : messages;
 
-    let index = 0;
-
     function mostrarProximo() {
       if (isHovering) return;
 
@@ -332,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
         autoHighlightedPlanet = null;
       }
 
-      const planeta = planetasAtuais[index];
+      const planeta = planetasAtuais[messageLoopCurrentIndex];
       const chave =
         [...planeta.classList].find((c) => mensagensAtuais[c]) || '';
 
@@ -342,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showTooltip(planeta, mensagensAtuais[chave]);
       }
 
-      index = (index + 1) % planetasAtuais.length;
+      messageLoopCurrentIndex = (messageLoopCurrentIndex + 1) % planetasAtuais.length;
       messageLoopTimeoutId = setTimeout(mostrarProximo, AUTO_MESSAGE_DELAY);
     }
 
@@ -358,8 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
           autoHighlightedPlanet.classList.remove('planet-active-message');
           autoHighlightedPlanet = null;
         }
-
-        pausedPlanetIndex = currentPlanetIndex;
 
         hideTooltip();
 
@@ -383,8 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isHovering = false;
 
         setTimeout(() => {
-          currentPlanetIndex = pausedPlanetIndex;
-          startMessageLoop();
+          startMessageLoop(false);
         }, TOOLTIP_TRANSITION_DURATION);
       });
     });
