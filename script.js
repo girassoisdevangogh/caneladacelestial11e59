@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const TOOLTIP_TRANSITION_DURATION = 500;
   const AUTO_MESSAGE_DELAY = 8500;
 
-  const STAR_CREATE_INTERVAL = 60;
+  const STAR_CREATE_INTERVAL = 28;
   let lastStarCreationTime = 0;
   let cursorX = 0, cursorY = 0, cursorRafPending = false;
 
@@ -265,12 +265,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildPlaylistMenu() {
     playlistMenu.innerHTML = '';
-    playlist.forEach((track, i) => {
+    const sorted = playlist
+      .map((track, i) => ({ ...track, playIndex: i }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    sorted.forEach(track => {
       const item = document.createElement('div');
-      item.className = 'playlist-item' + (i === currentTrackIndex ? ' active' : '');
+      item.className = 'playlist-item' + (track.playIndex === currentTrackIndex ? ' active' : '');
       item.textContent = track.name;
       item.addEventListener('click', () => {
-        loadTrack(i, true);
+        loadTrack(track.playIndex, true);
         playlistMenu.classList.remove('open');
       });
       playlistMenu.appendChild(item);
