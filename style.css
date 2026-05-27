@@ -298,14 +298,29 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   display: none;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 30px;
-  padding: 8px 18px;
+  border-radius: 20px;
+  padding: 8px 18px 10px;
   backdrop-filter: blur(8px);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   z-index: 150;
+}
+
+#track-name {
+  font-size: 0.78rem;
+  font-family: 'Quicksand', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+#music-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #prev-btn,
@@ -316,12 +331,15 @@ h1 {
   color: white;
   cursor: pointer;
   user-select: none;
-  padding: 4px 6px;
-  transition: opacity 0.2s ease;
+  padding: 0 4px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
 }
 
-#play-pause-btn { font-size: 1.3rem; display: flex; align-items: center; justify-content: center; }
+#play-pause-btn { font-size: 1.3rem; }
 #prev-btn, #next-btn { font-size: 1.8rem; }
 
 #prev-btn:hover,

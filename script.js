@@ -14,17 +14,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextBtn = document.getElementById('next-btn');
   const volumeSlider = document.getElementById('volume-slider');
   const musicControls = document.getElementById('music-controls');
+  const trackNameEl = document.getElementById('track-name');
   const mainContainer = document.querySelector('.container');
 
   const playlist = [
-    'https://girassoisdevangogh.github.io/caneladacelestial11e59/RUELLE-I-get-to-love-you.mp3',
+    { src: 'https://girassoisdevangogh.github.io/caneladacelestial11e59/RUELLE-I-get-to-love-you.mp3', name: 'Ruelle — I Get to Love You' },
   ];
   let currentTrackIndex = 0;
 
   function loadTrack(index, autoplay) {
     currentTrackIndex = (index + playlist.length) % playlist.length;
-    bgMusic.src = playlist[currentTrackIndex];
+    bgMusic.src = playlist[currentTrackIndex].src;
     bgMusic.load();
+    trackNameEl.textContent = playlist[currentTrackIndex].name;
     if (autoplay) bgMusic.play().then(updateMusicButtonState).catch(() => {});
     else updateMusicButtonState();
   }
