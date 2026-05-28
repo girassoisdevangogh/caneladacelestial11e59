@@ -12,8 +12,7 @@
 html,
 body {
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
   background: transparent;
@@ -807,6 +806,16 @@ h1 {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+#playlist-menu::-webkit-scrollbar {
+  display: block;
+  width: 5px;
+}
+
+#playlist-menu {
+  scrollbar-width: thin;
+  scrollbar-color: #4169e1 rgba(8, 8, 24, 0.6);
 }
 
 ::-webkit-scrollbar-track {
