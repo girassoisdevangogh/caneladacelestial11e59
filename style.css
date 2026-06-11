@@ -35,6 +35,7 @@ body {
 }
 
 .container {
+  position: relative;
   text-align: center;
   width: 94%;
   max-width: 1100px;
@@ -50,6 +51,61 @@ body {
   z-index: 10;
   color: white;
   transition: opacity 0.5s ease-out, visibility 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.speech-balloon {
+  position: fixed;
+  top: 50%;
+  left: 90px;
+  transform: translateY(-50%);
+  max-width: 220px;
+  background: rgba(30, 58, 138, 0.3);
+  border: 1px solid rgba(180, 150, 255, 0.6);
+  color: #e6e9ff;
+  font-family: 'The Storyline', serif;
+  font-size: 1.85rem;
+  line-height: 1.35;
+  padding: 1.2rem 1.6rem;
+  border-radius: 50px 50px 50px 12px;
+  backdrop-filter: blur(8px);
+  text-shadow: 0 0 4px rgba(147, 197, 253, 0.9), 0 0 8px #60a5faaa, 0 0 16px #b794ffcc;
+  box-shadow: 0 0 25px rgba(147, 112, 219, 0.85), 0 0 50px rgba(65, 105, 225, 0.5), 0 0 80px rgba(147, 112, 219, 0.3);
+  text-align: center;
+  z-index: 90;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.speech-balloon::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 22px;
+  width: 18px;
+  height: 18px;
+  background: rgba(30, 58, 138, 0.3);
+  border: 1px solid rgba(180, 150, 255, 0.6);
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+}
+
+.speech-balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -22px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
+  background: rgba(30, 58, 138, 0.3);
+  border: 1px solid rgba(180, 150, 255, 0.6);
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+}
+
+.container.hidden ~ .speech-balloon {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-50%) scale(0.85);
+  pointer-events: none;
 }
 
 .container.hidden {
