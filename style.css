@@ -179,6 +179,7 @@ h1 {
 
 #gift-box:hover {
   transform: scale(1.05);
+  animation-play-state: paused;
 }
 
 #gift-box.kick-animation {
@@ -361,10 +362,14 @@ h1 {
 .planet:hover,
 .planet-active-message {
   transform: scale(1.15);
-  color: #93c5fd;
-  background-color: rgba(30, 58, 138, 0.55);
-  box-shadow: 0 0 25px rgba(65, 105, 225, 0.95), 0 0 50px rgba(65, 105, 225, 0.5);
-  border: 1px solid #4169e1;
+  color: #b8d8ff;
+  background-color: rgba(30, 58, 138, 0.65);
+  box-shadow:
+    0 0 18px rgba(65, 105, 225, 0.95),
+    0 0 45px rgba(65, 105, 225, 0.65),
+    0 0 90px rgba(147, 112, 219, 0.35);
+  border: 1px solid rgba(147, 197, 253, 0.75);
+  text-shadow: 0 0 8px rgba(147, 197, 253, 0.9), 0 0 20px #60a5faaa;
 }
 
 .planet.fade-out {
@@ -943,4 +948,197 @@ body.cinema-mode > *:not(#music-controls):not(#btn-cinema):not(#btn-fullscreen):
   opacity: 0 !important;
   pointer-events: none !important;
   transition: opacity 0.6s ease !important;
+}
+
+/* ================================================================
+   VISUAL ENHANCEMENTS
+   ================================================================ */
+
+/* --- Container entrance --- */
+@keyframes containerEntrance {
+  from { opacity: 0; translate: 0 22px; }
+  to   { opacity: 1; translate: 0  0;   }
+}
+
+.container { animation: containerEntrance 0.95s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.container.hidden { animation: none; }
+
+/* --- Speech balloon gentle bob --- */
+@keyframes balloonBob {
+  0%, 100% { translate: 0 0;      rotate:  0deg;   }
+  30%       { translate: 0 -11px; rotate: -1.8deg; }
+  70%       { translate: 0 -8px;  rotate:  1.2deg; }
+}
+
+.speech-balloon { animation: balloonBob 3.8s ease-in-out infinite; will-change: translate, rotate; }
+.container.hidden ~ .speech-balloon { animation-play-state: paused; }
+
+/* --- Gift box heartbeat — scale+brightness (compositor) --- */
+@keyframes giftGlow {
+  0%, 100% { scale: 1;     filter: brightness(1);    }
+  50%       { scale: 1.02; filter: brightness(1.18); }
+}
+
+#gift-box {
+  animation: giftGlow 2.4s ease-in-out infinite;
+  will-change: scale, filter;
+}
+#gift-box.kick-animation { animation: shake 0.5s ease-in-out, kick-allstar-box 0.8s forwards; }
+
+/* --- Planet floating --- */
+@keyframes planetFloat {
+  0%, 100% { translate: 0 0;    }
+  50%       { translate: 0 -7px; }
+}
+
+.planet            { animation: planetFloat 4s ease-in-out infinite; will-change: translate, opacity; }
+.planet.sol        { animation-duration: 3.8s; animation-delay:  0.0s; }
+.planet.lua        { animation-duration: 4.5s; animation-delay: -1.1s; }
+.planet.venus      { animation-duration: 5.0s; animation-delay: -2.3s; }
+.planet.marte      { animation-duration: 3.5s; animation-delay: -0.7s; }
+.planet.jupiter    { animation-duration: 5.3s; animation-delay: -3.1s; }
+.planet.saturno    { animation-duration: 4.7s; animation-delay: -1.8s; }
+.planet.urano      { animation-duration: 3.9s; animation-delay: -0.4s; }
+.planet.netuno     { animation-duration: 5.6s; animation-delay: -2.6s; }
+.planet.plutao     { animation-duration: 4.2s; animation-delay: -1.5s; }
+.planet.ascendente { animation-duration: 4.8s; animation-delay: -3.4s; }
+.planet.fade-out   { animation: none; }
+
+/* --- Planet ripple ring — apenas transform+opacity (compositor) --- */
+.planet::after {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(99, 155, 255, 0.8);
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+@keyframes planetRipple {
+  0%   { transform: scale(0.78); opacity: 1; }
+  100% { transform: scale(1.05); opacity: 0; }
+}
+
+.planet:hover::after,
+.planet-active-message::after {
+  animation: planetRipple 1.6s ease-out infinite;
+}
+
+/* --- Progress bar shimmer — translateX (compositor) --- */
+@keyframes barShimmer {
+  to { transform: translateX(300%); }
+}
+
+#progress-bar-fill {
+  background: linear-gradient(to right, #4169e1, #00b4ff);
+  position: relative;
+  overflow: hidden;
+}
+
+#progress-bar-fill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 35%;
+  background: linear-gradient(90deg, transparent, rgba(157, 232, 255, 0.7), transparent);
+  transform: translateX(-100%);
+  animation: barShimmer 2s linear infinite;
+  will-change: transform;
+}
+
+/* --- Reduced-motion overrides --- */
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .speech-balloon,
+  #gift-box,
+  .planet,
+  .planet::after,
+  #progress-bar-fill {
+    animation: none !important;
+  }
+}
+
+/* ================================================================
+   VISUAL ENHANCEMENTS — PART 2: Balõezinhos & Mais Vida
+   ================================================================ */
+
+/* --- Tooltip: sobe como balão + flutua enquanto visível --- */
+@keyframes tooltipAppear {
+  from { translate: 0 14px; transform: scale(0.92); }
+  to   { translate: 0 0;    transform: scale(1);    }
+}
+
+@keyframes tooltipFloat {
+  0%, 100% { translate: 0 0;    }
+  50%       { translate: 0 -6px; }
+}
+
+#tooltip.visible {
+  animation:
+    tooltipAppear 0.38s cubic-bezier(0.22, 1, 0.36, 1) both,
+    tooltipFloat  3.3s ease-in-out 0.38s infinite;
+}
+
+#kat-tooltip.visible {
+  animation:
+    tooltipAppear 0.38s cubic-bezier(0.22, 1, 0.36, 1) both,
+    tooltipFloat  3.9s ease-in-out 0.38s infinite;
+}
+
+/* --- Título (pílula) flutuando --- */
+@keyframes titleFloat {
+  0%, 100% { translate: 0 0;    }
+  50%       { translate: 0 -5px; }
+}
+
+#sky-title  { animation: titleFloat 4.8s ease-in-out infinite; }
+#mapa-title { animation: titleFloat 5.1s ease-in-out 0.9s infinite; }
+
+#sky-title.title-out,
+#mapa-title.title-out { animation: none; }
+
+/* --- Botões de navegação: glow que respira — brightness (compositor) --- */
+@keyframes navGlow {
+  0%, 100% { filter: brightness(1);    }
+  50%       { filter: brightness(1.4); }
+}
+
+#btn-ver-mapa,
+#btn-voltar-sky,
+#btn-voltar-inicio {
+  animation: navGlow 3.2s ease-in-out infinite;
+  will-change: filter;
+}
+
+/* Pausa animação no hover (hover já tem box-shadow próprio) */
+#btn-ver-mapa:hover,
+#btn-voltar-sky:hover,
+#btn-voltar-inicio:hover,
+#btn-cinema:hover {
+  animation-play-state: paused;
+}
+
+/* --- Lua do cinema flutuando --- */
+@keyframes moonFloat {
+  0%, 100% { translate: 0 0;    }
+  50%       { translate: 0 -8px; }
+}
+
+#btn-cinema { animation: moonFloat 4.4s ease-in-out infinite; }
+
+/* --- Reduced-motion parte 2 --- */
+@media (prefers-reduced-motion: reduce) {
+  #tooltip,
+  #kat-tooltip,
+  #sky-title,
+  #mapa-title,
+  #btn-ver-mapa,
+  #btn-voltar-sky,
+  #btn-voltar-inicio,
+  #btn-cinema {
+    animation: none !important;
+  }
 }
